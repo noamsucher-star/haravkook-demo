@@ -1204,3 +1204,17 @@ html[data-cw="b"] .dm-rabbis .dm-rlist .dm-rabbi { background: none; border-colo
 
 .ic-bore .icv .mo:nth-child(n+3) { opacity: 0; transition: opacity .35s ease .25s; }
 .ic-bore.on .icv .mo:nth-child(n+3) { opacity: 1; }
+
+/* מסלולים: שורה שמדפדפים בה (6 מסלולים) */
+.dm-pathgrid { grid-template-columns: none !important; grid-auto-flow: column; grid-auto-columns: calc((100% - 32px) / 3); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; scrollbar-width: thin; }
+.dm-pathgrid > * { scroll-snap-align: start; }
+@media (max-width: 860px) { .dm-pathgrid { grid-auto-columns: 84%; } }
+
+/* מבארים בדף הבית: כולם, קטן, 3 שורות */
+.dm-rlist.compact { grid-template-columns: none; grid-template-rows: repeat(3, auto); grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0 22px; }
+.dm-rlist.compact .dm-rabbi { padding: 9px 0 8px; }
+.dm-rlist.compact .dm-rabbi .nm { font-size: 16.5px; }
+.dm-rlist.compact .dm-rabbi .ro { font-size: 13px; line-height: 1.25; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; }
+@media (max-width: 860px) { .dm-rlist.compact { grid-auto-columns: 46%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; } .dm-rlist.compact > * { scroll-snap-align: start; } }
+
+.dm-pathgrid, .dm-rail, .dm-rlist { min-width: 0; max-width: 100%; }
