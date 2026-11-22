@@ -638,7 +638,12 @@ function todayHTML(q, base) {
 
 // ---------- דמו 22.11: כתב היד של הרב (BA כנפי רוח) - קישוט בלבד, לא לקריאה ----------
 (function () {
-  var SIG = 'אברהם יצחק הכהן קוק', MOTTO = 'הישן יתחדש והחדש יתקדש';
+  var SIG = 'אברהם יצחק הכהן קוק', MOTTO = 'הישן יתחדש והחדש יתקדש', RISE = 'עלה למעלה עלה, כי כח עז לך, יש לך כנפי רוח, כנפי נשרים אבירים. אל תכחש בם, פן יכחשו לך, דרש אותם, וימצאו לך מיד';
+  // מתג זמני: איך לשלב את החתימה (a מתחת למקור במרכז / b כמו חתימה במכתב, בצד / c חותמת גדולה ודהויה בפינה)
+  var html = document.documentElement, sg = 'a';
+  try { sg = localStorage.getItem('dm-sg') || 'a'; } catch (x) {}
+  var mq = /[?&]sg=([abc])/.exec(location.search); if (mq) sg = mq[1];
+  html.setAttribute('data-sg', sg);
   function el(tag, cls, txt) { var e = document.createElement(tag); e.className = cls; e.setAttribute('aria-hidden', 'true'); if (txt) e.textContent = txt; return e; }
   // כניסה של "כתיבה": נחשף מימין לשמאל כשמגיעים אליו
   var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
@@ -663,7 +668,7 @@ function todayHTML(q, base) {
       var bg = el('div', 'hw-bg'); today.insertBefore(bg, today.firstChild);
       var fill = function () {
         var q = tin.querySelector('.q'); if (!q) return;
-        var t = q.textContent.trim(); bg.textContent = t + ' · ' + t;
+        var t = q.textContent.trim(); bg.textContent = (t + ' ').repeat(8);
         bg.classList.remove('hw-in'); void bg.offsetWidth; watch(bg);
         addSig(tin);
       };
@@ -680,9 +685,20 @@ function todayHTML(q, base) {
     // 3. חתימה גם בכרטיסי מסלול
     document.querySelectorAll('[data-reader] .card .cardin').forEach(addSig);
     // 4. פס כתב יד שזז לאט בין האזורים, ובמסך "סיימתם"
-    var band = function () { var b = el('div', 'hw-band'); var line = (MOTTO + ' · ').repeat(6); b.innerHTML = '<span>' + line + '</span><span>' + line + '</span>'; return b; };
+    var band = function () { var b = el('div', 'hw-band'); var one = RISE + ' <b class="sep">·</b> '; var line = one + one; b.innerHTML = '<span>' + line + '</span><span>' + line + '</span>'; return b; };
     var doors = document.querySelector('.dm-doors'); if (doors) doors.parentNode.insertBefore(band(), doors);
     var rab = document.querySelector('.dm-rabbis'); if (rab) rab.parentNode.insertBefore(band(), rab);
+    // מתג חתימה
+    var sw = document.createElement('div'); sw.className = 'dm-switch';
+    var NAMES = { a: 'מתחת למקור, במרכז', b: 'כמו חתימה במכתב, בצד', c: 'חותמת גדולה ודהויה בפינה' };
+    sw.innerHTML = '<button type="button" class="dm-sw-btn" aria-expanded="false">גרסאות</button><div class="dm-sw-panel" hidden><p>חתימת הרב</p>' + ['a', 'b', 'c'].map(function (v, k) { return '<button type="button" data-v="' + v + '" aria-pressed="' + (sg === v) + '">' + (k + 1) + '. ' + NAMES[v] + '</button>'; }).join('') + '</div>';
+    document.body.appendChild(sw);
+    var swb = sw.querySelector('.dm-sw-btn'), swp = sw.querySelector('.dm-sw-panel');
+    swb.addEventListener('click', function () { swp.hidden = !swp.hidden; swb.setAttribute('aria-expanded', String(!swp.hidden)); });
+    swp.querySelectorAll('[data-v]').forEach(function (b) { b.addEventListener('click', function () {
+      sg = b.getAttribute('data-v'); html.setAttribute('data-sg', sg); try { localStorage.setItem('dm-sg', sg); } catch (x) {}
+      swp.querySelectorAll('[data-v]').forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
+    }); });
     var end = document.querySelector('.dm-end'); if (end) { var eb = el('div', 'hw-endbg', MOTTO); end.insertBefore(eb, end.firstChild); }
   });
 })();
