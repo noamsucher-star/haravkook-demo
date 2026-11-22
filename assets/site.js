@@ -694,7 +694,8 @@ function todayHTML(q, base) {
       b.addEventListener('pointerup', up); b.addEventListener('pointercancel', up); b.addEventListener('lostpointercapture', up);
       return b;
     };
-    var doors = document.querySelector('.dm-doors'); if (doors) doors.parentNode.insertBefore(band(RISE), doors);
+    // הפס העליון: במעבר בין המדבר (הפתיחה) ל"חצי דקה להיום"
+    var tday = document.querySelector('.block.today'); if (tday) tday.parentNode.insertBefore(band(RISE), tday);
     var join = document.querySelector('.join.block'); if (join) join.parentNode.insertBefore(band(BGTEXT), join);
     var end = document.querySelector('.dm-end'); if (end) { var eb = el('div', 'hw-endbg', MOTTO); end.insertBefore(eb, end.firstChild); }
   });

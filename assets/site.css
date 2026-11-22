@@ -1206,3 +1206,14 @@ html[data-ic="a"] .ic-bore .icv-a { display: inline; }
 @media (prefers-reduced-motion: reduce) { .hw-bg, .hw-sig { clip-path: none; transition: none; } }
 
 
+
+/* 22.11 נועם (טלפון): עמוד ציטוט ממורכז - ציטוט, מקור, ושורת "ביאור" + שם המבאר */
+@media (max-width: 900px) {
+  .dm-qpage .card .quote, .dm-qpage .card .ref, .dm-qpage .card .note { text-align: center !important; }
+  .dm-qpage details.biur > summary { justify-content: center !important; }
+  .dm-qpage details.biur > summary .who { justify-content: center; }
+  .dm-qpage details.biur > summary .wh { text-align: center; align-items: center; }
+}
+/* החתימה לא נחתכת: מקום לזנבות האותיות (ק, ן) גם בתוך החשיפה */
+.hw-sig { line-height: 1.5 !important; padding-bottom: .15em; clip-path: inset(-40% -6% -60% 100%); }
+.hw-sig.hw-in { clip-path: inset(-40% -6% -60% -6%) !important; }
