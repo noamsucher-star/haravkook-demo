@@ -1205,15 +1205,4 @@ html[data-ic="a"] .ic-bore .icv-a { display: inline; }
 @media (prefers-reduced-motion: reduce) { .hw-band > span { animation: none; } .hw-bg, .hw-sig { clip-path: none; transition: none; } }
 body.a-still .hw-band > span { animation: none; }
 
-/* חתימה - 3 גרסאות (מתג זמני) */
-html[data-sg="b"] .hw-sig { text-align: left !important; font-size: 36px; transform: rotate(-4deg); transform-origin: left center; margin: 10px 0 0; padding-left: 6%; }
-html[data-sg="c"] .hw-sig { position: relative; z-index: -1; text-align: left !important; margin: -38px 0 -6px; padding-left: 2%; font-size: clamp(56px, 10vw, 88px); line-height: 1; opacity: .26; transform: rotate(-7deg); transform-origin: left center; }
-html[data-sg="c"] [data-reader] .card .cardin, html[data-sg="c"] .today .in { isolation: isolate; }
 
-/* מתג גרסאות */
-.dm-switch { position: fixed; z-index: 90; right: calc(14px + env(safe-area-inset-right, 0px)); bottom: calc(14px + env(safe-area-inset-bottom, 0px)); display: grid; justify-items: end; gap: 8px; font-family: var(--display); }
-.dm-sw-btn { height: 46px; padding: 0 18px; background: #1f150b; color: #f1d595; border: 1px solid #c99a48; font: inherit; font-size: 18px; font-weight: 700; cursor: pointer; }
-.dm-sw-panel { background: #fffdf8; border: 1px solid #c99a48; padding: 12px; display: grid; gap: 6px; min-width: 210px; box-shadow: 0 12px 30px rgba(26, 17, 7, .25); }
-.dm-sw-panel p { margin: 0 0 2px; font-size: 14px; color: #8a5a2b; font-weight: 700; }
-.dm-sw-panel button { text-align: right; padding: 9px 12px; border: 1px solid #e6dac0; background: #fff; font: inherit; font-size: 17px; color: #33240f; cursor: pointer; }
-.dm-sw-panel button[aria-pressed="true"] { background: #1f150b; color: #f1d595; border-color: #1f150b; }
