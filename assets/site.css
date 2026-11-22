@@ -1228,3 +1228,12 @@ html[data-ic="a"] .ic-bore .icv-a { display: inline; }
   .hero form { order: 4; width: 100%; margin-bottom: 0 !important; }
   .hero .dm-new { order: 5; margin-top: 10px !important; padding-top: 0 !important; }
 }
+/* 22.11 נועם - טלפון בלבד: כותרת גדולה יותר ומשפט קטן קצת, באותו רוחב; "מי היה" צמוד לחיפוש; השער נגמר מהר יותר (הרקע נחתך מהשמיים, הדיונות נשארות) */
+@media (max-width: 900px) {
+  .hero .in { padding-top: 22px !important; padding-bottom: 14px !important; row-gap: 14px !important; }
+  .hero h1 { font-size: 31vw !important; line-height: .98 !important; margin: 0 !important; }
+  .hero .lede { font-size: 6.75vw !important; line-height: 1.3 !important; max-width: none !important; margin: 0 !important; }
+  .hero .stage { margin: 2px auto 6px !important; }
+  .hero form { margin: 0 !important; }
+  .hero .dm-new { margin-top: -6px !important; padding-block: 0 !important; }
+}
