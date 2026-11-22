@@ -635,3 +635,54 @@ function todayHTML(q, base) {
     } catch (x) {}
   });
 })();
+
+// ---------- דמו 22.11: כתב היד של הרב (BA כנפי רוח) - קישוט בלבד, לא לקריאה ----------
+(function () {
+  var SIG = 'אברהם יצחק הכהן קוק', MOTTO = 'הישן יתחדש והחדש יתקדש';
+  function el(tag, cls, txt) { var e = document.createElement(tag); e.className = cls; e.setAttribute('aria-hidden', 'true'); if (txt) e.textContent = txt; return e; }
+  // כניסה של "כתיבה": נחשף מימין לשמאל כשמגיעים אליו
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('hw-in'); io.unobserve(e.target); } });
+  }, { threshold: 0.25 }) : null;
+  function watch(e) {
+    // גם בלי IntersectionObserver (או כשהוא לא נורה): אם כבר על המסך - לחשוף
+    requestAnimationFrame(function () { requestAnimationFrame(function () {
+      var r = e.getBoundingClientRect();
+      if (!io || (r.top < innerHeight && r.bottom > 0)) e.classList.add('hw-in'); else io.observe(e);
+    }); });
+  }
+  function addSig(box) {
+    if (!box || box.querySelector('.hw-sig')) return;
+    var ref = box.querySelector('.ref'); if (!ref) return;
+    var s = el('p', 'hw-sig', SIG); ref.parentNode.insertBefore(s, ref.nextSibling); watch(s);
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    // 1. רקע בפתיחה: הציטוט של היום בכתב ידו, גדול ועדין מאחורי "חצי דקה להיום"
+    var today = document.querySelector('.today'), tin = today && today.querySelector('.in');
+    if (today && tin) {
+      var bg = el('div', 'hw-bg'); today.insertBefore(bg, today.firstChild);
+      var fill = function () {
+        var q = tin.querySelector('.q'); if (!q) return;
+        var t = q.textContent.trim(); bg.textContent = t + ' · ' + t;
+        bg.classList.remove('hw-in'); void bg.offsetWidth; watch(bg);
+        addSig(tin);
+      };
+      fill();
+      new MutationObserver(function () { if (!tin.querySelector('.hw-sig')) fill(); }).observe(tin, { childList: true });
+    }
+    // 2. סימן מים בעמוד ציטוט: מילות הציטוט עצמו מאחורי הטקסט
+    var qp = document.querySelector('.dm-qpage .card');
+    if (qp) {
+      var qt = qp.querySelector('.quote'), mk = el('div', 'hw-mark', qt ? qt.textContent.trim() : '');
+      var cin = qp.querySelector('.cardin') || qp; cin.insertBefore(mk, cin.firstChild); watch(mk);
+      addSig(qp.querySelector('.cardin'));
+    }
+    // 3. חתימה גם בכרטיסי מסלול
+    document.querySelectorAll('[data-reader] .card .cardin').forEach(addSig);
+    // 4. פס כתב יד שזז לאט בין האזורים, ובמסך "סיימתם"
+    var band = function () { var b = el('div', 'hw-band'); var line = (MOTTO + ' · ').repeat(6); b.innerHTML = '<span>' + line + '</span><span>' + line + '</span>'; return b; };
+    var doors = document.querySelector('.dm-doors'); if (doors) doors.parentNode.insertBefore(band(), doors);
+    var rab = document.querySelector('.dm-rabbis'); if (rab) rab.parentNode.insertBefore(band(), rab);
+    var end = document.querySelector('.dm-end'); if (end) { var eb = el('div', 'hw-endbg', MOTTO); end.insertBefore(eb, end.firstChild); }
+  });
+})();
