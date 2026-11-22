@@ -981,25 +981,11 @@ body.a-still #topics .famtog svg * { transition: none !important; }
 /* ===== דמו דיוקים 22.11.26 ===== */
 /* --- עולמות צבע (מתג "גרסאות") --- */
 html[data-cw="a"] { --ivory: #f3ebdd; --paper: #fbf7ef; --line: #e2d5bd; --bark: #24170b; --ink: #2b1d0d; }
-html[data-cw="b"] { --ivory: #f5eee2; --paper: #fdfaf4; --line: #e4d8c2; --bark: #24170b; --ink: #2b1d0d; }
-html[data-cw="c"] { --ivory: #fbf9f5; --paper: #ffffff; --line: #ece4d6; --bark: #3a2a17; --ink: #33240f; }
 html[data-cw] body { background: var(--ivory); }
 /* הצילום של הרב באותו גוון זהב של המדבר */
-html[data-cw="a"] .arch .pic img, html[data-cw="b"] .arch .pic img { filter: sepia(.5) saturate(1.35) hue-rotate(-6deg) contrast(1.04) brightness(1.03); }
-html[data-cw="c"] .arch .pic img { filter: sepia(.25) saturate(1.1); }
+html[data-cw="a"] .arch .pic img { filter: sepia(.5) saturate(1.35) hue-rotate(-6deg) contrast(1.04) brightness(1.03); }
 /* b: מקצב, אזור הנושאים והספרים כלילה במדבר */
-html[data-cw="b"] #topics, html[data-cw="b"] .dm-rabbis { background: #1c1209; border-top-color: #1c1209; }
-html[data-cw="b"] #topics h2, html[data-cw="b"] .dm-rabbis h2 { color: #f1dfb6; }
-html[data-cw="b"] #topics .sub, html[data-cw="b"] .dm-rabbis .sub, html[data-cw="b"] .dm-rabbis .dm-all { color: #cdb98f; }
-html[data-cw="b"] #topics .topic { border-color: rgba(233, 207, 148, .18) !important; }
-html[data-cw="b"] #topics .topic .name { color: #f6e7c4 !important; }
-html[data-cw="b"] #topics .topic .promise { color: #c4ae84 !important; }
-html[data-cw="b"] #topics .famblock .fold > .tgrid { background: #24180c !important; border-color: #3d2a15 !important; }
-html[data-cw="b"] .dm-rabbis .dm-rabbi { background: #2a1c0e; border-color: #3d2a15; }
-html[data-cw="b"] .dm-rabbis .dm-rabbi .nm { color: #f6ead0; }
-html[data-cw="b"] .dm-rabbis .dm-rabbi .ro { color: #bda67a; }
 /* c: שקט, בלי לוחיות כהות */
-html[data-cw="c"] .block { border-top-color: transparent; }
 
 /* --- פחות מספרים --- */
 #topics .topic .count { display: none; }
@@ -1066,32 +1052,11 @@ html[data-pv="a"] .dm-path .dots i { width: 8px; height: 8px; border-radius: 50%
 html[data-pv="a"] .dm-path .dots i:first-child { background: #c99a48; }
 html[data-pv="a"] .dm-path .go { color: var(--bark); }
 /* b: מדבר, התמונה של הפתיחה */
-html[data-pv="b"] .dm-path { min-height: 380px; align-content: end; color: #fff3d8; }
-html[data-pv="b"] .dm-path .bg { display: block; position: absolute; inset: 0; background: url(hero-phone.webp) center 88% / cover no-repeat; transition: transform .8s var(--ease); }
-html[data-pv="b"] .dm-pathgrid .dm-path:nth-child(2) .bg { background-position: 30% 92%; }
-html[data-pv="b"] .dm-pathgrid .dm-path:nth-child(3) .bg { background-position: 75% 80%; }
-html[data-pv="b"] .dm-path .bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20, 12, 5, 0) 0%, rgba(20, 12, 5, .15) 35%, rgba(20, 12, 5, .88) 100%); }
-html[data-pv="b"] .dm-path:hover .bg { transform: scale(1.04); }
-html[data-pv="b"] .dm-path .k { color: #f1d595; }
-html[data-pv="b"] .dm-path .t { color: #fff6e0; font-size: 34px; }
-html[data-pv="b"] .dm-path .s { color: #e6d3ab; }
-html[data-pv="b"] .dm-path .first { color: #f3e6c8; border-top: 1px solid rgba(241, 213, 149, .35); }
-html[data-pv="b"] .dm-path .go { color: #f1d595; }
 /* c: תוכן העניינים, רואים מה יש בפנים */
-html[data-pv="c"] .dm-path { background: var(--paper); border: 1px solid var(--line); border-top: 3px solid #c99a48; color: var(--ink); }
-html[data-pv="c"] .dm-path:hover { border-color: #c99a48; }
-html[data-pv="c"] .dm-path .k { color: #a87b33; }
-html[data-pv="c"] .dm-path .t { color: var(--bark); }
-html[data-pv="c"] .dm-path .s { color: #6d5a3d; }
-html[data-pv="c"] .dm-path .first { display: none; }
-html[data-pv="c"] .dm-path .toc { display: grid; gap: 0; margin: 6px 0 0; padding: 0; list-style: none; counter-reset: t; border-top: 1px solid var(--line); }
-html[data-pv="c"] .dm-path .toc li { counter-increment: t; display: grid; grid-template-columns: 26px 1fr; padding-block: 7px; border-bottom: 1px solid var(--line); font-size: 17px; color: #3d2e18; }
-html[data-pv="c"] .dm-path .toc li::before { content: counter(t); color: #a87b33; font-weight: 700; }
-html[data-pv="c"] .dm-path .go { color: var(--bark); }
 
 /* אייקון "האדם ובוראו": רק הגרסה שנבחרה */
 .ic-bore .icv { display: none; }
-html[data-ic="a"] .ic-bore .icv-a, html[data-ic="b"] .ic-bore .icv-b, html[data-ic="c"] .ic-bore .icv-c { display: inline; }
+html[data-ic="a"] .ic-bore .icv-a { display: inline; }
 
 /* קריאת מסלול: ציטוט אחד בכל פעם */
 .dm-steps.reader:not(.all) li { grid-template-columns: 1fr; }
@@ -1181,13 +1146,6 @@ html[data-ic="a"] .ic-bore .icv-a, html[data-ic="b"] .ic-bore .icv-b, html[data-
 @media (max-width: 520px) { .dm-steps li { grid-template-columns: 1fr; } .dm-steps .st { margin-top: 0; } }
 
 /* --- מתג גרסאות --- */
-.dm-switch { position: fixed; z-index: 90; right: calc(14px + env(safe-area-inset-right, 0px)); bottom: calc(14px + env(safe-area-inset-bottom, 0px)); display: grid; justify-items: end; gap: 8px; font-family: var(--display); }
-.dm-sw-btn { height: 46px; padding: 0 18px; background: #1f150b; color: #f1d595; border: 1px solid #c99a48; font: inherit; font-size: 18px; font-weight: 700; cursor: pointer; }
-.dm-sw-panel { background: #fffdf8; border: 1px solid #c99a48; padding: 12px; display: grid; gap: 6px; min-width: 210px; box-shadow: 0 12px 30px rgba(26, 17, 7, .25); }
-.dm-sw-panel p { margin: 0 0 2px; font-size: 14px; color: #8a5a2b; font-weight: 700; }
-.dm-sw-panel button { text-align: right; padding: 9px 12px; border: 1px solid #e6dac0; background: #fff; font: inherit; font-size: 17px; color: #33240f; cursor: pointer; }
-.dm-sw-panel button[aria-pressed="true"] { background: #1f150b; color: #f1d595; border-color: #1f150b; }
-.dm-sw-panel a { font-size: 14.5px; color: #8a5a2b; margin-top: 4px; }
 
 .dm-rabbi .mono.ph { background-repeat: no-repeat; background-color: #2a1c0e; filter: saturate(.92) sepia(.1); }
 
@@ -1200,7 +1158,6 @@ html[data-ic="a"] .ic-bore .icv-a, html[data-ic="b"] .ic-bore .icv-b, html[data-
 .dm-rlist .dm-rabbi .nm { font-size: 21px; }
 .dm-rlist .dm-rabbi .ro { font-size: 15.5px; }
 .dm-rlist .dm-rabbi:hover .nm { color: #a87b33; }
-html[data-cw="b"] .dm-rabbis .dm-rlist .dm-rabbi { background: none; border-color: rgba(233, 207, 148, .18); }
 
 .ic-bore .icv .mo:nth-child(n+3) { opacity: 0; transition: opacity .35s ease .25s; }
 .ic-bore.on .icv .mo:nth-child(n+3) { opacity: 1; }

@@ -560,34 +560,7 @@ function todayHTML(q, base) {
 // ---------- דמו דיוקים 22.11.26: מתג גרסאות, "עכשיו בלוח השנה", קריאת מסלול ----------
 (function () {
   var html = document.documentElement, base = html.getAttribute('data-base') || '';
-  // שלוש קבוצות במתג. הערך נקבע כבר בראש העמוד (סקריפט קטן ב-head), כאן רק הכפתורים
-  var GROUPS = [
-    ['cw', 'עולם צבע', { a: 'חול ולילה', b: 'מקצב כהה-בהיר', c: 'שקט ובהיר' }],
-    ['pv', 'כרטיסי מסלולים', { a: 'נייר וזהב', b: 'מדבר', c: 'תוכן העניינים' }],
-    ['ic', 'אייקון "האדם ובוראו"', { a: 'אדם שהופך לשמש', b: 'אדם שהופך לנר', c: 'אדם שמרים ידיים' }],
-  ];
-  var cur = function (k) { return html.getAttribute('data-' + k) || 'a'; };
-  var box = document.createElement('div');
-  box.className = 'dm-switch';
-  box.innerHTML = '<button type="button" class="dm-sw-btn" aria-expanded="false">גרסאות</button><div class="dm-sw-panel" hidden>'
-    + GROUPS.map(function (g) {
-      return '<p>' + g[1] + '</p>' + ['a', 'b', 'c'].map(function (v, i) { return '<button type="button" data-g="' + g[0] + '" data-v="' + v + '" aria-pressed="' + (cur(g[0]) === v) + '">' + (i + 1) + '. ' + g[2][v] + '</button>'; }).join('');
-    }).join('')
-    + '<a href="https://noamsucher-star.github.io/haravkook-archive/" target="_blank" rel="noopener">לאתר המאושר (להשוואה)</a></div>';
-
   document.addEventListener('DOMContentLoaded', function () {
-    document.body.appendChild(box);
-    var btn = box.querySelector('.dm-sw-btn'), panel = box.querySelector('.dm-sw-panel');
-    btn.addEventListener('click', function () { panel.hidden = !panel.hidden; btn.setAttribute('aria-expanded', String(!panel.hidden)); });
-    box.querySelectorAll('[data-g]').forEach(function (b) {
-      b.addEventListener('click', function () {
-        var g = b.getAttribute('data-g'), v = b.getAttribute('data-v');
-        html.setAttribute('data-' + g, v);
-        try { localStorage.setItem('dm-' + g, v); } catch (x) {}
-        box.querySelectorAll('[data-g="' + g + '"]').forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
-      });
-    });
-
     // ---------- מסלול: ציטוט אחד בכל פעם ----------
     var steps = document.querySelector('[data-reader]');
     if (steps) {
