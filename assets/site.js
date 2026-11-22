@@ -591,6 +591,16 @@ function todayHTML(q, base) {
       }
       prev.addEventListener('click', function () { show(i - 1, true); });
       next.addEventListener('click', function () { show(i + 1, true); });
+      // החלקת אצבע על הכרטיס: שמאלה = הבא, ימינה = הקודם (כמו החצים)
+      var sx = 0, sy = 0, st = 0;
+      var slide = function (k) { if (k < 0 || k > items.length) return; var dir = k > i ? 'dm-in-next' : 'dm-in-prev'; show(k, true); var li = items[i]; if (li) { li.classList.remove('dm-in-next', 'dm-in-prev'); void li.offsetWidth; li.classList.add(dir); } };
+      steps.addEventListener('touchstart', function (e) { if (all || e.touches.length > 1) return; sx = e.touches[0].clientX; sy = e.touches[0].clientY; st = Date.now(); }, { passive: true });
+      steps.addEventListener('touchend', function (e) {
+        if (all || !st) return; var t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy; st = 0;
+        if (Math.abs(dx) < 55 || Math.abs(dx) < Math.abs(dy) * 1.6) return;
+        if (window.getSelection && String(window.getSelection())) return;
+        slide(dx < 0 ? i + 1 : i - 1);
+      }, { passive: true });
       toggle.addEventListener('click', function () {
         all = !all; steps.classList.toggle('all', all); bar.hidden = all;
         toggle.textContent = all ? 'לקרוא אחד אחד' : 'להציג את כל השבעה ברצף';

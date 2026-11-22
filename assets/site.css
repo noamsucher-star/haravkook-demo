@@ -1237,3 +1237,23 @@ html[data-ic="a"] .ic-bore .icv-a { display: inline; }
   .hero form { margin: 0 !important; }
   .hero .dm-new { margin-top: -6px !important; padding-block: 0 !important; }
 }
+
+/* 22.11 נועם (טלפון): כל כרטיסי הציטוט ממורכזים - כותרת, ציטוט, מקור, ביאור + מבאר, נושאים ושיתוף. טקסט הביאור עצמו נשאר מיושר לקריאה */
+@media (max-width: 900px) {
+  .card .cardtop { display: flex; flex-direction: column; align-items: center !important; justify-content: center; text-align: center; gap: 2px; }
+  .card .cardtop .title, .card .num { text-align: center !important; margin-inline: auto; }
+  .card .quote, .card .ref, .card .note { text-align: center !important; }
+  .card details.biur > summary { justify-content: center !important; }
+  .card details.biur > summary .who { justify-content: center; }
+  .card details.biur > summary .wh { text-align: center; align-items: center; }
+  .card .cardbar { justify-content: center !important; text-align: center; }
+  .card .cardbar .tags { display: flex; flex-wrap: wrap; justify-content: center; }
+  .card .cardbar .spacer { display: none; }
+}
+/* החלקה בין כרטיסי מסלול */
+.dm-steps.reader li.dm-in-next { animation: dmInNext .32s cubic-bezier(.2, .7, .2, 1) both; }
+.dm-steps.reader li.dm-in-prev { animation: dmInPrev .32s cubic-bezier(.2, .7, .2, 1) both; }
+@keyframes dmInNext { from { opacity: 0; transform: translateX(40px); } }
+@keyframes dmInPrev { from { opacity: 0; transform: translateX(-40px); } }
+@media (prefers-reduced-motion: reduce) { .dm-steps.reader li.dm-in-next, .dm-steps.reader li.dm-in-prev { animation: none; } }
+.dm-steps.reader { touch-action: pan-y; }
