@@ -678,9 +678,24 @@ function todayHTML(q, base) {
     // 3. חתימה גם בכרטיסי מסלול
     document.querySelectorAll('[data-reader] .card .cardin').forEach(addSig);
     // 4. פס כתב יד שזז לאט בין האזורים, ובמסך "סיימתם"
-    var band = function (txt) { var b = el('div', 'hw-band'); var one = txt + ' <b class="sep">·</b> '; var line = one + one; b.innerHTML = '<span>' + line + '</span><span>' + line + '</span>'; return b; };
+    // פס שזז לבד מימין לשמאל, ואפשר לגרור אותו ביד (אצבע / עכבר) לשני הכיוונים
+    var band = function (txt) {
+      var b = el('div', 'hw-band'), tr = document.createElement('div'); tr.className = 'hw-track';
+      var one = txt + ' <b class="sep">·</b> '; tr.innerHTML = '<span>' + one + one + '</span><span>' + one + one + '</span>'; b.appendChild(tr);
+      var x = 0, last = 0, drag = false, px = 0, hold = 0, span = tr.firstChild;
+      var still = function () { return (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) || document.body.classList.contains('a-still'); };
+      function step(t) { var w = span.offsetWidth || 1, dt = last ? Math.min(t - last, 60) : 0; last = t;
+        if (!drag && t > hold && !still()) x += dt * 0.035;
+        x = ((x % w) + w) % w; tr.style.transform = 'translate3d(' + x + 'px,0,0)'; requestAnimationFrame(step); }
+      requestAnimationFrame(step);
+      b.addEventListener('pointerdown', function (e) { drag = true; px = e.clientX; b.classList.add('grab'); try { b.setPointerCapture(e.pointerId); } catch (z) {} });
+      b.addEventListener('pointermove', function (e) { if (!drag) return; x += e.clientX - px; px = e.clientX; });
+      var up = function () { if (!drag) return; drag = false; hold = performance.now() + 1200; b.classList.remove('grab'); };
+      b.addEventListener('pointerup', up); b.addEventListener('pointercancel', up); b.addEventListener('lostpointercapture', up);
+      return b;
+    };
     var doors = document.querySelector('.dm-doors'); if (doors) doors.parentNode.insertBefore(band(RISE), doors);
-    var rab = document.querySelector('.dm-rabbis'); if (rab) rab.parentNode.insertBefore(band(BGTEXT), rab);
+    var join = document.querySelector('.join.block'); if (join) join.parentNode.insertBefore(band(BGTEXT), join);
     var end = document.querySelector('.dm-end'); if (end) { var eb = el('div', 'hw-endbg', MOTTO); end.insertBefore(eb, end.firstChild); }
   });
 })();

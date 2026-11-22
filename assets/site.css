@@ -1196,13 +1196,13 @@ html[data-ic="a"] .ic-bore .icv-a { display: inline; }
 .today .hw-sig { display: block; width: 100%; grid-column: 1 / -1; justify-self: center; text-align: center !important; }
 
 /* 4. פס שזז */
-.hw-band { display: flex; overflow: hidden; white-space: nowrap; font-family: var(--hw); color: var(--hw-gold); opacity: .55; font-size: clamp(28px, 4vw, 44px); line-height: 1.6; padding-block: 6px; border-block: 1px solid rgba(201, 154, 72, .3); user-select: none; pointer-events: none; }
-.hw-band > span { flex: none; padding-left: .6em; animation: hwscroll 70s linear infinite; }
+.hw-band { overflow: hidden; white-space: nowrap; font-family: var(--hw); color: var(--hw-gold); font-size: clamp(28px, 4vw, 44px); line-height: 1.6; padding-block: 6px; border-block: 1px solid rgba(201, 154, 72, .3); user-select: none; -webkit-user-select: none; touch-action: pan-y; cursor: grab; }
+.hw-band.grab { cursor: grabbing; }
+.hw-track { display: flex; width: max-content; opacity: .55; will-change: transform; }
+.hw-track > span { flex: none; padding-left: .6em; }
 .hw-band .sep { font-weight: normal; font-size: .5em; vertical-align: middle; padding-inline: .3em; }
-@keyframes hwscroll { to { transform: translateX(100%); } }
 .dm-end { position: relative; overflow: hidden; isolation: isolate; }
 .hw-endbg { position: absolute; inset: 50% -5% auto; transform: translateY(-50%) rotate(-5deg); z-index: -1; font-family: var(--hw); color: var(--hw-gold); opacity: .14; font-size: clamp(60px, 12vw, 150px); text-align: center; white-space: nowrap; pointer-events: none; }
-@media (prefers-reduced-motion: reduce) { .hw-band > span { animation: none; } .hw-bg, .hw-sig { clip-path: none; transition: none; } }
-body.a-still .hw-band > span { animation: none; }
+@media (prefers-reduced-motion: reduce) { .hw-bg, .hw-sig { clip-path: none; transition: none; } }
 
 
