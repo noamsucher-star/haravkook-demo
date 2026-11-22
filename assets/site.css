@@ -1266,21 +1266,12 @@ html[data-ic="a"] .ic-bore .icv-a { display: inline; }
   .hero form :is(input, button) { height: 56px !important; min-height: 0 !important; font-size: 18px !important; }
 }
 
-/* 22.11 נועם - טלפון: פחות מרווח בשורות שמתחת לציטוט (נושא / שיתוף / העתקה). 2 גרסאות במתג */
+/* 22.11 נועם - טלפון: פחות מרווח בשורות שמתחת לציטוט (נושא / שיתוף / העתקה). נבחר: צפוף */
 @media (max-width: 900px) {
-  html[data-cb="a"] .card .cardbar { margin-top: 12px !important; padding-top: 8px !important; }
-  html[data-cb="a"] .card .cardbar :is(.tags a, > a, > button) { padding-block: 5px !important; min-height: 0 !important; line-height: 1.25 !important; }
-  html[data-cb="a"] .card .cardbar .tags { margin-bottom: 4px !important; }
-  html[data-cb="b"] .card .cardbar { margin-top: 10px !important; padding-top: 6px !important; }
-  html[data-cb="b"] .card .cardbar :is(.tags a, > a, > button) { padding-block: 2px !important; min-height: 0 !important; line-height: 1.2 !important; }
-  html[data-cb="b"] .card .cardbar .tags { margin-bottom: 0 !important; }
+  .card .cardbar { margin-top: 10px !important; padding-top: 6px !important; }
+  .card .cardbar :is(.tags a, > a, > button) { padding-block: 2px !important; min-height: 0 !important; line-height: 1.2 !important; }
+  .card .cardbar .tags { margin-bottom: 0 !important; }
 }
-.dm-switch { position: fixed; z-index: 90; right: calc(14px + env(safe-area-inset-right, 0px)); bottom: calc(14px + env(safe-area-inset-bottom, 0px)); display: grid; justify-items: end; gap: 8px; font-family: var(--display); }
-.dm-sw-btn { height: 46px; padding: 0 18px; background: #1f150b; color: #f1d595; border: 1px solid #c99a48; font: inherit; font-size: 18px; font-weight: 700; cursor: pointer; }
-.dm-sw-panel { background: #fffdf8; border: 1px solid #c99a48; padding: 12px; display: grid; gap: 6px; min-width: 210px; box-shadow: 0 12px 30px rgba(26, 17, 7, .25); }
-.dm-sw-panel p { margin: 0 0 2px; font-size: 14px; color: #8a5a2b; font-weight: 700; }
-.dm-sw-panel button { text-align: right; padding: 9px 12px; border: 1px solid #e6dac0; background: #fff; font: inherit; font-size: 17px; color: #33240f; cursor: pointer; }
-.dm-sw-panel button[aria-pressed="true"] { background: #1f150b; color: #f1d595; border-color: #1f150b; }
 /* תיקון: שורת "ביאור" + המבאר הייתה inline-flex ונצמדה לימין. עכשיו ברוחב מלא וממורכזת */
 @media (max-width: 900px) {
   .card details.biur > summary { display: flex !important; width: 100%; justify-content: center !important; text-align: center; }
