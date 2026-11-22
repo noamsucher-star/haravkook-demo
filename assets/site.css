@@ -1281,3 +1281,8 @@ html[data-ic="a"] .ic-bore .icv-a { display: inline; }
 .dm-sw-panel p { margin: 0 0 2px; font-size: 14px; color: #8a5a2b; font-weight: 700; }
 .dm-sw-panel button { text-align: right; padding: 9px 12px; border: 1px solid #e6dac0; background: #fff; font: inherit; font-size: 17px; color: #33240f; cursor: pointer; }
 .dm-sw-panel button[aria-pressed="true"] { background: #1f150b; color: #f1d595; border-color: #1f150b; }
+/* תיקון: שורת "ביאור" + המבאר הייתה inline-flex ונצמדה לימין. עכשיו ברוחב מלא וממורכזת */
+@media (max-width: 900px) {
+  .card details.biur > summary { display: flex !important; width: 100%; justify-content: center !important; text-align: center; }
+  .card details.biur .biurbox .bh { justify-content: center; text-align: center; }
+}
