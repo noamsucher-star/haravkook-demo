@@ -610,7 +610,11 @@ function todayHTML(q, base) {
         n.textContent = done ? 'סיימתם' : (i + 1) + ' מתוך ' + items.length;
         prev.disabled = i === 0; next.hidden = done; next.innerHTML = (i === items.length - 1 ? 'לסיום' : 'הבא') + ' <i class="arw" aria-hidden="true"></i>';
         if (end) end.hidden = !done && !all;
-        if (scroll) (done && end ? end : steps).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (scroll) {
+          // תמיד לאותה נקודה: ראש הציטוט מתחת לסרגל הדביק, בלי תלות באורך הביאורים
+          var tgt = done && end ? end : steps, hd = document.querySelector('header'), off = (hd && getComputedStyle(hd).position === 'sticky' ? hd.offsetHeight : 0) + 14;
+          window.scrollTo({ top: Math.max(0, Math.round(tgt.getBoundingClientRect().top + window.pageYOffset - off)), behavior: 'instant' });
+        }
       }
       prev.addEventListener('click', function () { show(i - 1, true); });
       next.addEventListener('click', function () { show(i + 1, true); });
