@@ -557,35 +557,73 @@ function todayHTML(q, base) {
   }
 })();
 
-// ---------- דמו דיוקים 22.11.26: מתג עולם צבע + "עכשיו בלוח השנה" ----------
+// ---------- דמו דיוקים 22.11.26: מתג גרסאות, "עכשיו בלוח השנה", קריאת מסלול ----------
 (function () {
   var html = document.documentElement, base = html.getAttribute('data-base') || '';
-  function e(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-
-  // עולם צבע: 3 גרסאות. נשמר במכשיר, וגם בקישור ?cw=a/b/c
-  var KEY = 'dm-cw', cw = 'a';
-  try { cw = localStorage.getItem(KEY) || 'a'; } catch (x) {}
-  var m = /[?&]cw=([abc])/.exec(location.search); if (m) cw = m[1];
-  html.setAttribute('data-cw', cw);
-  var names = { a: 'חול ולילה', b: 'מקצב כהה-בהיר', c: 'שקט ובהיר' };
+  // שלוש קבוצות במתג. הערך נקבע כבר בראש העמוד (סקריפט קטן ב-head), כאן רק הכפתורים
+  var GROUPS = [
+    ['cw', 'עולם צבע', { a: 'חול ולילה', b: 'מקצב כהה-בהיר', c: 'שקט ובהיר' }],
+    ['pv', 'כרטיסי מסלולים', { a: 'נייר וזהב', b: 'מדבר', c: 'תוכן העניינים' }],
+    ['ic', 'אייקון "האדם ובוראו"', { a: 'אדם ואור מלמעלה', b: 'ידיים שמקבלות אור', c: 'סולם' }],
+  ];
+  var cur = function (k) { return html.getAttribute('data-' + k) || 'a'; };
   var box = document.createElement('div');
   box.className = 'dm-switch';
-  box.innerHTML = '<button type="button" class="dm-sw-btn" aria-expanded="false">גרסאות</button><div class="dm-sw-panel" hidden><p>עולם צבע</p>'
-    + ['a', 'b', 'c'].map(function (k, i) { return '<button type="button" data-cw="' + k + '" aria-pressed="' + (k === cw) + '">' + (i + 1) + '. ' + names[k] + '</button>'; }).join('')
+  box.innerHTML = '<button type="button" class="dm-sw-btn" aria-expanded="false">גרסאות</button><div class="dm-sw-panel" hidden>'
+    + GROUPS.map(function (g) {
+      return '<p>' + g[1] + '</p>' + ['a', 'b', 'c'].map(function (v, i) { return '<button type="button" data-g="' + g[0] + '" data-v="' + v + '" aria-pressed="' + (cur(g[0]) === v) + '">' + (i + 1) + '. ' + g[2][v] + '</button>'; }).join('');
+    }).join('')
     + '<a href="https://noamsucher-star.github.io/haravkook-archive/" target="_blank" rel="noopener">לאתר המאושר (להשוואה)</a></div>';
+
   document.addEventListener('DOMContentLoaded', function () {
     document.body.appendChild(box);
     var btn = box.querySelector('.dm-sw-btn'), panel = box.querySelector('.dm-sw-panel');
     btn.addEventListener('click', function () { panel.hidden = !panel.hidden; btn.setAttribute('aria-expanded', String(!panel.hidden)); });
-    box.querySelectorAll('[data-cw]').forEach(function (b) {
+    box.querySelectorAll('[data-g]').forEach(function (b) {
       b.addEventListener('click', function () {
-        cw = b.getAttribute('data-cw'); html.setAttribute('data-cw', cw);
-        try { localStorage.setItem(KEY, cw); } catch (x) {}
-        box.querySelectorAll('[data-cw]').forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
+        var g = b.getAttribute('data-g'), v = b.getAttribute('data-v');
+        html.setAttribute('data-' + g, v);
+        try { localStorage.setItem('dm-' + g, v); } catch (x) {}
+        box.querySelectorAll('[data-g="' + g + '"]').forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
       });
     });
 
-    // עכשיו בלוח השנה: פרשת השבוע והחג הקרוב
+    // ---------- מסלול: ציטוט אחד בכל פעם ----------
+    var steps = document.querySelector('[data-reader]');
+    if (steps) {
+      var items = [].slice.call(steps.children), end = document.querySelector('.dm-end'), i = 0, all = false;
+      var bar = document.createElement('div');
+      bar.className = 'dm-reader';
+      bar.innerHTML = '<button type="button" class="prev"><i class="arw r" aria-hidden="true"></i> הקודם</button>'
+        + '<span class="prog"><span class="dots">' + items.map(function () { return '<i></i>'; }).join('') + '</span><span class="n"></span></span>'
+        + '<button type="button" class="next">הבא <i class="arw" aria-hidden="true"></i></button>';
+      var toggle = document.createElement('button');
+      toggle.type = 'button'; toggle.className = 'dm-showall'; toggle.textContent = 'להציג את כל השבעה ברצף';
+      steps.parentNode.insertBefore(bar, steps.nextSibling);
+      bar.parentNode.insertBefore(toggle, bar.nextSibling);
+      var dots = [].slice.call(bar.querySelectorAll('.dots i')), n = bar.querySelector('.n'), prev = bar.querySelector('.prev'), next = bar.querySelector('.next');
+      function show(k, scroll) {
+        i = Math.max(0, Math.min(items.length, k));
+        var done = i === items.length;
+        items.forEach(function (li, j) { li.hidden = !all && j !== i; });
+        dots.forEach(function (d, j) { d.className = j < i ? 'was' : j === i ? 'now' : ''; });
+        n.textContent = done ? 'סיימתם' : (i + 1) + ' מתוך ' + items.length;
+        prev.disabled = i === 0; next.hidden = done; next.innerHTML = (i === items.length - 1 ? 'לסיום' : 'הבא') + ' <i class="arw" aria-hidden="true"></i>';
+        if (end) end.hidden = !done && !all;
+        if (scroll) (done && end ? end : steps).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      prev.addEventListener('click', function () { show(i - 1, true); });
+      next.addEventListener('click', function () { show(i + 1, true); });
+      toggle.addEventListener('click', function () {
+        all = !all; steps.classList.toggle('all', all); bar.hidden = all;
+        toggle.textContent = all ? 'לקרוא אחד אחד' : 'להציג את כל השבעה ברצף';
+        show(all ? 0 : i, false);
+      });
+      steps.classList.add('reader');
+      show(0, false);
+    }
+
+    // ---------- עכשיו בלוח השנה: פרשת השבוע והחג הקרוב ----------
     var calEl = document.getElementById('dmcal'), pmapEl = document.getElementById('pmap');
     if (!calEl) return;
     var CAL = {}; try { CAL = JSON.parse(calEl.textContent); } catch (x) { return; }
@@ -601,15 +639,14 @@ function todayHTML(q, base) {
       wk.forEach(function (s) { if (!hit && PM[s]) hit = PM[s]; });
       if (hit) fill('dm-parasha', 'parasha/' + hit[0], 'פרשת ' + hit[1]);
     } catch (x) {}
-    // החג הקרוב לפי הלוח העברי של הדפדפן
     var DATES = { 'Tishri': [[1, 'rosh-hashana'], [3, 'tzom-gedalia'], [15, 'sukkot']], 'Heshvan': [[11, 'rachel']], 'Kislev': [[25, 'hanukkah']], 'Shevat': [[15, 'tu-bishvat']],
       'Adar': [[14, 'purim']], 'Adar II': [[14, 'purim']], 'Nisan': [[15, 'pesach'], [27, 'yom-hashoah']], 'Iyar': [[4, 'yom-hazikaron'], [18, 'lag-baomer'], [28, 'yom-yerushalayim']],
       'Sivan': [[6, 'shavuot']], 'Tamuz': [[17, 'bein-hametzarim']], 'Av': [[15, 'tu-beav']], 'Elul': [[3, 'rav']] };
     try {
       var f = new Intl.DateTimeFormat('en-u-ca-hebrew', { month: 'long', day: 'numeric' }), d = new Date(), found = null;
       for (var k = 0; k < 400 && !found; k++) {
-        var parts = f.formatToParts(d), mo = '', dy = 0;
-        parts.forEach(function (p) { if (p.type === 'month') mo = p.value; if (p.type === 'day') dy = +p.value; });
+        var mo = '', dy = 0;
+        f.formatToParts(d).forEach(function (p) { if (p.type === 'month') mo = p.value; if (p.type === 'day') dy = +p.value; });
         (DATES[mo] || []).forEach(function (x) { if (!found && x[0] === dy && CAL['moed/' + x[1]]) found = { slug: 'moed/' + x[1], days: k }; });
         d = new Date(d.getTime() + 864e5);
       }

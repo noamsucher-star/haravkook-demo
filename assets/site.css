@@ -1044,14 +1044,85 @@ html[data-cw="c"] .block { border-top-color: transparent; }
 /* --- 7. מסלולים --- */
 .dm-pathgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; width: 100%; margin-top: 10px; }
 @media (max-width: 860px) { .dm-pathgrid { grid-template-columns: 1fr; } }
-.dm-path { display: grid; gap: 8px; align-content: start; padding: 24px 24px 20px; background: #1f150b; color: #f3e6c8; text-decoration: none; text-align: right; position: relative; overflow: hidden; }
-.dm-path::before { content: ''; position: absolute; inset: auto -30% -60% auto; width: 80%; aspect-ratio: 1; background: radial-gradient(circle, rgba(233, 180, 92, .28), transparent 65%); }
+/* מסלולים: 3 גרסאות (מתג pv). a נייר וזהב, b מדבר, c תוכן העניינים */
+.dm-path { display: grid; gap: 8px; align-content: start; padding: 26px 24px 22px; text-decoration: none; text-align: right; position: relative; overflow: hidden; transition: transform .35s var(--ease), border-color .3s; }
+.dm-path:hover { transform: translateY(-3px); }
 .dm-path > * { position: relative; }
-.dm-path .k { font-size: 14px; letter-spacing: .06em; color: #d9b66d; }
-.dm-path .t { font-size: 28px; font-weight: 700; line-height: 1.1; color: #fff4d6; }
-.dm-path .s { font-size: 16px; color: #cbb68c; }
-.dm-path .first { font-family: var(--book); font-size: 17px; line-height: 1.5; color: #eadcbc; border-top: 1px solid rgba(233, 207, 148, .25); padding-top: 12px; margin-top: 4px; }
-.dm-path .go { display: inline-flex; align-items: center; gap: 8px; color: #f1d595; font-size: 17px; font-weight: 700; }
+.dm-path .bg, .dm-path .toc, .dm-path .dots { display: none; }
+.dm-path .k { font-size: 14px; letter-spacing: .04em; font-weight: 700; }
+.dm-path .t { font-size: 30px; font-weight: 700; line-height: 1.1; }
+.dm-path .s { font-size: 16.5px; line-height: 1.4; }
+.dm-path .first { font-family: var(--book); font-size: 18px; line-height: 1.55; padding-top: 12px; margin-top: 2px; }
+.dm-path .go { display: inline-flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 700; margin-top: 4px; }
+/* a: נייר וזהב */
+html[data-pv="a"] .dm-path { background: var(--paper); border: 1px solid #d8c08a; outline: 1px solid rgba(201, 154, 72, .35); outline-offset: -7px; color: var(--ink); }
+html[data-pv="a"] .dm-path:hover { border-color: #c99a48; }
+html[data-pv="a"] .dm-path .k { color: #a87b33; }
+html[data-pv="a"] .dm-path .t { color: var(--bark); }
+html[data-pv="a"] .dm-path .s { color: #6d5a3d; }
+html[data-pv="a"] .dm-path .first { color: #3d2e18; border-top: 1px solid var(--line); }
+html[data-pv="a"] .dm-path .dots { display: flex; gap: 6px; }
+html[data-pv="a"] .dm-path .dots i { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid #c99a48; }
+html[data-pv="a"] .dm-path .dots i:first-child { background: #c99a48; }
+html[data-pv="a"] .dm-path .go { color: var(--bark); }
+/* b: מדבר, התמונה של הפתיחה */
+html[data-pv="b"] .dm-path { min-height: 380px; align-content: end; color: #fff3d8; }
+html[data-pv="b"] .dm-path .bg { display: block; position: absolute; inset: 0; background: url(hero-phone.webp) center 88% / cover no-repeat; transition: transform .8s var(--ease); }
+html[data-pv="b"] .dm-pathgrid .dm-path:nth-child(2) .bg { background-position: 30% 92%; }
+html[data-pv="b"] .dm-pathgrid .dm-path:nth-child(3) .bg { background-position: 75% 80%; }
+html[data-pv="b"] .dm-path .bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20, 12, 5, 0) 0%, rgba(20, 12, 5, .15) 35%, rgba(20, 12, 5, .88) 100%); }
+html[data-pv="b"] .dm-path:hover .bg { transform: scale(1.04); }
+html[data-pv="b"] .dm-path .k { color: #f1d595; }
+html[data-pv="b"] .dm-path .t { color: #fff6e0; font-size: 34px; }
+html[data-pv="b"] .dm-path .s { color: #e6d3ab; }
+html[data-pv="b"] .dm-path .first { color: #f3e6c8; border-top: 1px solid rgba(241, 213, 149, .35); }
+html[data-pv="b"] .dm-path .go { color: #f1d595; }
+/* c: תוכן העניינים, רואים מה יש בפנים */
+html[data-pv="c"] .dm-path { background: var(--paper); border: 1px solid var(--line); border-top: 3px solid #c99a48; color: var(--ink); }
+html[data-pv="c"] .dm-path:hover { border-color: #c99a48; }
+html[data-pv="c"] .dm-path .k { color: #a87b33; }
+html[data-pv="c"] .dm-path .t { color: var(--bark); }
+html[data-pv="c"] .dm-path .s { color: #6d5a3d; }
+html[data-pv="c"] .dm-path .first { display: none; }
+html[data-pv="c"] .dm-path .toc { display: grid; gap: 0; margin: 6px 0 0; padding: 0; list-style: none; counter-reset: t; border-top: 1px solid var(--line); }
+html[data-pv="c"] .dm-path .toc li { counter-increment: t; display: grid; grid-template-columns: 26px 1fr; padding-block: 7px; border-bottom: 1px solid var(--line); font-size: 17px; color: #3d2e18; }
+html[data-pv="c"] .dm-path .toc li::before { content: counter(t); color: #a87b33; font-weight: 700; }
+html[data-pv="c"] .dm-path .go { color: var(--bark); }
+
+/* אייקון "האדם ובוראו": רק הגרסה שנבחרה */
+.ic-bore .icv { display: none; }
+html[data-ic="a"] .ic-bore .icv-a, html[data-ic="b"] .ic-bore .icv-b, html[data-ic="c"] .ic-bore .icv-c { display: inline; }
+
+/* קריאת מסלול: ציטוט אחד בכל פעם */
+.dm-steps.reader:not(.all) li { grid-template-columns: 1fr; }
+.dm-steps.reader:not(.all) .st { display: none; }
+.dm-reader { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; margin: -10px 0 14px; }
+.dm-reader button { height: 50px; padding: 0 18px; font: inherit; font-size: 19px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+.dm-reader .prev { background: transparent; border: 1px solid var(--line); color: var(--bark); }
+.dm-reader .prev:disabled { opacity: .35; cursor: default; }
+.dm-reader .next { background: #1f150b; border: 1px solid #1f150b; color: #f1d595; }
+.dm-reader .next[hidden] { display: none; }
+.dm-reader .prog { display: grid; justify-items: center; gap: 6px; }
+.dm-reader .dots { display: flex; gap: 7px; }
+.dm-reader .dots i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid #c99a48; transition: background .3s, transform .3s; }
+.dm-reader .dots i.was { background: rgba(201, 154, 72, .45); }
+.dm-reader .dots i.now { background: #c99a48; transform: scale(1.25); }
+.dm-reader .n { font-size: 15px; color: #6d5a3d; }
+.dm-showall { display: block; margin: 0 auto 30px; background: none; border: 0; border-bottom: 1px solid currentColor; color: #8a5a2b; font: inherit; font-size: 16px; cursor: pointer; padding: 0 0 2px; }
+.dm-end { text-align: center; padding: 34px 20px; margin-bottom: 30px; background: var(--paper); border: 1px solid #d8c08a; display: grid; justify-items: center; gap: 8px; }
+.dm-end[hidden] { display: none; }
+.dm-end .k { margin: 0; color: #a87b33; font-weight: 700; font-size: 15px; }
+.dm-end h2 { margin: 0; }
+.dm-end p { margin: 0; font-size: 19px; }
+.dm-endjoin { display: inline-flex; align-items: center; gap: 8px; height: 52px; padding: 0 22px; margin-top: 6px; color: #24170b; text-decoration: none; font-size: 20px; font-weight: 700; background: linear-gradient(120deg, #c99a48, #f0d79c 45%, #c99a48); }
+.dm-endjoin svg { width: 22px; height: 22px; }
+.dm-endmore { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; margin-top: 12px; }
+.dm-endmore a { color: var(--bark); font-size: 17px; text-decoration: none; border-bottom: 1px solid currentColor; display: inline-flex; align-items: center; gap: 6px; }
+.dm-endmore .arw { width: .65em; height: .65em; }
+
+/* תמונות המבארים */
+.dm-rabbi .mono { overflow: hidden; }
+.dm-rabbi .mono img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; display: block; filter: saturate(.9) sepia(.12); }
 
 /* --- 5. כריכות ספרים ושורת גלילה --- */
 .dm-rail { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(170px, 1fr); gap: 14px; overflow-x: auto; width: 100%; padding-bottom: 10px; scroll-snap-type: x mandatory; scrollbar-width: thin; margin-top: 10px; }
