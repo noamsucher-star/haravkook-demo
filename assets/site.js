@@ -641,6 +641,8 @@ function todayHTML(q, base) {
   var SIG = 'אברהם יצחק הכהן קוק', MOTTO = 'הישן יתחדש והחדש יתקדש', RISE = 'עלה למעלה עלה, כי כח עז לך, יש לך כנפי רוח, כנפי נשרים אבירים. אל תכחש בם, פן יכחשו לך, דרש אותם, וימצאו לך מיד';
   // מתג זמני: איך לשלב את החתימה (a מתחת למקור במרכז / b כמו חתימה במכתב, בצד / c חותמת גדולה ודהויה בפינה)
   var html = document.documentElement, sg = 'a';
+  // פסקה קבועה ברקע של 'חצי דקה להיום' (נועם בחר 22.11: 'רעיון פגז') - חדריו, עמ' פ
+  var BGTEXT = 'אפילו כשנדמה שאין מוסיפים דבר ושום רעיון חדש, אין הדבר כן, כי במה שמעתיקים את העניינים ממקום למקום, מוסיפים תנועה חיותית ואור פנימי, אור חיים חדש מזריח ושופע';
   try { sg = localStorage.getItem('dm-sg') || 'a'; } catch (x) {}
   var mq = /[?&]sg=([abc])/.exec(location.search); if (mq) sg = mq[1];
   html.setAttribute('data-sg', sg);
@@ -668,20 +670,16 @@ function todayHTML(q, base) {
       var bg = el('div', 'hw-bg'); today.insertBefore(bg, today.firstChild);
       var fill = function () {
         var q = tin.querySelector('.q'); if (!q) return;
-        var t = q.textContent.trim(); bg.textContent = (t + ' ').repeat(8);
+        bg.textContent = (BGTEXT + ' ').repeat(4);
         bg.classList.remove('hw-in'); void bg.offsetWidth; watch(bg);
         addSig(tin);
       };
       fill();
       new MutationObserver(function () { if (!tin.querySelector('.hw-sig')) fill(); }).observe(tin, { childList: true });
     }
-    // 2. סימן מים בעמוד ציטוט: מילות הציטוט עצמו מאחורי הטקסט
+    // 2. עמוד ציטוט: רק חתימה (סימן המים הוסר לבקשת נועם)
     var qp = document.querySelector('.dm-qpage .card');
-    if (qp) {
-      var qt = qp.querySelector('.quote'), mk = el('div', 'hw-mark', qt ? qt.textContent.trim() : '');
-      var cin = qp.querySelector('.cardin') || qp; cin.insertBefore(mk, cin.firstChild); watch(mk);
-      addSig(qp.querySelector('.cardin'));
-    }
+    if (qp) addSig(qp.querySelector('.cardin'));
     // 3. חתימה גם בכרטיסי מסלול
     document.querySelectorAll('[data-reader] .card .cardin').forEach(addSig);
     // 4. פס כתב יד שזז לאט בין האזורים, ובמסך "סיימתם"
