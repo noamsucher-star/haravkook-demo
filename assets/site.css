@@ -1188,3 +1188,5 @@ html[data-ic="a"] .ic-bore .icv-a, html[data-ic="b"] .ic-bore .icv-b, html[data-
 .dm-sw-panel button { text-align: right; padding: 9px 12px; border: 1px solid #e6dac0; background: #fff; font: inherit; font-size: 17px; color: #33240f; cursor: pointer; }
 .dm-sw-panel button[aria-pressed="true"] { background: #1f150b; color: #f1d595; border-color: #1f150b; }
 .dm-sw-panel a { font-size: 14.5px; color: #8a5a2b; margin-top: 4px; }
+
+.dm-rabbi .mono.ph { background-repeat: no-repeat; background-color: #2a1c0e; filter: saturate(.92) sepia(.1); }
