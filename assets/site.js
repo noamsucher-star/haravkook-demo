@@ -711,24 +711,3 @@ function todayHTML(q, base) {
   });
 })();
 
-// ---------- מתג זמני (22.11): גודל השער בטלפון - 3 גרסאות ----------
-(function () {
-  var html = document.documentElement, v = 'a';
-  try { v = localStorage.getItem('dm-hs') || 'a'; } catch (x) {}
-  var m = /[?&]hs=([abc])/.exec(location.search); if (m) v = m[1];
-  html.setAttribute('data-hs', v);
-  var NAMES = { a: 'כמו מקודם', b: 'קטן ועדין', c: 'באמצע' };
-  document.addEventListener('DOMContentLoaded', function () {
-    if (!document.querySelector('.hero')) return;
-    var sw = document.createElement('div'); sw.className = 'dm-switch';
-    sw.innerHTML = '<button type="button" class="dm-sw-btn" aria-expanded="false">גרסאות</button><div class="dm-sw-panel" hidden><p>גודל השער (טלפון)</p>'
-      + ['a', 'b', 'c'].map(function (k, n) { return '<button type="button" data-v="' + k + '" aria-pressed="' + (v === k) + '">' + (n + 1) + '. ' + NAMES[k] + '</button>'; }).join('') + '</div>';
-    document.body.appendChild(sw);
-    var b = sw.querySelector('.dm-sw-btn'), p = sw.querySelector('.dm-sw-panel');
-    b.addEventListener('click', function () { p.hidden = !p.hidden; b.setAttribute('aria-expanded', String(!p.hidden)); });
-    p.querySelectorAll('[data-v]').forEach(function (o) { o.addEventListener('click', function () {
-      v = o.getAttribute('data-v'); html.setAttribute('data-hs', v); try { localStorage.setItem('dm-hs', v); } catch (x) {}
-      p.querySelectorAll('[data-v]').forEach(function (q) { q.setAttribute('aria-pressed', String(q === o)); });
-    }); });
-  });
-})();
