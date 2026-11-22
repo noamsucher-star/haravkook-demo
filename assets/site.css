@@ -1196,9 +1196,9 @@ html[data-ic="a"] .ic-bore .icv-a { display: inline; }
 .today .hw-sig { display: block; width: 100%; grid-column: 1 / -1; justify-self: center; text-align: center !important; }
 
 /* 4. פס שזז */
-.hw-band { overflow: hidden; white-space: nowrap; font-family: var(--hw); color: var(--hw-gold); font-size: clamp(28px, 4vw, 44px); line-height: 1.6; padding-block: 6px; border-block: 1px solid rgba(201, 154, 72, .3); user-select: none; -webkit-user-select: none; touch-action: pan-y; cursor: grab; }
+.hw-band { overflow: hidden; white-space: nowrap; font-family: var(--hw); color: var(--hw-gold); font-size: clamp(38px, 5.4vw, 60px); line-height: 1.6; padding-block: 8px; border-block: 1px solid rgba(201, 154, 72, .3); user-select: none; -webkit-user-select: none; touch-action: pan-y; cursor: grab; }
 .hw-band.grab { cursor: grabbing; }
-.hw-track { display: flex; width: max-content; opacity: .55; will-change: transform; }
+.hw-track { display: flex; width: max-content; opacity: .72; will-change: transform; }
 .hw-track > span { flex: none; padding-left: .6em; }
 .hw-band .sep { font-weight: normal; font-size: .5em; vertical-align: middle; padding-inline: .3em; }
 .dm-end { position: relative; overflow: hidden; isolation: isolate; }

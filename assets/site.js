@@ -685,7 +685,7 @@ function todayHTML(q, base) {
       var x = 0, last = 0, drag = false, px = 0, hold = 0, span = tr.firstChild;
       var still = function () { return (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) || document.body.classList.contains('a-still'); };
       function step(t) { var w = span.offsetWidth || 1, dt = last ? Math.min(t - last, 60) : 0; last = t;
-        if (!drag && t > hold && !still()) x += dt * 0.035;
+        if (!drag && t > hold && !still()) x += dt * 0.022;
         x = ((x % w) + w) % w; tr.style.transform = 'translate3d(' + x + 'px,0,0)'; requestAnimationFrame(step); }
       requestAnimationFrame(step);
       b.addEventListener('pointerdown', function (e) { drag = true; px = e.clientX; b.classList.add('grab'); try { b.setPointerCapture(e.pointerId); } catch (z) {} });
