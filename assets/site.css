@@ -1190,3 +1190,17 @@ html[data-ic="a"] .ic-bore .icv-a, html[data-ic="b"] .ic-bore .icv-b, html[data-
 .dm-sw-panel a { font-size: 14.5px; color: #8a5a2b; margin-top: 4px; }
 
 .dm-rabbi .mono.ph { background-repeat: no-repeat; background-color: #2a1c0e; filter: saturate(.92) sepia(.1); }
+
+/* מבארים כרשימה: שם ותיאור, 3 טורים, בלי תמונות (נועם 22.11) */
+.dm-rlist { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 34px; width: 100%; margin-top: 14px; text-align: right; }
+@media (max-width: 860px) { .dm-rlist { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; } }
+@media (max-width: 480px) { .dm-rlist { grid-template-columns: 1fr; } }
+.dm-rlist.all { padding-block: 30px 50px; }
+.dm-rlist .dm-rabbi { display: grid; gap: 2px; justify-items: start; text-align: right; padding: 15px 0 14px; background: none; border: 0; border-bottom: 1px solid var(--line); }
+.dm-rlist .dm-rabbi .nm { font-size: 21px; }
+.dm-rlist .dm-rabbi .ro { font-size: 15.5px; }
+.dm-rlist .dm-rabbi:hover .nm { color: #a87b33; }
+html[data-cw="b"] .dm-rabbis .dm-rlist .dm-rabbi { background: none; border-color: rgba(233, 207, 148, .18); }
+
+.ic-bore .icv .mo:nth-child(n+3) { opacity: 0; transition: opacity .35s ease .25s; }
+.ic-bore.on .icv .mo:nth-child(n+3) { opacity: 1; }
