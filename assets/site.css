@@ -1217,3 +1217,14 @@ html[data-ic="a"] .ic-bore .icv-a { display: inline; }
 /* החתימה לא נחתכת: מקום לזנבות האותיות (ק, ן) גם בתוך החשיפה */
 .hw-sig { line-height: 1.5 !important; padding-bottom: .15em; clip-path: inset(-40% -6% -60% 100%); }
 .hw-sig.hw-in { clip-path: inset(-40% -6% -60% -6%) !important; }
+
+/* 22.11 נועם (טלפון): בשער - תמונת הרב קטנה יותר, החיפוש מתחתיה, ו"מי היה הרב קוק" צמוד לחיפוש */
+@media (max-width: 900px) {
+  .hero .text, .hero .under { display: contents; }
+  .hero > .in, .hero .in:has(> .stage) { display: flex !important; flex-direction: column; align-items: center; }
+  .hero h1 { order: 1; } .hero .lede { order: 2; }
+  .hero .stage { order: 3; width: 150px !important; max-width: 42vw; height: auto !important; margin: 8px auto 18px !important; }
+  .hero .stage .arch { width: 100% !important; height: auto !important; }
+  .hero form { order: 4; width: 100%; margin-bottom: 0 !important; }
+  .hero .dm-new { order: 5; margin-top: 10px !important; padding-top: 0 !important; }
+}
