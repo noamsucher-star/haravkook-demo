@@ -1257,3 +1257,25 @@ html[data-ic="a"] .ic-bore .icv-a { display: inline; }
 @keyframes dmInPrev { from { opacity: 0; transform: translateX(-40px); } }
 @media (prefers-reduced-motion: reduce) { .dm-steps.reader li.dm-in-next, .dm-steps.reader li.dm-in-prev { animation: none; } }
 .dm-steps.reader { touch-action: pan-y; }
+
+/* 22.11 נועם - טלפון בלבד: 3 גרסאות גודל לשער (כותרת, משפט, מלבן חיפוש). מתג "גרסאות" */
+@media (max-width: 900px) {
+  html[data-hs="a"] .hero h1 { font-size: 21vw !important; }
+  html[data-hs="a"] .hero .lede { font-size: 6.1vw !important; }
+  html[data-hs="a"] .hero form { width: 100% !important; }
+  html[data-hs="a"] .hero form :is(input, button) { height: 56px !important; min-height: 0 !important; font-size: 18px !important; }
+  html[data-hs="b"] .hero h1 { font-size: 18.5vw !important; }
+  html[data-hs="b"] .hero .lede { font-size: 5.5vw !important; }
+  html[data-hs="b"] .hero form { width: 90% !important; }
+  html[data-hs="b"] .hero form :is(input, button) { height: 50px !important; min-height: 0 !important; font-size: 16.5px !important; }
+  html[data-hs="c"] .hero h1 { font-size: 24vw !important; }
+  html[data-hs="c"] .hero .lede { font-size: 6.4vw !important; }
+  html[data-hs="c"] .hero form { width: 95% !important; }
+  html[data-hs="c"] .hero form :is(input, button) { height: 58px !important; min-height: 0 !important; font-size: 19px !important; }
+}
+.dm-switch { position: fixed; z-index: 90; right: calc(14px + env(safe-area-inset-right, 0px)); bottom: calc(14px + env(safe-area-inset-bottom, 0px)); display: grid; justify-items: end; gap: 8px; font-family: var(--display); }
+.dm-sw-btn { height: 46px; padding: 0 18px; background: #1f150b; color: #f1d595; border: 1px solid #c99a48; font: inherit; font-size: 18px; font-weight: 700; cursor: pointer; }
+.dm-sw-panel { background: #fffdf8; border: 1px solid #c99a48; padding: 12px; display: grid; gap: 6px; min-width: 210px; box-shadow: 0 12px 30px rgba(26, 17, 7, .25); }
+.dm-sw-panel p { margin: 0 0 2px; font-size: 14px; color: #8a5a2b; font-weight: 700; }
+.dm-sw-panel button { text-align: right; padding: 9px 12px; border: 1px solid #e6dac0; background: #fff; font: inherit; font-size: 17px; color: #33240f; cursor: pointer; }
+.dm-sw-panel button[aria-pressed="true"] { background: #1f150b; color: #f1d595; border-color: #1f150b; }
