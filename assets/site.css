@@ -1186,7 +1186,7 @@ html[data-ic="a"] .ic-bore .icv-a { display: inline; }
 
 /* 1. רקע בפתיחה */
 .today { position: relative; overflow: hidden; isolation: isolate; }
-.hw-bg { position: absolute; inset: 0 -2%; z-index: -1; pointer-events: none; user-select: none; overflow: hidden; font-family: var(--hw); color: var(--hw-gold); opacity: .11; font-size: clamp(78px, 15vw, 190px); line-height: 1.12; text-align: justify; word-break: break-word; transform: rotate(-3deg) scale(1.06); }
+.hw-bg { position: absolute; inset: 0; z-index: -1; pointer-events: none; user-select: none; overflow: hidden; font-family: var(--hw); color: var(--hw-gold); opacity: .1; font-size: clamp(78px, 15vw, 190px); line-height: .92; text-align: justify; word-break: break-word; padding-top: .1em; -webkit-mask-image: radial-gradient(ellipse 60% 55% at 50% 50%, rgba(0,0,0,.18) 0%, rgba(0,0,0,.45) 45%, #000 100%); mask-image: radial-gradient(ellipse 60% 55% at 50% 50%, rgba(0,0,0,.18) 0%, rgba(0,0,0,.45) 45%, #000 100%); }
 
 /* 2. סימן מים בעמוד ציטוט */
 .dm-qpage .card .cardin { position: relative; isolation: isolate; overflow: hidden; }
