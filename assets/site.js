@@ -1369,7 +1369,7 @@ if (typeof module !== 'undefined') module.exports = SE;
       return b;
     };
     // הפס העליון: במעבר בין המדבר (הפתיחה) ל"חצי דקה להיום"
-    var tday = document.querySelector('.block.today'); if (tday) tday.parentNode.insertBefore(band(RISE), tday);
+    var tday = document.querySelector('.block.today') || document.querySelector('.home.h2 ~ main .dm-doors'); if (tday) tday.parentNode.insertBefore(band(RISE), tday);
     var join = document.querySelector('.join.block'); if (join) join.parentNode.insertBefore(band(BGTEXT), join);
     var end = document.querySelector('.dm-end'); if (end) { var eb = el('div', 'hw-endbg', MOTTO); end.insertBefore(eb, end.firstChild); }
   });
@@ -1396,20 +1396,39 @@ if (typeof module !== 'undefined') module.exports = SE;
 })();
 
 
-/* פתיח חדש (24.11.26): הציטוט שבפתיח הוא "חצי דקה להיום". מסתנכרן עם הבלוק שמתחת (גם ב"ציטוט נוסף") */
+/* פתיח חדש (24.11.26): הציטוט שבפתיח הוא "חצי דקה להיום". 25.11: הרצועה שמתחת נמחקה; חצים מדפדפים במאגר, וקישור "לביאור" מוביל לעמוד הציטוט */
 (function () {
-  var q = document.getElementById('h2-q'), ref = document.getElementById('h2-ref'), box = document.querySelector('.today > .in');
+  var q = document.getElementById('h2-q'), ref = document.getElementById('h2-ref'), more = document.getElementById('h2-more');
   if (!q) return;
+  var a = q.querySelector('a'), hero = q.closest('.hero'), P = [], cur = -1;
+  try { P = JSON.parse(document.getElementById('pool').textContent); } catch (e) {}
   function size() { var n = q.textContent.trim().length; q.setAttribute('data-len', n > 150 ? 'xl' : n > 95 ? 'l' : n > 48 ? 'm' : 's'); }
-  function sync() {
-    if (!box) return size();
-    var a = box.querySelector('.q a'), r = box.querySelector('.ref'), t = q.querySelector('a');
-    if (a && t && a.textContent.trim() && t.textContent !== a.textContent) { t.textContent = a.textContent; t.setAttribute('href', a.getAttribute('href')); }
-    if (r && ref) { var x = r.textContent.replace(/^\s*מקור:\s*/, '').trim(); if (ref.textContent !== x) ref.textContent = x; }
-    size();
+  function idOf(h) { var m = /q\/([^\/]+)\.html/.exec(h || ''); return m ? m[1] : ''; }
+  function words(el, txt, from, step) { // כמו כניסת הכותרת: כל מילה עולה ומתחדדת
+    el.textContent = ''; var n = from;
+    txt.split(/\s+/).forEach(function (w, i) { if (!w) return; if (i) el.appendChild(document.createTextNode(' ')); var s = document.createElement('span'); s.className = 'w'; s.textContent = w; s.style.cssText = '--d:' + Math.round(n * step) + 'ms;--du:440ms'; el.appendChild(s); n++; });
+    return n;
   }
-  sync();
-  if (box && 'MutationObserver' in window) new MutationObserver(sync).observe(box, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['data-i'] });
+  function show(i, anim) {
+    var d = P[i]; if (!d || !a) return; cur = i;
+    var href = a.getAttribute('href').replace(/q\/[^\/]+\.html.*$/, 'q/' + d.i + '.html');
+    a.setAttribute('href', href); if (more) more.setAttribute('href', href);
+    if (anim && hero && hero.classList.contains('h2t-go')) { var st = Math.min(30, 600 / Math.max(1, d.q.split(/\s+/).length)); var n = words(a, d.q, 0, st); words(ref, d.r || '', n, st); }
+    else { a.textContent = d.q; ref.textContent = d.r || ''; }
+    size();
+    try { document.dispatchEvent(new CustomEvent('h2:quote')); } catch (e) {}
+  }
+  // הציטוט של היום (מתחלף כל יום, לפי השעון של הגולש)
+  if (P.length && a) {
+    var t = Math.floor((Date.now() - new Date().getTimezoneOffset() * 6e4) / 864e5) % P.length;
+    if (String(P[t].i) !== idOf(a.getAttribute('href'))) show(t, false); else cur = t;
+  }
+  size();
+  // החצים: מעבר לציטוט הבא / הקודם במאגר
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-h2nav]'); if (!b || !P.length) return;
+    show(((cur < 0 ? 0 : cur) + (+b.getAttribute('data-h2nav')) + P.length) % P.length, true);
+  });
 })();
 
 /* מתג דמו: 3 כיווני פריסה + 2 פסקאות לכתב היד */
@@ -1417,7 +1436,7 @@ if (typeof module !== 'undefined') module.exports = SE;
   if (!document.querySelector('.h2-hw')) return;
   var root = document.documentElement, sw = document.createElement('div');
   sw.className = 'hw-sw'; sw.setAttribute('role', 'group'); sw.setAttribute('aria-label', 'גרסאות לפתיח');
-  sw.innerHTML = '<b>פריסה</b><button type="button" data-k="hv" data-v="a">1 הרב בימין</button><button type="button" data-k="hv" data-v="b">2 הרב במרכז</button><button type="button" data-k="hv" data-v="c">3 הרב בשמאל</button><i></i><b>כתב יד</b><button type="button" data-k="hw" data-v="a">מרחבים</button><button type="button" data-k="hw" data-v="b">שמעו אלי עמי</button>';
+  sw.innerHTML = '<b>פריסה</b><button type="button" data-k="hv" data-v="a">1 הרב בימין</button><button type="button" data-k="hv" data-v="b">2 הרב במרכז</button><button type="button" data-k="hv" data-v="c">3 הרב בשמאל</button><i></i><b>כתב יד</b><button type="button" data-k="hw" data-v="a">מרחבים</button><button type="button" data-k="hw" data-v="b">שמעו אלי עמי</button><i></i><b>חצים</b><button type="button" data-k="ha" data-v="a">1 בצדי הציטוט</button><button type="button" data-k="ha" data-v="b">2 ליד הכותרת</button><button type="button" data-k="ha" data-v="c">3 ליד "לביאור"</button>';
   function mark() { [].forEach.call(sw.querySelectorAll('button'), function (b) { b.setAttribute('aria-pressed', root.getAttribute('data-' + b.getAttribute('data-k')) === b.getAttribute('data-v') ? 'true' : 'false'); }); }
   sw.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; root.setAttribute('data-' + b.getAttribute('data-k'), b.getAttribute('data-v')); try { localStorage.setItem(b.getAttribute('data-k'), b.getAttribute('data-v')); } catch (x) {} mark(); });
   document.body.appendChild(sw); mark();
@@ -1540,6 +1559,8 @@ window.H2_PRESET = {
     var t = text(), done = function () { e.target.textContent = 'הועתק ✓'; setTimeout(function () { e.target.textContent = 'העתקת ההגדרות'; }, 1600); };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, function () { prompt('להעתיק:', t); }); else prompt('להעתיק:', t);
   });
+  // החצים בפתיח החליפו ציטוט: מחשבים מחדש את גודל האותיות לפי האורך החדש
+  document.addEventListener('h2:quote', function () { q.style.fontSize = ''; baseFs = parseFloat(getComputedStyle(q).fontSize); q.style.fontSize = (baseFs * v.qs / 100) + 'px'; });
   // החלפת פריסה במתג, או מעבר בין מחשב לטלפון: מתחילים מנקודת הפתיחה של המצב החדש
   document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('.hw-sw button[data-k="hv"]')) setTimeout(start, 30); });
   var wasMob = mob(); window.addEventListener('resize', function () { if (mob() !== wasMob) { wasMob = mob(); start(); } });

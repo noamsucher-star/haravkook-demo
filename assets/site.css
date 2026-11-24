@@ -1640,6 +1640,39 @@ html.h2t-wait .h2-k, html.h2t-wait .h2-q, html.h2t-wait .h2-ref{opacity: 0;}
 @media (prefers-reduced-motion: reduce) { .hero.h2t-go *{animation: none !important;} html.h2t-wait .h2-k, html.h2t-wait .h2-q, html.h2t-wait .h2-ref{opacity: 1;} }
 body.a-still .hero.h2t-go :is(.h2-k, .h2-q, .h2-q a, .h2-ref, .w){animation: none !important;}
 
+/* ================= 25.11: חצים למעבר בין הציטוטים + קישור לביאור =================
+   לא משנים את הפריסה של הפתיח: החצים צפים (absolute), ושורת "לביאור" בגובה אפס (מרווח שלילי) בתוך הרווח שמתחת למקור.
+   מתג data-ha: a = בצדי הציטוט / b = ליד "חצי דקה להיום" / c = ליד "לביאור". אחרי בחירה: לקבע ולמחוק את השאר. */
+.h2-q, .h2-k{position: relative;}
+.h2-nav{position: absolute; top: 50%; width: 48px; height: 48px; margin: -24px 0 0; padding: 0; border: 0; border-radius: 50%; background: none; color: #3a2710; cursor: pointer; display: grid; place-items: center; opacity: .7; transition: opacity .2s, transform .25s cubic-bezier(.2, .7, .2, 1); -webkit-tap-highlight-color: transparent; filter: drop-shadow(0 0 8px #fff0d0) drop-shadow(0 0 20px #fff0d0);}
+.h2-nav svg{width: 28px; height: 28px; display: block;}
+.h2-nav.next svg{transform: scaleX(-1);}
+.h2-nav:hover{opacity: 1;}
+.h2-nav.prev:hover{transform: translateX(4px);}
+.h2-nav.next:hover{transform: translateX(-4px);}
+.h2-nav:active{transform: scale(.88);}
+.h2-nav:focus-visible{outline: 2px solid #3a2710; outline-offset: 2px; opacity: 1;}
+.h2-nav-a.prev{right: -84px;}
+.h2-nav-a.next{left: -84px;}
+.h2-nav-b{width: 40px; height: 40px; margin-top: -20px;}
+.h2-nav-b svg{width: 18px; height: 18px;}
+.h2-nav-b.prev{right: -52px;}
+.h2-nav-b.next{left: -52px;}
+.h2-nav-c{position: static; margin: 0; width: 40px; height: 32px;}
+.h2-nav-c svg{width: 16px; height: 16px;}
+html:not([data-ha="a"]) .h2-nav-a, html:not([data-ha="b"]) .h2-nav-b, html:not([data-ha="c"]) .h2-nav-c{display: none;}
+.h2-more{display: flex; align-items: center; justify-content: center; gap: 4px; height: 32px; margin: 8px 0 -40px; font-family: var(--display); font-weight: 400; font-size: 21px; line-height: 32px; letter-spacing: .03em;}
+.h2-more a{color: #3a2710; padding: 0 8px; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; text-shadow: 0 0 14px #fff0d0, 0 0 30px #fff0d0, 0 0 50px #fff0d0;}
+.h2-more a:hover{text-decoration-thickness: 2px;}
+html.h2t-wait .h2-more, html.h2t-wait .h2-nav{opacity: 0;}
+.hero.h2t-go .h2-more, .hero.h2t-go .h2-nav{animation: h2Fade .6s ease .75s both;}
+@keyframes h2Fade{from{opacity: 0;}}
+@media (max-width: 900px) {
+  .h2-more{margin-bottom: 0;}
+  html[data-ha="a"] .h2-nav-a{display: none;}
+  html[data-ha="a"] .h2-nav-c{display: grid;}
+}
+
 /* ================= לוח שליטה ידני לנועם (דמו בלבד): מחשב וטלפון ================= */
 .h2c{position: fixed; z-index: 96; top: 76px; left: 12px; width: 268px; max-height: calc(100vh - 150px); overflow: auto; background: rgba(26, 17, 7, .98); color: #f3e2b9; border: 1px solid #b88a3e; font: 400 14px/1.3 "Heebo", Arial, sans-serif; box-shadow: 0 18px 40px -16px rgba(0, 0, 0, .7); direction: rtl; text-align: right;}
 .h2c summary{cursor: pointer; padding: 11px 14px; font-weight: 700; font-size: 15px; background: linear-gradient(120deg, #c99a48, #f0d79c 45%, #c99a48); color: #24170b; list-style: none; position: sticky; top: 0; z-index: 1;}
