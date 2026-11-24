@@ -1628,14 +1628,17 @@ html:root .home.h2 form.search{animation: none; opacity: 1; background: rgba(255
 html:root .home.h2 .lede{text-shadow: 0 0 10px rgba(255, 246, 226, .95), 0 0 26px rgba(255, 240, 210, .9), 0 0 44px rgba(255, 240, 210, .7);}
 .h2-hw{opacity: .5;}
 
-/* ---------- כניסת כתב היד: כל מילה נחשפת מימין לשמאל (hwanim.js קובע את ההשהיה) ---------- */
-.h2-hw .w{display: inline-block;}
-.h2-hw.hw-go .w{animation: hwWrite var(--du, 260ms) cubic-bezier(.25, .7, .2, 1) var(--d, 0ms) both;}
-.h2-hw.hw-go[data-hwa="c"] .w{animation-name: hwSoft; animation-timing-function: cubic-bezier(.2, .6, .2, 1);}
-@keyframes hwWrite{from{opacity: 0; clip-path: inset(-20% 0 -20% 100%);} 30%{opacity: 1;} to{opacity: 1; clip-path: inset(-20% 0 -20% -5%);}}
-@keyframes hwSoft{from{opacity: 0; filter: blur(5px); transform: translate(10px, 6px);} to{opacity: 1; filter: blur(0); transform: none;}}
-@media (prefers-reduced-motion: reduce) { .h2-hw.hw-go .w{animation: none;} }
-body.a-still .h2-hw.hw-go .w{animation: none;}
+/* ---------- כניסת הכותרת בפתיח (חצי דקה להיום, הציטוט, המקור). כתב היד ברקע סטטי. hwanim.js קובע את ההשהיות ---------- */
+html.h2t-wait .h2-k, html.h2t-wait .h2-q, html.h2t-wait .h2-ref{opacity: 0;}
+.h2-k .w, .h2-q .w, .h2-ref .w{display: inline-block;}
+.hero.h2t-go:is([data-hta="a"], [data-hta="c"]) :is(.h2-k, .h2-q, .h2-ref) .w{animation: h2Write var(--du, 280ms) cubic-bezier(.25, .7, .2, 1) var(--d, 0ms) both;}
+.hero.h2t-go[data-hta="c"] :is(.h2-k, .h2-q, .h2-ref) .w{animation-name: h2Soft; animation-timing-function: cubic-bezier(.2, .6, .2, 1);}
+.hero.h2t-go[data-hta="b"] :is(.h2-k, .h2-q a, .h2-ref){animation: h2Wipe var(--du, 500ms) cubic-bezier(.3, .6, .2, 1) var(--d, 0ms) both;}
+@keyframes h2Write{from{opacity: 0; clip-path: inset(-40% 0 -40% 100%);} 35%{opacity: 1;} to{opacity: 1; clip-path: inset(-40% -8% -40% -8%);}}
+@keyframes h2Soft{from{opacity: 0; filter: blur(7px); transform: translateY(.22em);} to{opacity: 1; filter: blur(0); transform: none;}}
+@keyframes h2Wipe{from{opacity: 0; clip-path: inset(-60% 0 -60% 100%);} 15%{opacity: 1;} to{opacity: 1; clip-path: inset(-60% -12% -60% -12%);}}
+@media (prefers-reduced-motion: reduce) { .hero.h2t-go *{animation: none !important;} html.h2t-wait .h2-k, html.h2t-wait .h2-q, html.h2t-wait .h2-ref{opacity: 1;} }
+body.a-still .hero.h2t-go :is(.h2-k, .h2-q, .h2-q a, .h2-ref, .w){animation: none !important;}
 
 /* ================= לוח שליטה ידני לנועם (דמו בלבד): מחשב וטלפון ================= */
 .h2c{position: fixed; z-index: 96; top: 76px; left: 12px; width: 268px; max-height: calc(100vh - 150px); overflow: auto; background: rgba(26, 17, 7, .98); color: #f3e2b9; border: 1px solid #b88a3e; font: 400 14px/1.3 "Heebo", Arial, sans-serif; box-shadow: 0 18px 40px -16px rgba(0, 0, 0, .7); direction: rtl; text-align: right;}

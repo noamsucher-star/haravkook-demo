@@ -1547,52 +1547,49 @@ window.H2_PRESET = {
 })();
 
 
-/* כניסה מהירה של כתב היד ברקע הפתיח (25.11.26). 3 אפשרויות, מתג data-hwa:
-   a = נכתב שורה אחרי שורה, מימין לשמאל   b = כל השורות נכתבות יחד מימין לשמאל   c = גל רך שנפתח מהפינה הימנית העליונה
-   לא משנה שום דבר בפריסה: רק עוטף כל מילה ומוסיף לה השהיה. */
+/* כניסה מהירה של הכותרת בפתיח (25.11.26): "חצי דקה להיום", הציטוט והמקור. כתב היד ברקע נשאר סטטי (נועם).
+   3 אפשרויות, מתג data-hwa:  a = מילה אחרי מילה, נכתב מימין לשמאל   b = משיכה אחת חלקה מימין לשמאל   c = מילים שעולות ומתחדדות ברכות
+   לא משנה שום דבר בפריסה: רק עוטף מילים ומוסיף השהיה. */
 (function () {
   var hero = document.querySelector('.home.h2 .hero'); if (!hero) return;
-  var root = document.documentElement, still = function () { return (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) || document.body.classList.contains('a-still'); };
-  function wrap(el) { // פעם אחת: כל מילה ב-span
-    if (el.getAttribute('data-w')) return; el.setAttribute('data-w', '1');
-    var words = el.textContent.split(/\s+/).filter(Boolean), f = document.createDocumentFragment();
-    words.forEach(function (w, i) { var s = document.createElement('span'); s.className = 'w'; s.textContent = w; f.appendChild(s); if (i < words.length - 1) f.appendChild(document.createTextNode(' ')); });
-    el.textContent = ''; el.appendChild(f);
-  }
-  function play() {
-    var mode = root.getAttribute('data-hwa') || 'a';
-    [].forEach.call(hero.querySelectorAll('.h2-hw'), function (el) {
-      el.classList.remove('hw-go');
-      if (getComputedStyle(el).display === 'none') return;
-      wrap(el);
-      if (still()) return;
-      var R = el.getBoundingClientRect(), ws = el.querySelectorAll('.w'), tops = [], line = -1, last = null, items = [];
-      for (var i = 0; i < ws.length; i++) {
-        var r = ws[i].getBoundingClientRect(); if (r.top > R.bottom) { ws[i].style.cssText = ''; continue; }
-        if (last === null || Math.abs(r.top - last) > 4) { line++; last = r.top; }
-        items.push([ws[i], line, Math.max(0, Math.min(1, (R.right - r.right) / Math.max(1, R.width)))]);
-      }
-      var lines = line + 1;
-      items.forEach(function (it) {
-        var l = it[1], p = it[2], d, du;
-        if (mode === 'a') { d = l * 85 + p * 95; du = 240; }                       // שורה אחרי שורה
-        else if (mode === 'b') { d = p * 650 + l * 22; du = 300; }                 // כל השורות יחד
-        else { d = (p * .62 + (l / Math.max(1, lines)) * .38) * 1000; du = 720; }  // גל רך
-        it[0].style.cssText = '--d:' + Math.round(d) + 'ms;--du:' + du + 'ms';
-      });
-      void el.offsetWidth; el.setAttribute('data-hwa', mode); el.classList.add('hw-go');
+  var root = document.documentElement, parts = function () { return [hero.querySelector('.h2-k'), hero.querySelector('.h2-q a') || hero.querySelector('.h2-q'), hero.querySelector('.h2-ref')].filter(Boolean); };
+  var still = function () { return (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) || document.body.classList.contains('a-still'); };
+  function wrap(el) { // עוטף כל מילה ב-span (אם המלל הוחלף, עוטף מחדש)
+    if (el.querySelector('.w')) return;
+    var tw = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), nodes = [], n; while ((n = tw.nextNode())) nodes.push(n);
+    nodes.forEach(function (t) {
+      var bits = t.nodeValue.split(/(\s+)/), f = document.createDocumentFragment();
+      bits.forEach(function (b) { if (!b) return; if (/^\s+$/.test(b)) { f.appendChild(document.createTextNode(' ')); return; } var s = document.createElement('span'); s.className = 'w'; s.textContent = b; f.appendChild(s); });
+      t.parentNode.replaceChild(f, t);
     });
   }
-  window.h2PlayHw = play;
-  var ready = function () { setTimeout(play, 260); };
+  function play() {
+    var mode = root.getAttribute('data-hwa') || 'a', P = parts();
+    hero.classList.remove('h2t-go'); root.classList.remove('h2t-wait');
+    P.forEach(function (el) { el.style.removeProperty('--d'); el.style.removeProperty('--du'); });
+    if (still()) return;
+    hero.setAttribute('data-hta', mode);
+    if (mode === 'b') { // משיכה אחת לכל חלק, אחד אחרי השני
+      var t = 0; P.forEach(function (el, i) { var du = i === 1 ? 620 : 340; el.style.setProperty('--d', t + 'ms'); el.style.setProperty('--du', du + 'ms'); t += i === 1 ? 420 : 150; });
+    } else {
+      P.forEach(wrap);
+      var ws = []; P.forEach(function (el) { [].forEach.call(el.querySelectorAll('.w'), function (w) { ws.push(w); }); });
+      var step = mode === 'a' ? Math.min(60, 1250 / Math.max(1, ws.length)) : Math.min(46, 1000 / Math.max(1, ws.length)), du = mode === 'a' ? 280 : 620;
+      ws.forEach(function (w, i) { w.style.cssText = '--d:' + Math.round(i * step) + 'ms;--du:' + du + 'ms'; });
+    }
+    void hero.offsetWidth; hero.classList.add('h2t-go');
+  }
+  window.h2PlayTitle = play;
+  var ready = function () { setTimeout(play, 320); };
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(ready); else setTimeout(ready, 500);
+  setTimeout(function () { root.classList.remove('h2t-wait'); }, 2600); // ביטחון: הכותרת תמיד מופיעה
   // מתג הדמו: בחירת כניסה + "נגן שוב"
   var sw = document.querySelector('.hw-sw');
   if (sw) {
-    var g = document.createElement('span'); g.className = 'hwa';
-    g.innerHTML = '<i></i><b>כניסת כתב היד</b><button type="button" data-k="hwa" data-v="a">1 שורה שורה</button><button type="button" data-k="hwa" data-v="b">2 הכול יחד</button><button type="button" data-k="hwa" data-v="c">3 גל רך</button><button type="button" data-replay>נגן שוב ↻</button>';
+    var g = document.createElement('span');
+    g.innerHTML = '<i></i><b>כניסת הכותרת</b><button type="button" data-k="hwa" data-v="a">1 מילה מילה</button><button type="button" data-k="hwa" data-v="b">2 משיכה אחת</button><button type="button" data-k="hwa" data-v="c">3 רך</button><button type="button" data-replay>נגן שוב ↻</button>';
     while (g.firstChild) sw.appendChild(g.firstChild);
     [].forEach.call(sw.querySelectorAll('button[data-k="hwa"]'), function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-v') === (root.getAttribute('data-hwa') || 'a') ? 'true' : 'false'); });
-    sw.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; if (b.hasAttribute('data-replay') || b.getAttribute('data-k') === 'hwa' || b.getAttribute('data-k') === 'hw') setTimeout(play, 40); });
+    sw.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; if (b.hasAttribute('data-replay') || b.getAttribute('data-k') === 'hwa') setTimeout(play, 40); });
   }
 })();
