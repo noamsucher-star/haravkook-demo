@@ -1378,32 +1378,12 @@ if (typeof module !== 'undefined') module.exports = SE;
 
 
 
-/* סבב 17 (24.11.26): דמו לפי הערות המעצבת. מתג גרסאות לאלמנט המלווה + כניסה רכה של אזורים בגלילה */
+/* ליטושים 24.11.26: מתג לפני / אחרי (דמו בלבד) */
 (function () {
-  var root = document.documentElement;
-  // מתג הגרסאות (דמו בלבד; אחרי הבחירה של נועם מקבעים ומוחקים)
-  var names = [['a', 'דף'], ['b', 'קשת'], ['c', 'דף בקשת']];
-  var sw = document.createElement('div');
-  sw.className = 'dz-sw'; sw.setAttribute('role', 'group'); sw.setAttribute('aria-label', 'גרסאות עיצוב');
-  sw.innerHTML = '<b>גרסאות</b>' + names.map(function (n, i) { return '<button type="button" data-dz="' + n[0] + '">' + (i + 1) + ' ' + n[1] + '</button>'; }).join('');
-  function mark() { var cur = root.getAttribute('data-dz') || 'a'; [].forEach.call(sw.querySelectorAll('button'), function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-dz') === cur ? 'true' : 'false'); }); }
-  sw.addEventListener('click', function (e) {
-    var b = e.target.closest('button'); if (!b) return;
-    root.setAttribute('data-dz', b.getAttribute('data-dz'));
-    try { localStorage.setItem('dz', b.getAttribute('data-dz')); } catch (err) {}
-    mark();
-  });
+  var root = document.documentElement, sw = document.createElement('div');
+  sw.className = 'lt-sw'; sw.setAttribute('role', 'group'); sw.setAttribute('aria-label', 'לפני ואחרי הליטושים');
+  sw.innerHTML = '<button type="button" data-lt="off">לפני</button><button type="button" data-lt="on">אחרי</button>';
+  function mark() { var c = root.getAttribute('data-lt'); [].forEach.call(sw.children, function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-lt') === c ? 'true' : 'false'); }); }
+  sw.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; root.setAttribute('data-lt', b.getAttribute('data-lt')); try { localStorage.setItem('lt', b.getAttribute('data-lt')); } catch (x) {} mark(); });
   document.body.appendChild(sw); mark();
-
-  // אזורי דף הבית נכנסים ברכות כשמגיעים אליהם
-  var home = document.querySelector('.home');
-  if (!home || !('IntersectionObserver' in window)) return;
-  var parts = document.querySelectorAll('main > section:not(.today) > .in');
-  var io = new IntersectionObserver(function (es) {
-    es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('dz-on'); io.unobserve(en.target); } });
-  }, { rootMargin: '0px 0px -12% 0px', threshold: .05 });
-  [].forEach.call(parts, function (p) {
-    if (p.getBoundingClientRect().top < window.innerHeight * .9) return; // מה שכבר על המסך לא זז
-    p.classList.add('dz-rv'); io.observe(p);
-  });
 })();
