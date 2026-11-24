@@ -1411,3 +1411,14 @@ if (typeof module !== 'undefined') module.exports = SE;
   sync();
   if (box && 'MutationObserver' in window) new MutationObserver(sync).observe(box, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['data-i'] });
 })();
+
+/* מתג דמו: שתי פסקאות לרקע כתב היד */
+(function () {
+  if (!document.querySelector('.h2-hw')) return;
+  var root = document.documentElement, sw = document.createElement('div');
+  sw.className = 'hw-sw'; sw.setAttribute('role', 'group'); sw.setAttribute('aria-label', 'פסקת כתב היד ברקע');
+  sw.innerHTML = '<button type="button" data-hw="a">פסקה 1: מרחבים</button><button type="button" data-hw="b">פסקה 2: שמעו אלי עמי</button>';
+  function mark() { var c = root.getAttribute('data-hw'); [].forEach.call(sw.children, function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-hw') === c ? 'true' : 'false'); }); }
+  sw.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; root.setAttribute('data-hw', b.getAttribute('data-hw')); try { localStorage.setItem('hw', b.getAttribute('data-hw')); } catch (x) {} mark(); });
+  document.body.appendChild(sw); mark();
+})();

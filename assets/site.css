@@ -1571,3 +1571,28 @@ html:root .bar .menubtn{order: 6;}
 }
 html:root .home.h2 form.search{background: rgba(255, 251, 240, .9); box-shadow: 0 0 0 1px rgba(255, 248, 226, .6), 0 18px 40px -22px rgba(0, 0, 0, .8);}
 html:root .home.h2 form.search input::placeholder{color: #5a4a30;}
+
+/* ---------- נועם 24.11: כתב היד = פסקה ארוכה (שתי אפשרויות, מתג data-hw), דהוי יותר בצד ימין, איפה שהרב ---------- */
+html[data-hw="a"] .h2-hw-b, html[data-hw="b"] .h2-hw-a{display: none;}
+.h2-hw{-webkit-mask-image: linear-gradient(180deg, #000 0%, #000 40%, transparent 100%), linear-gradient(to left, transparent 0%, rgba(0, 0, 0, .12) 22%, rgba(0, 0, 0, .55) 46%, #000 72%); mask-image: linear-gradient(180deg, #000 0%, #000 40%, transparent 100%), linear-gradient(to left, transparent 0%, rgba(0, 0, 0, .12) 22%, rgba(0, 0, 0, .55) 46%, #000 72%); -webkit-mask-composite: source-in; mask-composite: intersect; opacity: .3;}
+@media (max-width: 900px) { .h2-hw{-webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .5) 45%, transparent 100%); mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .5) 45%, transparent 100%); opacity: .2;} }
+.hw-sw{position: fixed; z-index: 95; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 2px; padding: 5px; background: #1a1107; color: #f3d998; border: 1px solid #b88a3e; font-size: 16px; line-height: 1; white-space: nowrap; box-shadow: 0 16px 34px -14px rgba(0, 0, 0, .6);}
+.hw-sw button{min-height: 40px; padding: 0 16px; border: 0; background: none; color: inherit; font: inherit; cursor: pointer;}
+.hw-sw button[aria-pressed="true"]{background: linear-gradient(120deg, #c99a48, #f0d79c 45%, #c99a48); color: #24170b; font-weight: 700;}
+
+/* ================= רקע זריחה בהיר (נועם 24.11, תמונה ממגניפיק) + מלל כהה ================= */
+html:root .home.h2{background: #f6dcae url(hero-sun.webp) 62% bottom / cover no-repeat; color: #2b1d0d;}
+html:root .home.h2::before{display: none;}
+.h2-hw{color: #7a5122; opacity: .34;}
+.h2-rav{mix-blend-mode: multiply;}
+.h2-rav img{filter: sepia(.7) saturate(1.15) hue-rotate(-6deg) brightness(1.02) contrast(1.02) !important; opacity: .62 !important;}
+.h2-k, .h2-ref, html:root .home.h2 .lede{color: #3a2710; text-shadow: 0 0 18px rgba(255, 244, 220, .75), 0 1px 0 rgba(255, 248, 232, .5);}
+.h2-k, .h2-ref{font-weight: 400;}
+html:root .home.h2 .lede{font-weight: 400;}
+.h2-q a{color: #2b1a09; background: linear-gradient(180deg, #5a3a16 0%, #2e1c0a 55%, #1d1206 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 1px 0 rgba(255, 246, 226, .55)) drop-shadow(0 0 22px rgba(255, 240, 208, .6));}
+html:root .home.h2 form.search{background: rgba(255, 253, 246, .9); box-shadow: 0 0 0 1px rgba(255, 255, 255, .7), 0 18px 40px -20px rgba(70, 40, 8, .55);}
+html:root .home.h2 form.search:focus-within{background: rgba(255, 253, 246, .97); box-shadow: 0 0 0 2px #b88a3e, 0 18px 40px -20px rgba(70, 40, 8, .55);}
+@media (max-width: 900px) {
+  html:root .home.h2{background-image: url(hero-sun-phone.webp); background-position: center bottom;}
+  .h2-rav img{opacity: .5 !important;}
+}
