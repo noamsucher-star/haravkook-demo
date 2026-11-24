@@ -1564,7 +1564,7 @@ window.H2_PRESET = {
     });
   }
   function play() {
-    var mode = root.getAttribute('data-hwa') || 'a', P = parts();
+    var mode = 'c', P = parts(); // נועם בחר 25.11: אפשרות 3, מילים שעולות ומתחדדות ברכות
     hero.classList.remove('h2t-go'); root.classList.remove('h2t-wait');
     P.forEach(function (el) { el.style.removeProperty('--d'); el.style.removeProperty('--du'); });
     if (still()) return;
@@ -1583,13 +1583,4 @@ window.H2_PRESET = {
   var ready = function () { setTimeout(play, 320); };
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(ready); else setTimeout(ready, 500);
   setTimeout(function () { root.classList.remove('h2t-wait'); }, 2600); // ביטחון: הכותרת תמיד מופיעה
-  // מתג הדמו: בחירת כניסה + "נגן שוב"
-  var sw = document.querySelector('.hw-sw');
-  if (sw) {
-    var g = document.createElement('span');
-    g.innerHTML = '<i></i><b>כניסת הכותרת</b><button type="button" data-k="hwa" data-v="a">1 מילה מילה</button><button type="button" data-k="hwa" data-v="b">2 משיכה אחת</button><button type="button" data-k="hwa" data-v="c">3 רך</button><button type="button" data-replay>נגן שוב ↻</button>';
-    while (g.firstChild) sw.appendChild(g.firstChild);
-    [].forEach.call(sw.querySelectorAll('button[data-k="hwa"]'), function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-v') === (root.getAttribute('data-hwa') || 'a') ? 'true' : 'false'); });
-    sw.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; if (b.hasAttribute('data-replay') || b.getAttribute('data-k') === 'hwa') setTimeout(play, 40); });
-  }
 })();
