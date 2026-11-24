@@ -1424,6 +1424,12 @@ if (typeof module !== 'undefined') module.exports = SE;
 })();
 
 
+/* ההגדרות שנועם כיוון ביד (25.11.26). נטענות תמיד, בכל דפדפן ובכל כתובת; מה ששמור בדפדפן גובר עליהן. */
+window.H2_PRESET = {
+  "d-a": {"size":96,"x":82.5,"y":1,"op":45,"hwp":"מרחבים","blend":"multiply","fade":60,"sep":0,"br":109,"flip":"לא","hwo":35,"hws":27,"hwh":57,"hwl":1.1,"demo":"הציטוט של היום","box":"לא","qw":56,"tb":"normal","ty":18.5,"tx":0,"qs":100,"gap":62,"qc":"#2e1c0a","tc":"#3a2710","glow":69,"gc":"#fff0d0","sh":0,"shd":4,"shc":"#1a0f04","ls":27,"lx":0,"lb":9,"lc":"#3a2710","lg":69,"lgc":"#fff0d0","lgo":4,"so":64,"sw":590}
+};
+
+
 /* לוח שליטה ידני (דמו בלבד, מחשב וטלפון): נועם מכוון בעצמו את הרב, הבלנד, כתב היד והמלל, ושולח את המספרים.
    ההגדרות נשמרות בנפרד לכל פריסה (hv) ולכל סוג מסך (מחשב / טלפון). */
 (function () {
@@ -1515,7 +1521,7 @@ if (typeof module !== 'undefined') module.exports = SE;
   box.innerHTML = html; document.body.appendChild(box);
   function fill() { [].forEach.call(box.querySelectorAll('[data-k]'), function (e) { var k = e.getAttribute('data-k'); e.value = v[k]; var o = box.querySelector('[data-o="' + k + '"]'); if (o) o.textContent = v[k] + (e.getAttribute('data-u') || ''); }); }
   function saved() { try { return JSON.parse(localStorage.getItem(key()) || 'null'); } catch (e) { return null; } }
-  function start() { clear(); if (orig) sample('הציטוט של היום'); measure(); v = {}; for (var k in base) v[k] = base[k]; var s = saved(); if (s) { for (var k2 in s) if (k2 in v) v[k2] = s[k2]; } apply(); fill(); }
+  function start() { clear(); if (orig) sample('הציטוט של היום'); measure(); v = {}; for (var k in base) v[k] = base[k]; var pre = (window.H2_PRESET || {})[(mob() ? 'm' : 'd') + '-' + root.getAttribute('data-hv')]; if (pre) for (var kp in pre) if (kp in v) v[kp] = pre[kp]; var s = saved(); if (s) { for (var k2 in s) if (k2 in v) v[k2] = s[k2]; } apply(); fill(); }
   box.addEventListener('input', function (e) { var k = e.target.getAttribute('data-k'); if (!k) return; v[k] = e.target.type === 'range' ? parseFloat(e.target.value) : e.target.value; apply(); fill(); try { localStorage.setItem(key(), JSON.stringify(v)); } catch (x) {} });
   box.addEventListener('click', function (e) {
     var a = e.target.getAttribute && e.target.getAttribute('data-a'); if (!a) return;
