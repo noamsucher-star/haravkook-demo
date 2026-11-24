@@ -1434,20 +1434,37 @@ if (typeof module !== 'undefined') module.exports = SE;
     ['h', 'הרב'], ['size', 'גודל', 20, 170, 1, '%'], ['x', 'ימינה / שמאלה', -20, 120, .5, '%'], ['y', 'למעלה / למטה', -40, 70, .5, '%'], ['op', 'שקיפות', 0, 100, 1, '%'],
     ['blend', 'סוג בלנד', ['multiply', 'normal', 'soft-light', 'overlay', 'hard-light', 'luminosity', 'darken', 'color-burn', 'screen']],
     ['fade', 'פייד בקצוות', 0, 100, 1, ''], ['sep', 'גוון חום', 0, 100, 1, '%'], ['br', 'בהירות', 60, 140, 1, '%'], ['flip', 'היפוך כיוון', ['לא', 'כן']],
-    ['h', 'כתב היד ברקע'], ['hwp', 'איזו פסקה', ['מרחבים', 'שמעו אלי עמי']], ['hwo', 'שקיפות', 0, 100, 1, '%'], ['hws', 'גודל אותיות', 12, 48, 1, 'px'], ['hwh', 'עד איזה גובה', 10, 100, 1, '%'],
-    ['h', 'המלל'], ['ty', 'מרווח מלמטה', 0, 50, .5, 'vh'], ['tx', 'ימינה / שמאלה', -40, 40, .5, 'vw'], ['qs', 'גודל הציטוט', 50, 150, 1, '%'], ['gap', 'מרווח עד משפט הארכיון', 0, 160, 2, 'px'],
+    ['h', 'כתב היד ברקע'], ['hwp', 'איזו פסקה', ['מרחבים', 'שמעו אלי עמי']], ['hwo', 'שקיפות', 0, 100, 1, '%'], ['hws', 'גודל אותיות', 12, 48, 1, 'px'], ['hwh', 'עד איזה גובה', 10, 100, 1, '%'], ['hwl', 'מרווח בין השורות', 0.8, 3.2, 0.05, ''],
+    ['h', 'המלל'], ['demo', 'ציטוט לדוגמה (לבדיקת אורך)', ['הציטוט של היום', 'קצר', 'בינוני', 'ארוך', 'ארוך מאוד']], ['box', 'להציג את תיבת המלל', ['לא', 'כן']], ['qw', 'רוחב תיבת הציטוט', 30, 100, 1, '%'], ['tb', 'בלנד למלל', ['normal', 'multiply', 'overlay', 'soft-light', 'hard-light', 'color-burn', 'darken', 'luminosity', 'difference']], ['ty', 'מרווח מלמטה', 0, 50, .5, 'vh'], ['tx', 'ימינה / שמאלה', -40, 40, .5, 'vw'], ['qs', 'גודל הציטוט', 50, 150, 1, '%'], ['gap', 'מרווח עד משפט הארכיון', 0, 160, 2, 'px'],
     ['h', 'צבע ואפקטים למלל'], ['qc', 'צבע הציטוט', 'color'], ['tc', 'צבע המלל הקטן', 'color'], ['glow', 'זוהר מאחורי המלל', 0, 70, 1, 'px'], ['gc', 'צבע הזוהר', 'color'], ['sh', 'צל (דרופ שדו)', 0, 100, 1, '%'], ['shd', 'מרחק הצל', 0, 24, 1, 'px'], ['shc', 'צבע הצל', 'color'],
     ['h', 'החיפוש'], ['so', 'אטימות', 30, 100, 1, '%'], ['sw', 'רוחב', 240, 900, 10, 'px']
   ];
   var v = {}, base = {}, baseFs = 0;
   function key() { return 'h2ctl-' + (mob() ? 'm' : 'd') + '-' + root.getAttribute('data-hv'); }
-  function clear() { rav.style.cssText = ''; img.style.cssText = ''; inn.style.cssText = ''; q.style.fontSize = ''; form.style.cssText = ''; lede.style.cssText = ''; var qa0 = q.querySelector('a'); if (qa0) qa0.style.cssText = ''; [].forEach.call(hero.querySelectorAll('.h2-k, .h2-ref'), function (e) { e.style.cssText = ''; }); [].forEach.call(hws, function (h) { h.style.cssText = ''; }); }
+  function clear() { rav.style.cssText = ''; img.style.cssText = ''; inn.style.cssText = ''; q.style.cssText = ''; form.style.cssText = ''; lede.style.cssText = ''; var qa0 = q.querySelector('a'); if (qa0) qa0.style.cssText = ''; [].forEach.call(hero.querySelectorAll('.h2-k, .h2-ref'), function (e) { e.style.cssText = ''; }); [].forEach.call(hws, function (h) { h.style.cssText = ''; }); }
   function measure() { // נקודת הפתיחה = מה שרואים עכשיו, כדי ששום דבר לא יקפוץ
     var H = hero.getBoundingClientRect(), R = rav.getBoundingClientRect(), hw = hws[0], hwv = getComputedStyle(hw).display === 'none' ? hws[1] : hw;
     baseFs = parseFloat(getComputedStyle(q).fontSize);
     base = { size: Math.round(R.height / H.height * 100), x: Math.round((R.left + R.width / 2 - H.left) / H.width * 200) / 2, y: Math.round((R.top - H.top) / H.height * 200) / 2, op: Math.round(parseFloat(getComputedStyle(img).opacity) * 100), hwp: root.getAttribute('data-hw') === 'b' ? 'שמעו אלי עמי' : 'מרחבים', blend: 'multiply', fade: 86, sep: 55, br: 104, flip: 'לא',
       hwo: Math.round(parseFloat(getComputedStyle(hwv).opacity) * 100), hws: Math.round(parseFloat(getComputedStyle(hwv).fontSize)), hwh: Math.round(hwv.getBoundingClientRect().height / H.height * 100),
+      hwl: Math.round(parseFloat(getComputedStyle(hwv).lineHeight) / parseFloat(getComputedStyle(hwv).fontSize) * 20) / 20 || 1.5, demo: 'הציטוט של היום', box: 'לא', qw: Math.round(q.getBoundingClientRect().width / Math.max(1, inn.clientWidth - parseFloat(getComputedStyle(inn).paddingLeft) - parseFloat(getComputedStyle(inn).paddingRight)) * 100) > 92 ? (mob() ? 100 : 94) : 94, tb: 'normal',
       ty: Math.round(parseFloat(getComputedStyle(inn).paddingBottom) / window.innerHeight * 200) / 2, tx: 0, qs: 100, gap: Math.round(parseFloat(getComputedStyle(lede).marginTop)), qc: '#2e1c0a', tc: '#3a2710', glow: 22, gc: '#fff0d0', sh: 0, shd: 4, shc: '#1a0f04', so: 92, sw: Math.round(form.getBoundingClientRect().width) };
+  }
+  var orig = null, lastDemo = null, refEl = hero.querySelector('.h2-ref');
+  function sample(kind) {
+    var a = q.querySelector('a'); if (!a) return;
+    if (!orig || (lastDemo === 'הציטוט של היום' || lastDemo === null)) orig = orig && lastDemo !== null && kind !== 'הציטוט של היום' ? orig : { t: a.textContent, h: a.getAttribute('href'), r: refEl.textContent };
+    if (kind === lastDemo) return;
+    var pick = orig;
+    if (kind !== 'הציטוט של היום') {
+      var P = []; try { P = JSON.parse(document.getElementById('pool').textContent); } catch (e) {}
+      var want = { 'קצר': 30, 'בינוני': 75, 'ארוך': 130, 'ארוך מאוד': 230 }[kind], best = null;
+      P.forEach(function (x) { var d = Math.abs((x.q || '').length - want); if (!best || d < best.d) best = { d: d, x: x }; });
+      if (best) pick = { t: best.x.q, h: a.getAttribute('href'), r: best.x.r || '' };
+    }
+    a.textContent = pick.t; refEl.textContent = pick.r; if (kind === 'הציטוט של היום') a.setAttribute('href', pick.h);
+    var n = pick.t.trim().length; q.setAttribute('data-len', n > 150 ? 'xl' : n > 95 ? 'l' : n > 48 ? 'm' : 's');
+    q.style.fontSize = ''; baseFs = parseFloat(getComputedStyle(q).fontSize); lastDemo = kind;
   }
   function apply() {
     root.setAttribute('data-hw', v.hwp === 'שמעו אלי עמי' ? 'b' : 'a');
@@ -1456,8 +1473,14 @@ if (typeof module !== 'undefined') module.exports = SE;
     rav.style.setProperty('-webkit-mask-image', m); rav.style.setProperty('mask-image', m);
     img.style.setProperty('opacity', v.op / 100, 'important');
     img.style.setProperty('filter', 'sepia(' + v.sep / 100 + ') saturate(1.1) hue-rotate(-6deg) brightness(' + v.br / 100 + ') contrast(1.04)', 'important');
-    [].forEach.call(hws, function (h) { h.style.opacity = v.hwo / 100; h.style.fontSize = v.hws + 'px'; h.style.height = v.hwh + '%'; });
+    [].forEach.call(hws, function (h) { h.style.opacity = v.hwo / 100; h.style.fontSize = v.hws + 'px'; h.style.height = v.hwh + '%'; h.style.lineHeight = v.hwl; });
     inn.style.setProperty('padding-bottom', v.ty + 'vh', 'important'); inn.style.transform = v.tx ? 'translateX(' + (-v.tx) + 'vw)' : '';
+    sample(v.demo);
+    q.style.setProperty('max-width', v.qw + '%', 'important'); q.style.width = v.box === 'כן' ? v.qw + '%' : '';
+    q.style.outline = v.box === 'כן' ? '2px dashed rgba(200, 40, 40, .85)' : ''; q.style.outlineOffset = '0px';
+    inn.style.outline = v.box === 'כן' ? '1px dashed rgba(40, 90, 200, .7)' : '';
+    inn.style.zIndex = v.tb === 'normal' ? '' : 'auto'; q.style.mixBlendMode = v.tb;
+    [].forEach.call(hero.querySelectorAll('.h2-k, .h2-ref, .lede'), function (e) { e.style.mixBlendMode = v.tb; });
     q.style.fontSize = (baseFs * v.qs / 100) + 'px';
     lede.style.setProperty('margin-top', v.gap + 'px', 'important');
     var qa = q.querySelector('a'), hex = function (h, a) { var n = parseInt(h.slice(1), 16); return 'rgba(' + (n >> 16) + ',' + (n >> 8 & 255) + ',' + (n & 255) + ',' + a + ')'; };
@@ -1480,7 +1503,7 @@ if (typeof module !== 'undefined') module.exports = SE;
   box.innerHTML = html; document.body.appendChild(box);
   function fill() { [].forEach.call(box.querySelectorAll('[data-k]'), function (e) { var k = e.getAttribute('data-k'); e.value = v[k]; var o = box.querySelector('[data-o="' + k + '"]'); if (o) o.textContent = v[k] + (e.getAttribute('data-u') || ''); }); }
   function saved() { try { return JSON.parse(localStorage.getItem(key()) || 'null'); } catch (e) { return null; } }
-  function start() { clear(); measure(); v = {}; for (var k in base) v[k] = base[k]; var s = saved(); if (s) { for (var k2 in s) if (k2 in v) v[k2] = s[k2]; apply(); } fill(); }
+  function start() { clear(); if (orig) sample('הציטוט של היום'); measure(); v = {}; for (var k in base) v[k] = base[k]; var s = saved(); if (s) { for (var k2 in s) if (k2 in v) v[k2] = s[k2]; apply(); } fill(); }
   box.addEventListener('input', function (e) { var k = e.target.getAttribute('data-k'); if (!k) return; v[k] = e.target.type === 'range' ? parseFloat(e.target.value) : e.target.value; apply(); fill(); try { localStorage.setItem(key(), JSON.stringify(v)); } catch (x) {} });
   box.addEventListener('click', function (e) {
     var a = e.target.getAttribute && e.target.getAttribute('data-a'); if (!a) return;
