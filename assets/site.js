@@ -1435,8 +1435,9 @@ if (typeof module !== 'undefined') module.exports = SE;
     ['blend', 'סוג בלנד', ['multiply', 'normal', 'soft-light', 'overlay', 'hard-light', 'luminosity', 'darken', 'color-burn', 'screen']],
     ['fade', 'פייד בקצוות', 0, 100, 1, ''], ['sep', 'גוון חום', 0, 100, 1, '%'], ['br', 'בהירות', 60, 140, 1, '%'], ['flip', 'היפוך כיוון', ['לא', 'כן']],
     ['h', 'כתב היד ברקע'], ['hwp', 'איזו פסקה', ['מרחבים', 'שמעו אלי עמי']], ['hwo', 'שקיפות', 0, 100, 1, '%'], ['hws', 'גודל אותיות', 12, 48, 1, 'px'], ['hwh', 'עד איזה גובה', 10, 100, 1, '%'], ['hwl', 'מרווח בין השורות', 0.8, 3.2, 0.05, ''],
-    ['h', 'המלל'], ['demo', 'ציטוט לדוגמה (לבדיקת אורך)', ['הציטוט של היום', 'קצר', 'בינוני', 'ארוך', 'ארוך מאוד']], ['box', 'להציג את תיבת המלל', ['לא', 'כן']], ['qw', 'רוחב תיבת הציטוט', 30, 100, 1, '%'], ['tb', 'בלנד למלל', ['normal', 'multiply', 'overlay', 'soft-light', 'hard-light', 'color-burn', 'darken', 'luminosity', 'difference']], ['ty', 'מרווח מלמטה', 0, 50, .5, 'vh'], ['tx', 'ימינה / שמאלה', -40, 40, .5, 'vw'], ['qs', 'גודל הציטוט', 50, 150, 1, '%'], ['gap', 'מרווח עד משפט הארכיון', 0, 160, 2, 'px'],
+    ['h', 'המלל'], ['demo', 'ציטוט לדוגמה (לבדיקת אורך)', ['הציטוט של היום', 'קצר', 'בינוני', 'ארוך', 'ארוך מאוד']], ['box', 'להציג את תיבת המלל', ['לא', 'כן']], ['qw', 'רוחב תיבת הציטוט', 30, 100, 1, '%'], ['tb', 'בלנד למלל', ['normal', 'multiply', 'overlay', 'soft-light', 'hard-light', 'color-burn', 'darken', 'luminosity', 'difference']], ['ty', 'מרווח מלמטה', 0, 50, .5, 'vh'], ['tx', 'ימינה / שמאלה', -40, 40, .5, 'vw'], ['qs', 'גודל הציטוט', 50, 150, 1, '%'], ['gap', 'מרווח בין הציטוט למשפט שמעל החיפוש', 0, 200, 2, 'px'],
     ['h', 'צבע ואפקטים למלל'], ['qc', 'צבע הציטוט', 'color'], ['tc', 'צבע המלל הקטן', 'color'], ['glow', 'זוהר מאחורי המלל', 0, 70, 1, 'px'], ['gc', 'צבע הזוהר', 'color'], ['sh', 'צל (דרופ שדו)', 0, 100, 1, '%'], ['shd', 'מרחק הצל', 0, 24, 1, 'px'], ['shc', 'צבע הצל', 'color'],
+    ['h', 'המשפט שמעל החיפוש'], ['ls', 'גודל', 14, 52, 1, 'px'], ['lx', 'ימינה / שמאלה', -40, 40, .5, 'vw'], ['lb', 'מרווח עד החיפוש', 0, 90, 1, 'px'], ['lc', 'צבע', 'color'], ['lg', 'זוהר', 0, 80, 1, 'px'], ['lgc', 'צבע הזוהר', 'color'], ['lgo', 'עוצמת הזוהר', 1, 4, 1, ''],
     ['h', 'החיפוש'], ['so', 'אטימות', 30, 100, 1, '%'], ['sw', 'רוחב', 240, 900, 10, 'px']
   ];
   var v = {}, base = {}, baseFs = 0;
@@ -1448,7 +1449,7 @@ if (typeof module !== 'undefined') module.exports = SE;
     base = { size: Math.round(R.height / H.height * 100), x: Math.round((R.left + R.width / 2 - H.left) / H.width * 200) / 2, y: Math.round((R.top - H.top) / H.height * 200) / 2, op: Math.round(parseFloat(getComputedStyle(img).opacity) * 100), hwp: root.getAttribute('data-hw') === 'b' ? 'שמעו אלי עמי' : 'מרחבים', blend: 'multiply', fade: 86, sep: 55, br: 104, flip: 'לא',
       hwo: Math.round(parseFloat(getComputedStyle(hwv).opacity) * 100), hws: Math.round(parseFloat(getComputedStyle(hwv).fontSize)), hwh: Math.round(hwv.getBoundingClientRect().height / H.height * 100),
       hwl: Math.round(parseFloat(getComputedStyle(hwv).lineHeight) / parseFloat(getComputedStyle(hwv).fontSize) * 20) / 20 || 1.5, demo: 'הציטוט של היום', box: 'לא', qw: Math.round(q.getBoundingClientRect().width / Math.max(1, inn.clientWidth - parseFloat(getComputedStyle(inn).paddingLeft) - parseFloat(getComputedStyle(inn).paddingRight)) * 100) > 92 ? (mob() ? 100 : 94) : 94, tb: 'normal',
-      ty: Math.round(parseFloat(getComputedStyle(inn).paddingBottom) / window.innerHeight * 200) / 2, tx: 0, qs: 100, gap: Math.round(parseFloat(getComputedStyle(lede).marginTop)), qc: '#2e1c0a', tc: '#3a2710', glow: 22, gc: '#fff0d0', sh: 0, shd: 4, shc: '#1a0f04', so: 92, sw: Math.round(form.getBoundingClientRect().width) };
+      ty: Math.round(parseFloat(getComputedStyle(inn).paddingBottom) / window.innerHeight * 200) / 2, tx: 0, qs: 100, gap: Math.round(parseFloat(getComputedStyle(lede).marginTop)), qc: '#2e1c0a', tc: '#3a2710', glow: 22, gc: '#fff0d0', sh: 0, shd: 4, shc: '#1a0f04', ls: Math.round(parseFloat(getComputedStyle(lede).fontSize)), lx: 0, lb: Math.round(parseFloat(getComputedStyle(lede).marginBottom)), lc: '#3a2710', lg: 26, lgc: '#fff0d0', lgo: 3, so: 92, sw: Math.round(form.getBoundingClientRect().width) };
   }
   var orig = null, lastDemo = null, refEl = hero.querySelector('.h2-ref');
   function sample(kind) {
@@ -1488,6 +1489,11 @@ if (typeof module !== 'undefined') module.exports = SE;
     if (qa) { qa.style.background = 'none'; qa.style.webkitTextFillColor = v.qc; qa.style.color = v.qc; qa.style.filter = fl.trim() || 'none'; }
     var ts = [v.glow ? '0 0 ' + Math.round(v.glow * .6) + 'px ' + v.gc + ', 0 0 ' + Math.round(v.glow * 1.4) + 'px ' + v.gc : '', v.sh ? '0 ' + Math.max(1, Math.round(v.shd / 2)) + 'px ' + v.shd + 'px ' + hex(v.shc, v.sh / 100) : ''].filter(Boolean).join(', ') || 'none';
     [].forEach.call(hero.querySelectorAll('.h2-k, .h2-ref, .lede'), function (e) { e.style.setProperty('color', v.tc, 'important'); e.style.setProperty('text-shadow', ts, 'important'); });
+    var lts = []; for (var gi = 0; gi < (v.lg ? v.lgo : 0); gi++) lts.push('0 0 ' + Math.round(v.lg * (gi + 1) / v.lgo) + 'px ' + v.lgc);
+    if (v.sh) lts.push('0 ' + Math.max(1, Math.round(v.shd / 2)) + 'px ' + v.shd + 'px ' + hex(v.shc, v.sh / 100));
+    lede.style.setProperty('color', v.lc, 'important'); lede.style.setProperty('text-shadow', lts.join(', ') || 'none', 'important');
+    lede.style.setProperty('font-size', v.ls + 'px', 'important'); lede.style.setProperty('margin-bottom', v.lb + 'px', 'important');
+    lede.style.transform = v.lx ? 'translateX(' + (-v.lx) + 'vw)' : '';
     form.style.setProperty('background', 'rgba(255, 253, 246, ' + v.so / 100 + ')'); form.style.setProperty('width', v.sw + 'px', 'important'); form.style.setProperty('max-width', '100%', 'important');
   }
   function text() { return (mob() ? 'טלפון' : 'מחשב') + ' | פריסה ' + root.getAttribute('data-hv') + ' | כתב יד ' + root.getAttribute('data-hw') + ' | ' + F.filter(function (f) { return f[0] !== 'h'; }).map(function (f) { return f[0] + '=' + v[f[0]]; }).join(', ') + ' | מסך ' + window.innerWidth + 'x' + window.innerHeight; }
