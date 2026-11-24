@@ -1458,7 +1458,7 @@ window.H2_PRESET = {
   var mob = function () { return window.innerWidth < 901; };
   var CTL = /[?&]ctl=1/.test(location.search); // 25.11: הלוח מוסתר לגולשים; ההגדרות של נועם (ctl-preset.js) נטענות תמיד. לכיוון: להוסיף ?ctl=1 לכתובת
   var F = [
-    ['h', 'המשפט שמעל החיפוש'], ['lbx', 'להציג את התיבה (קו מקווקו)', ['לא', 'כן']], ['lbw', 'רוחב התיבה (המלל נשבר לפיו)', 100, 1000, 1, 'px'], ['lbh', 'גובה התיבה', 10, 240, 1, 'px'], ['ls', 'גודל', 12, 52, 0.5, 'px'], ['lsp', 'ריווח אותיות', -3, 6, 0.1, 'px'], ['llh', 'מרווח בין השורות', 0.8, 2, 0.02, ''], ['gap', 'מרווח מעליו (מהציטוט)', -40, 200, 1, 'px'], ['lb', 'מרווח עד החיפוש', -20, 90, 1, 'px'], ['lx', 'ימינה / שמאלה', -40, 40, .5, 'vw'], ['lc', 'צבע', 'color'], ['lg', 'זוהר', 0, 80, 1, 'px'], ['lgc', 'צבע הזוהר', 'color'], ['lgo', 'עוצמת הזוהר', 1, 4, 1, ''],
+    ['h', 'המשפט שמעל החיפוש'], ['lbx', 'להציג את התיבה (קו מקווקו)', ['לא', 'כן']], ['lbw', 'רוחב התיבה (המלל נשבר לפיו)', 100, 1000, 1, 'px'], ['lbh', 'גובה התיבה', 10, 240, 1, 'px'], ['ls', 'גודל', 12, 52, 0.5, 'px'], ['lsp', 'ריווח אותיות', -3, 6, 0.1, 'px'], ['llh', 'מרווח בין השורות', 0.8, 2, 0.02, ''], ['gap', 'מרווח מעליו (מהציטוט)', -40, 200, 1, 'px'], ['lb', 'מרווח עד החיפוש', -20, 90, 1, 'px'], ['lx', 'ימינה / שמאלה', -40, 40, .5, 'vw'], ['lc', 'צבע', 'color'], ['lg', 'זוהר', 0, 80, 1, 'px'], ['lgc', 'צבע הזוהר', 'color'], ['lgo', 'עוצמת הזוהר', 1, 4, 1, ''], ['lds', 'צל (דרופ שדו): עוצמה', 0, 100, 1, '%'], ['ldx', 'צל: ימינה / שמאלה', -20, 20, 1, 'px'], ['ldy', 'צל: למעלה / למטה', -20, 20, 1, 'px'], ['ldb', 'צל: רכות', 0, 40, 1, 'px'], ['ldc', 'צל: צבע', 'color'],
     ['h', 'שכבת זוהר נוספת מאחורי המשפט'], ['zg', 'להציג', ['לא', 'כן']], ['zgo', 'שקיפות', 0, 100, 1, '%'], ['zgc', 'צבע', 'color'], ['zgw', 'רוחב', 20, 200, 1, '%'], ['zgh', 'גובה', 10, 300, 1, 'px'], ['zgx', 'ימינה / שמאלה', -200, 200, 1, 'px'], ['zgy', 'למעלה / למטה', -150, 150, 1, 'px'], ['zgb', 'רכות (טשטוש)', 0, 80, 1, 'px'], ['zgr', 'עיגול הפינות', 0, 50, 1, '%'],
     ['h', 'הרב'], ['size', 'גודל', 20, 170, 1, '%'], ['x', 'ימינה / שמאלה', -20, 120, .5, '%'], ['y', 'למעלה / למטה', -40, 70, .5, '%'], ['op', 'שקיפות', 0, 100, 1, '%'],
     ['blend', 'סוג בלנד', ['multiply', 'normal', 'soft-light', 'overlay', 'hard-light', 'luminosity', 'darken', 'color-burn', 'screen']],
@@ -1492,6 +1492,7 @@ window.H2_PRESET = {
     base.qlh = Math.round(parseFloat(cs(q).lineHeight) / parseFloat(cs(q).fontSize) * 50) / 50 || 1.12;
     base.rt = Math.round(parseFloat(cs(refEl).marginTop)); base.rs = Math.round(parseFloat(cs(refEl).fontSize));
     base.mt = M ? Math.round(parseFloat(cs(M).marginTop)) : 8; base.ms = MA ? Math.round(parseFloat(cs(MA).fontSize)) : 21;
+    base.lds = 0; base.ldx = 0; base.ldy = 3; base.ldb = 6; base.ldc = '#1a0f04';
     base.zg = 'לא'; base.zgo = 70; base.zgc = '#fff4dc'; base.zgw = 110; base.zgh = 70; base.zgx = 0; base.zgy = 0; base.zgb = 24; base.zgr = 50;
     var LR = lede.getBoundingClientRect(); base.lbx = 'לא'; base.lbw = Math.round(LR.width); base.lbh = Math.round(LR.height);
     base.llh = Math.round(parseFloat(cs(lede).lineHeight) / parseFloat(cs(lede).fontSize) * 50) / 50 || 1.3; base.lsp = Math.round((parseFloat(cs(lede).letterSpacing) || 0) * 10) / 10;
@@ -1555,6 +1556,7 @@ window.H2_PRESET = {
     var ts = [v.glow ? '0 0 ' + Math.round(v.glow * .6) + 'px ' + v.gc + ', 0 0 ' + Math.round(v.glow * 1.4) + 'px ' + v.gc : '', v.sh ? '0 ' + Math.max(1, Math.round(v.shd / 2)) + 'px ' + v.shd + 'px ' + hex(v.shc, v.sh / 100) : ''].filter(Boolean).join(', ') || 'none';
     [].forEach.call(hero.querySelectorAll('.h2-k, .h2-ref, .lede'), function (e) { e.style.setProperty('color', v.tc, 'important'); e.style.setProperty('text-shadow', ts, 'important'); });
     var lts = []; for (var gi = 0; gi < (v.lg ? v.lgo : 0); gi++) lts.push('0 0 ' + Math.round(v.lg * (gi + 1) / v.lgo) + 'px ' + v.lgc);
+    if (v.lds) lts.push((-v.ldx) + 'px ' + v.ldy + 'px ' + v.ldb + 'px ' + hex(v.ldc, v.lds / 100));
     if (v.sh) lts.push('0 ' + Math.max(1, Math.round(v.shd / 2)) + 'px ' + v.shd + 'px ' + hex(v.shc, v.sh / 100));
     lede.style.setProperty('color', v.lc, 'important'); lede.style.setProperty('text-shadow', lts.join(', ') || 'none', 'important');
     lede.style.setProperty('font-size', v.ls + 'px', 'important'); lede.style.setProperty('margin-bottom', v.lb + 'px', 'important');
