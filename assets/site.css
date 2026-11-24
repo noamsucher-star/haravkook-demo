@@ -1558,3 +1558,16 @@ html:root .home.h2 ~ main .today .in::before{content: none;}
   html:root.sp2 .home.h2 .hero .lede, html:root .home.h2 .hero .lede{text-align: center !important; text-align-last: center !important; letter-spacing: .02em !important; word-spacing: 0 !important; width: auto !important; max-width: 22ch !important; text-wrap: balance !important;}
   html:root .home.h2 .lede .lb{display: none;}
 }
+
+/* ---------- נועם 24.11: הלוגו שלו (תמונה) בימין, תפריט וציטוט יומי בקצה השמאלי, חיפוש בהיר יותר ---------- */
+html:root .bar .logo{order: 0; margin: 0;}
+html:root .bar .dm-wa{order: 5; margin-right: auto;}
+html:root .bar .menubtn{order: 6;}
+@media (min-width: 1001px) {
+  html:root .bar .logo{margin-left: 26px;}
+  html:root .bar .navlinks{order: 1; margin: 0;}
+  html:root .bar .dm-wa{order: 5; margin-right: auto;}
+  html:root .bar .menubtn{order: 6;}
+}
+html:root .home.h2 form.search{background: rgba(255, 251, 240, .9); box-shadow: 0 0 0 1px rgba(255, 248, 226, .6), 0 18px 40px -22px rgba(0, 0, 0, .8);}
+html:root .home.h2 form.search input::placeholder{color: #5a4a30;}
