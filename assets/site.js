@@ -1422,3 +1422,67 @@ if (typeof module !== 'undefined') module.exports = SE;
   sw.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; root.setAttribute('data-' + b.getAttribute('data-k'), b.getAttribute('data-v')); try { localStorage.setItem(b.getAttribute('data-k'), b.getAttribute('data-v')); } catch (x) {} mark(); });
   document.body.appendChild(sw); mark();
 })();
+
+
+/* לוח שליטה ידני (דמו בלבד, מחשב וטלפון): נועם מכוון בעצמו את הרב, הבלנד, כתב היד והמלל, ושולח את המספרים.
+   ההגדרות נשמרות בנפרד לכל פריסה (hv) ולכל סוג מסך (מחשב / טלפון). */
+(function () {
+  var hero = document.querySelector('.home.h2 .hero'); if (!hero) return;
+  var rav = hero.querySelector('.h2-rav'), img = rav.querySelector('img'), hws = hero.querySelectorAll('.h2-hw'), inn = hero.querySelector('.h2-in'), q = hero.querySelector('.h2-q'), form = hero.querySelector('form.search'), lede = hero.querySelector('.lede'), root = document.documentElement;
+  var mob = function () { return window.innerWidth < 901; };
+  var F = [
+    ['h', 'הרב'], ['size', 'גודל', 20, 170, 1, '%'], ['x', 'ימינה / שמאלה', -20, 120, .5, '%'], ['y', 'למעלה / למטה', -40, 70, .5, '%'], ['op', 'שקיפות', 0, 100, 1, '%'],
+    ['blend', 'סוג בלנד', ['multiply', 'normal', 'soft-light', 'overlay', 'hard-light', 'luminosity', 'darken', 'color-burn', 'screen']],
+    ['fade', 'פייד בקצוות', 0, 100, 1, ''], ['sep', 'גוון חום', 0, 100, 1, '%'], ['br', 'בהירות', 60, 140, 1, '%'], ['flip', 'היפוך כיוון', ['לא', 'כן']],
+    ['h', 'כתב היד ברקע'], ['hwp', 'איזו פסקה', ['מרחבים', 'שמעו אלי עמי']], ['hwo', 'שקיפות', 0, 100, 1, '%'], ['hws', 'גודל אותיות', 12, 48, 1, 'px'], ['hwh', 'עד איזה גובה', 10, 100, 1, '%'],
+    ['h', 'המלל'], ['ty', 'מרווח מלמטה', 0, 50, .5, 'vh'], ['tx', 'ימינה / שמאלה', -40, 40, .5, 'vw'], ['qs', 'גודל הציטוט', 50, 150, 1, '%'], ['gap', 'מרווח עד משפט הארכיון', 0, 160, 2, 'px'],
+    ['h', 'החיפוש'], ['so', 'אטימות', 30, 100, 1, '%'], ['sw', 'רוחב', 240, 900, 10, 'px']
+  ];
+  var v = {}, base = {}, baseFs = 0;
+  function key() { return 'h2ctl-' + (mob() ? 'm' : 'd') + '-' + root.getAttribute('data-hv'); }
+  function clear() { rav.style.cssText = ''; img.style.cssText = ''; inn.style.cssText = ''; q.style.fontSize = ''; form.style.cssText = ''; lede.style.cssText = ''; [].forEach.call(hws, function (h) { h.style.cssText = ''; }); }
+  function measure() { // נקודת הפתיחה = מה שרואים עכשיו, כדי ששום דבר לא יקפוץ
+    var H = hero.getBoundingClientRect(), R = rav.getBoundingClientRect(), hw = hws[0], hwv = getComputedStyle(hw).display === 'none' ? hws[1] : hw;
+    baseFs = parseFloat(getComputedStyle(q).fontSize);
+    base = { size: Math.round(R.height / H.height * 100), x: Math.round((R.left + R.width / 2 - H.left) / H.width * 200) / 2, y: Math.round((R.top - H.top) / H.height * 200) / 2, op: Math.round(parseFloat(getComputedStyle(img).opacity) * 100), hwp: root.getAttribute('data-hw') === 'b' ? 'שמעו אלי עמי' : 'מרחבים', blend: 'multiply', fade: 86, sep: 55, br: 104, flip: 'לא',
+      hwo: Math.round(parseFloat(getComputedStyle(hwv).opacity) * 100), hws: Math.round(parseFloat(getComputedStyle(hwv).fontSize)), hwh: Math.round(hwv.getBoundingClientRect().height / H.height * 100),
+      ty: Math.round(parseFloat(getComputedStyle(inn).paddingBottom) / window.innerHeight * 200) / 2, tx: 0, qs: 100, gap: Math.round(parseFloat(getComputedStyle(lede).marginTop)), so: 92, sw: Math.round(form.getBoundingClientRect().width) };
+  }
+  function apply() {
+    root.setAttribute('data-hw', v.hwp === 'שמעו אלי עמי' ? 'b' : 'a');
+    rav.style.cssText = 'right:auto;left:' + v.x + '%;top:' + v.y + '%;height:' + v.size + '%;transform:translateX(-50%)' + (v.flip === 'כן' ? ' scaleX(-1)' : '') + ';mix-blend-mode:' + v.blend + ';';
+    var c = 55 + v.fade * .45, m = v.fade >= 100 ? 'none' : 'radial-gradient(ellipse 58% 52% at 50% 36%, #000 ' + Math.max(0, c - 52) + '%, rgba(0,0,0,.6) ' + (c - 24) + '%, transparent ' + c + '%)';
+    rav.style.setProperty('-webkit-mask-image', m); rav.style.setProperty('mask-image', m);
+    img.style.setProperty('opacity', v.op / 100, 'important');
+    img.style.setProperty('filter', 'sepia(' + v.sep / 100 + ') saturate(1.1) hue-rotate(-6deg) brightness(' + v.br / 100 + ') contrast(1.04)', 'important');
+    [].forEach.call(hws, function (h) { h.style.opacity = v.hwo / 100; h.style.fontSize = v.hws + 'px'; h.style.height = v.hwh + '%'; });
+    inn.style.setProperty('padding-bottom', v.ty + 'vh', 'important'); inn.style.transform = v.tx ? 'translateX(' + (-v.tx) + 'vw)' : '';
+    q.style.fontSize = (baseFs * v.qs / 100) + 'px';
+    lede.style.setProperty('margin-top', v.gap + 'px', 'important');
+    form.style.setProperty('background', 'rgba(255, 253, 246, ' + v.so / 100 + ')'); form.style.setProperty('width', v.sw + 'px', 'important'); form.style.setProperty('max-width', '100%', 'important');
+  }
+  function text() { return (mob() ? 'טלפון' : 'מחשב') + ' | פריסה ' + root.getAttribute('data-hv') + ' | כתב יד ' + root.getAttribute('data-hw') + ' | ' + F.filter(function (f) { return f[0] !== 'h'; }).map(function (f) { return f[0] + '=' + v[f[0]]; }).join(', ') + ' | מסך ' + window.innerWidth + 'x' + window.innerHeight; }
+  var box = document.createElement('details'); box.className = 'h2c'; box.open = !mob();
+  var html = '<summary>כיוון ידני ⚙</summary><div class="bd">';
+  F.forEach(function (f) {
+    if (f[0] === 'h') { html += '<h4>' + f[1] + '</h4>'; return; }
+    if (Array.isArray(f[2])) html += '<label>' + f[1] + '<select data-k="' + f[0] + '">' + f[2].map(function (o) { return '<option>' + o + '</option>'; }).join('') + '</select></label>';
+    else html += '<label>' + f[1] + '<output data-o="' + f[0] + '"></output><input type="range" data-k="' + f[0] + '" min="' + f[2] + '" max="' + f[3] + '" step="' + f[4] + '" data-u="' + f[5] + '"></label>';
+  });
+  html += '<div class="acts"><button type="button" class="go" data-a="copy">העתקת ההגדרות</button><button type="button" data-a="reset">איפוס</button></div><p class="tip">כשזה יושב טוב: לוחצים "העתקת ההגדרות" ומדביקים בצ׳אט. מקבעים בדיוק את זה. מחשב וטלפון נשמרים בנפרד.</p></div>';
+  box.innerHTML = html; document.body.appendChild(box);
+  function fill() { [].forEach.call(box.querySelectorAll('[data-k]'), function (e) { var k = e.getAttribute('data-k'); e.value = v[k]; var o = box.querySelector('[data-o="' + k + '"]'); if (o) o.textContent = v[k] + (e.getAttribute('data-u') || ''); }); }
+  function saved() { try { return JSON.parse(localStorage.getItem(key()) || 'null'); } catch (e) { return null; } }
+  function start() { clear(); measure(); v = {}; for (var k in base) v[k] = base[k]; var s = saved(); if (s) { for (var k2 in s) if (k2 in v) v[k2] = s[k2]; apply(); } fill(); }
+  box.addEventListener('input', function (e) { var k = e.target.getAttribute('data-k'); if (!k) return; v[k] = e.target.type === 'range' ? parseFloat(e.target.value) : e.target.value; apply(); fill(); try { localStorage.setItem(key(), JSON.stringify(v)); } catch (x) {} });
+  box.addEventListener('click', function (e) {
+    var a = e.target.getAttribute && e.target.getAttribute('data-a'); if (!a) return;
+    if (a === 'reset') { try { localStorage.removeItem(key()); } catch (x) {} start(); return; }
+    var t = text(), done = function () { e.target.textContent = 'הועתק ✓'; setTimeout(function () { e.target.textContent = 'העתקת ההגדרות'; }, 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, function () { prompt('להעתיק:', t); }); else prompt('להעתיק:', t);
+  });
+  // החלפת פריסה במתג, או מעבר בין מחשב לטלפון: מתחילים מנקודת הפתיחה של המצב החדש
+  document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('.hw-sw button[data-k="hv"]')) setTimeout(start, 30); });
+  var wasMob = mob(); window.addEventListener('resize', function () { if (mob() !== wasMob) { wasMob = mob(); start(); } });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { setTimeout(start, 60); }); else setTimeout(start, 300);
+})();
