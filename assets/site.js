@@ -1434,7 +1434,7 @@ if (typeof module !== 'undefined') module.exports = SE;
 /* מתג דמו: 3 כיווני פריסה + 2 פסקאות לכתב היד */
 (function () {
   if (!document.querySelector('.h2-hw')) return;
-  if (!/[?&]ctl=1/.test(location.search)) return; // 25.11: המתגים מוסתרים; רק בכתובת עם ?ctl=1
+  if (!/[?&]ctl=1/.test(location.search) || /[?&]embed=1/.test(location.search)) return; // 25.11: המתגים מוסתרים; רק בכתובת עם ?ctl=1
   var root = document.documentElement, sw = document.createElement('div');
   sw.className = 'hw-sw'; sw.setAttribute('role', 'group'); sw.setAttribute('aria-label', 'גרסאות לפתיח');
   sw.innerHTML = '<b>פריסה</b><button type="button" data-k="hv" data-v="a">1 הרב בימין</button><button type="button" data-k="hv" data-v="b">2 הרב במרכז</button><button type="button" data-k="hv" data-v="c">3 הרב בשמאל</button><i></i><b>כתב יד</b><button type="button" data-k="hw" data-v="a">מרחבים</button><button type="button" data-k="hw" data-v="b">שמעו אלי עמי</button>';
@@ -1542,7 +1542,11 @@ window.H2_PRESET = {
     else html += '<label>' + f[1] + '<output data-o="' + f[0] + '"></output><input type="range" data-k="' + f[0] + '" min="' + f[2] + '" max="' + f[3] + '" step="' + f[4] + '" data-u="' + f[5] + '"></label>';
   });
   html += '<div class="acts"><button type="button" class="go" data-a="copy">העתקת ההגדרות</button><button type="button" data-a="reset">איפוס</button></div><p class="tip">כשזה יושב טוב: לוחצים "העתקת ההגדרות" ומדביקים בצ׳אט. מקבעים בדיוק את זה. מחשב וטלפון נשמרים בנפרד.</p></div>';
-  box.innerHTML = html; if (CTL) document.body.appendChild(box);
+  box.innerHTML = html;
+  // 25.11: דף "phone.html" = הטלפון במרכז המסך (iframe), והלוח יושב בדף החיצוני, מחוץ לטלפון
+  var EMB = /[?&]embed=1/.test(location.search) && window.parent !== window, host = null;
+  try { host = EMB ? window.parent.document.getElementById('h2c-host') : null; } catch (x) { host = null; }
+  if (host) { box.open = true; host.innerHTML = ''; host.appendChild(box); } else if (CTL) document.body.appendChild(box);
   function fill() { [].forEach.call(box.querySelectorAll('[data-k]'), function (e) { var k = e.getAttribute('data-k'); e.value = v[k]; var o = box.querySelector('[data-o="' + k + '"]'); if (o) o.textContent = v[k] + (e.getAttribute('data-u') || ''); }); }
   function saved() { if (!CTL) return null; try { return JSON.parse(localStorage.getItem(key()) || 'null'); } catch (e) { return null; } }
   function start() { clear(); if (orig) sample('הציטוט של היום'); measure(); v = {}; for (var k in base) v[k] = base[k]; var pre = (window.H2_PRESET || {})[(mob() ? 'm' : 'd') + '-' + root.getAttribute('data-hv')]; if (pre) for (var kp in pre) if (kp in v) v[kp] = pre[kp]; var s = saved(); if (s) { for (var k2 in s) if (k2 in v) v[k2] = s[k2]; } v.demo = 'הציטוט של היום'; apply(); fill(); }
