@@ -1436,7 +1436,7 @@ if (typeof module !== 'undefined') module.exports = SE;
   if (!document.querySelector('.h2-hw')) return;
   var root = document.documentElement, sw = document.createElement('div');
   sw.className = 'hw-sw'; sw.setAttribute('role', 'group'); sw.setAttribute('aria-label', 'גרסאות לפתיח');
-  sw.innerHTML = '<b>פריסה</b><button type="button" data-k="hv" data-v="a">1 הרב בימין</button><button type="button" data-k="hv" data-v="b">2 הרב במרכז</button><button type="button" data-k="hv" data-v="c">3 הרב בשמאל</button><i></i><b>כתב יד</b><button type="button" data-k="hw" data-v="a">מרחבים</button><button type="button" data-k="hw" data-v="b">שמעו אלי עמי</button><i></i><b>חצים</b><button type="button" data-k="ha" data-v="a">1 בצדי הציטוט</button><button type="button" data-k="ha" data-v="b">2 ליד הכותרת</button><button type="button" data-k="ha" data-v="c">3 ליד "לביאור"</button>';
+  sw.innerHTML = '<b>פריסה</b><button type="button" data-k="hv" data-v="a">1 הרב בימין</button><button type="button" data-k="hv" data-v="b">2 הרב במרכז</button><button type="button" data-k="hv" data-v="c">3 הרב בשמאל</button><i></i><b>כתב יד</b><button type="button" data-k="hw" data-v="a">מרחבים</button><button type="button" data-k="hw" data-v="b">שמעו אלי עמי</button>';
   function mark() { [].forEach.call(sw.querySelectorAll('button'), function (b) { b.setAttribute('aria-pressed', root.getAttribute('data-' + b.getAttribute('data-k')) === b.getAttribute('data-v') ? 'true' : 'false'); }); }
   sw.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; root.setAttribute('data-' + b.getAttribute('data-k'), b.getAttribute('data-v')); try { localStorage.setItem(b.getAttribute('data-k'), b.getAttribute('data-v')); } catch (x) {} mark(); });
   document.body.appendChild(sw); mark();
@@ -1445,7 +1445,7 @@ if (typeof module !== 'undefined') module.exports = SE;
 
 /* ההגדרות שנועם כיוון ביד ושלח (25.11.26, מחשב, פריסה 1, מסך 1440x825). נטענות תמיד, בכל דפדפן ובכל כתובת; מה ששמור בדפדפן גובר עליהן. */
 window.H2_PRESET = {
-  "d-a": {"size":96,"x":82.5,"y":1,"op":45,"blend":"multiply","fade":60,"sep":0,"br":109,"flip":"לא","hwp":"מרחבים","hwo":35,"hws":27,"hwh":57,"hwl":1.1,"demo":"הציטוט של היום","al":"מרכז","box":"לא","qw":56,"tb":"normal","ty":18.5,"tx":0,"qs":100,"gap":62,"qm":"לא","qms":160,"qmx":73.5,"qmy":36.5,"qmo":28,"qmcol":"#8a5a2b","qmb":"multiply","qmr":0,"qmf":"מאחורי","qc":"#2e1c0a","tc":"#3a2710","glow":69,"gc":"#fff0d0","sh":0,"shd":4,"shc":"#1a0f04","ls":27,"lx":0,"lb":9,"lc":"#3a2710","lg":69,"lgc":"#fff0d0","lgo":4,"so":60,"sw":590}
+  "d-a": {"size":96,"x":82.5,"y":1,"op":45,"blend":"multiply","fade":60,"sep":0,"br":109,"flip":"לא","hwp":"מרחבים","hwo":35,"hws":36,"hwh":59,"hwl":1,"demo":"הציטוט של היום","al":"מרכז","box":"לא","qw":56,"tb":"normal","ty":18.5,"tx":0,"qs":100,"gap":62,"qm":"לא","qms":160,"qmx":73.5,"qmy":36.5,"qmo":28,"qmcol":"#8a5a2b","qmb":"multiply","qmr":0,"qmf":"מאחורי","qc":"#2e1c0a","tc":"#3a2710","glow":69,"gc":"#fff0d0","sh":0,"shd":4,"shc":"#1a0f04","ls":27,"lx":0,"lb":9,"lc":"#3a2710","lg":69,"lgc":"#fff0d0","lgo":4,"so":60,"sw":590}
 };
 
 
