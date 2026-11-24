@@ -1458,20 +1458,26 @@ window.H2_PRESET = {
   var mob = function () { return window.innerWidth < 901; };
   var CTL = /[?&]ctl=1/.test(location.search); // 25.11: הלוח מוסתר לגולשים; ההגדרות של נועם (ctl-preset.js) נטענות תמיד. לכיוון: להוסיף ?ctl=1 לכתובת
   var F = [
+    ['h', 'המשפט שמעל החיפוש'], ['l1', 'שורה אחת', ['לא', 'כן']], ['ls', 'גודל', 12, 52, 0.5, 'px'], ['lsp', 'ריווח אותיות', -3, 6, 0.1, 'px'], ['lw', 'רוחב (כשיותר משורה)', 30, 100, 1, '%'], ['llh', 'מרווח בין השורות', 0.8, 2, 0.02, ''], ['gap', 'מרווח מעליו (מהציטוט)', -40, 200, 1, 'px'], ['lb', 'מרווח עד החיפוש', -20, 90, 1, 'px'], ['lx', 'ימינה / שמאלה', -40, 40, .5, 'vw'], ['lc', 'צבע', 'color'], ['lg', 'זוהר', 0, 80, 1, 'px'], ['lgc', 'צבע הזוהר', 'color'], ['lgo', 'עוצמת הזוהר', 1, 4, 1, ''],
+    ['h', 'שכבת זוהר נוספת מאחורי המשפט'], ['zg', 'להציג', ['לא', 'כן']], ['zgo', 'שקיפות', 0, 100, 1, '%'], ['zgc', 'צבע', 'color'], ['zgw', 'רוחב', 20, 200, 1, '%'], ['zgh', 'גובה', 10, 300, 1, 'px'], ['zgx', 'ימינה / שמאלה', -200, 200, 1, 'px'], ['zgy', 'למעלה / למטה', -150, 150, 1, 'px'], ['zgb', 'רכות (טשטוש)', 0, 80, 1, 'px'], ['zgr', 'עיגול הפינות', 0, 50, 1, '%'],
     ['h', 'הרב'], ['size', 'גודל', 20, 170, 1, '%'], ['x', 'ימינה / שמאלה', -20, 120, .5, '%'], ['y', 'למעלה / למטה', -40, 70, .5, '%'], ['op', 'שקיפות', 0, 100, 1, '%'],
     ['blend', 'סוג בלנד', ['multiply', 'normal', 'soft-light', 'overlay', 'hard-light', 'luminosity', 'darken', 'color-burn', 'screen']],
     ['fade', 'פייד בקצוות', 0, 100, 1, ''], ['sep', 'גוון חום', 0, 100, 1, '%'], ['br', 'בהירות', 60, 140, 1, '%'], ['flip', 'היפוך כיוון', ['לא', 'כן']],
     ['h', 'כתב היד ברקע'], ['hwp', 'איזו פסקה', ['מרחבים', 'שמעו אלי עמי']], ['hwo', 'שקיפות', 0, 100, 1, '%'], ['hws', 'גודל אותיות', 12, 48, 1, 'px'], ['hwh', 'עד איזה גובה', 10, 100, 1, '%'], ['hwl', 'מרווח בין השורות', 0.8, 3.2, 0.05, ''],
-    ['h', 'המלל'], ['demo', 'ציטוט לדוגמה (לבדיקת אורך)', ['הציטוט של היום', 'קצר', 'בינוני', 'ארוך', 'ארוך מאוד']], ['al', 'יישור המלל', ['מרכז', 'ימין', 'שמאל']], ['box', 'להציג את תיבת המלל', ['לא', 'כן']], ['qw', 'רוחב תיבת הציטוט', 30, 100, 1, '%'], ['tb', 'בלנד למלל', ['normal', 'multiply', 'overlay', 'soft-light', 'hard-light', 'color-burn', 'darken', 'luminosity', 'difference']], ['ty', 'מרווח מלמטה', 0, 50, .5, 'vh'], ['tx', 'ימינה / שמאלה', -40, 40, .5, 'vw'], ['qs', 'גודל הציטוט', 50, 150, 1, '%'], ['gap', 'מרווח בין הציטוט למשפט שמעל החיפוש', 0, 200, 2, 'px'],
+    ['h', 'המלל'], ['demo', 'ציטוט לדוגמה (לבדיקת אורך)', ['הציטוט של היום', 'קצר', 'בינוני', 'ארוך', 'ארוך מאוד']], ['al', 'יישור המלל', ['מרכז', 'ימין', 'שמאל']], ['box', 'להציג את תיבת המלל', ['לא', 'כן']], ['qw', 'רוחב תיבת הציטוט', 30, 100, 1, '%'], ['tb', 'בלנד למלל', ['normal', 'multiply', 'overlay', 'soft-light', 'hard-light', 'color-burn', 'darken', 'luminosity', 'difference']], ['ty', 'מרווח מלמטה', 0, 50, .5, 'vh'], ['tx', 'ימינה / שמאלה', -40, 40, .5, 'vw'], ['qs', 'גודל הציטוט', 50, 150, 1, '%'],
     ['h', 'גרשיים ברקע (פלטפורמה בולד)'], ['qm', 'להציג', ['כן', 'לא']], ['qms', 'גודל', 40, 1200, 5, 'px'], ['qmx', 'ימינה / שמאלה', -10, 110, .5, '%'], ['qmy', 'למעלה / למטה', -10, 110, .5, '%'], ['qmo', 'שקיפות', 0, 100, 1, '%'], ['qmcol', 'צבע', 'color'], ['qmb', 'סוג בלנד', ['multiply', 'normal', 'overlay', 'soft-light', 'screen', 'color-burn', 'luminosity']], ['qmr', 'סיבוב', -45, 45, 1, '°'], ['qmf', 'מאחורי או מלפני המלל', ['מאחורי', 'מלפני']],
     ['h', 'צבע ואפקטים למלל'], ['qc', 'צבע הציטוט', 'color'], ['tc', 'צבע המלל הקטן', 'color'], ['glow', 'זוהר מאחורי המלל', 0, 70, 1, 'px'], ['gc', 'צבע הזוהר', 'color'], ['sh', 'צל (דרופ שדו)', 0, 100, 1, '%'], ['shd', 'מרחק הצל', 0, 24, 1, 'px'], ['shc', 'צבע הצל', 'color'],
-    ['h', 'המשפט שמעל החיפוש'], ['ls', 'גודל', 14, 52, 1, 'px'], ['lx', 'ימינה / שמאלה', -40, 40, .5, 'vw'], ['lb', 'מרווח עד החיפוש', 0, 90, 1, 'px'], ['lc', 'צבע', 'color'], ['lg', 'זוהר', 0, 80, 1, 'px'], ['lgc', 'צבע הזוהר', 'color'], ['lgo', 'עוצמת הזוהר', 1, 4, 1, ''],
-    ['h', 'החיפוש'], ['so', 'אטימות', 30, 100, 1, '%'], ['sw', 'רוחב', 240, 900, 10, 'px']
+    ['h', 'החיפוש'], ['so', 'אטימות', 30, 100, 1, '%'], ['sw', 'רוחב', 240, 900, 10, 'px'],
+    ['h', 'שורה אחרי שורה (גדלים ומרווחים)'],
+    ['ks', '"חצי דקה להיום": גודל', 12, 40, 1, 'px'], ['kb', 'מרווח מתחת ל"חצי דקה להיום"', -20, 80, 1, 'px'],
+    ['qlh', 'הציטוט: מרווח בין השורות', 0.8, 1.8, 0.02, ''],
+    ['rt', 'מרווח בין הציטוט למקור', -20, 80, 1, 'px'], ['rs', 'המקור: גודל', 12, 40, 1, 'px'],
+    ['mt', 'מרווח בין המקור ל"לביאור"', -20, 80, 1, 'px'], ['ms', '"לביאור": גודל', 12, 36, 1, 'px']
   ];
   var v = {}, base = {}, baseFs = 0;
   var qm = document.createElement('div'); qm.className = 'h2-qm'; qm.setAttribute('aria-hidden', 'true'); qm.textContent = '"'; hero.insertBefore(qm, inn);
   function key() { return 'h2ctl-' + (mob() ? 'm' : 'd') + '-' + root.getAttribute('data-hv'); }
-  function clear() { rav.style.cssText = ''; img.style.cssText = ''; inn.style.cssText = ''; q.style.cssText = ''; qm.style.cssText = 'display:none'; form.style.cssText = ''; lede.style.cssText = ''; var qa0 = q.querySelector('a'); if (qa0) qa0.style.cssText = ''; [].forEach.call(hero.querySelectorAll('.h2-k, .h2-ref'), function (e) { e.style.cssText = ''; }); [].forEach.call(hws, function (h) { h.style.cssText = ''; }); }
+  function clear() { rav.style.cssText = ''; img.style.cssText = ''; inn.style.cssText = ''; q.style.cssText = ''; qm.style.cssText = 'display:none'; form.style.cssText = ''; lede.style.cssText = ''; var qa0 = q.querySelector('a'); if (qa0) qa0.style.cssText = ''; [].forEach.call(hero.querySelectorAll('.h2-k, .h2-ref, .h2-more, .h2-more a'), function (e) { e.style.cssText = ''; }); [].forEach.call(hws, function (h) { h.style.cssText = ''; }); }
   function measure() { // נקודת הפתיחה = מה שרואים עכשיו, כדי ששום דבר לא יקפוץ
     var H = hero.getBoundingClientRect(), R = rav.getBoundingClientRect(), hw = hws[0], hwv = getComputedStyle(hw).display === 'none' ? hws[1] : hw;
     baseFs = parseFloat(getComputedStyle(q).fontSize);
@@ -1479,6 +1485,31 @@ window.H2_PRESET = {
       hwo: Math.round(parseFloat(getComputedStyle(hwv).opacity) * 100), hws: Math.round(parseFloat(getComputedStyle(hwv).fontSize)), hwh: Math.round(hwv.getBoundingClientRect().height / H.height * 100),
       hwl: Math.round(parseFloat(getComputedStyle(hwv).lineHeight) / parseFloat(getComputedStyle(hwv).fontSize) * 20) / 20 || 1.5, demo: 'הציטוט של היום', box: 'לא', qw: Math.round(q.getBoundingClientRect().width / Math.max(1, inn.clientWidth - parseFloat(getComputedStyle(inn).paddingLeft) - parseFloat(getComputedStyle(inn).paddingRight)) * 100) > 92 ? (mob() ? 100 : 94) : 94, tb: 'normal',
       ty: Math.round(parseFloat(getComputedStyle(inn).paddingBottom) / window.innerHeight * 200) / 2, tx: 0, qs: 100, gap: Math.round(parseFloat(getComputedStyle(lede).marginTop)), qc: '#2e1c0a', tc: '#3a2710', glow: 22, gc: '#fff0d0', sh: 0, shd: 4, shc: '#1a0f04', ls: Math.round(parseFloat(getComputedStyle(lede).fontSize)), lx: 0, lb: Math.round(parseFloat(getComputedStyle(lede).marginBottom)), lc: '#3a2710', lg: 26, lgc: '#fff0d0', lgo: 3, al: getComputedStyle(inn).textAlign === 'right' || getComputedStyle(inn).textAlign === 'start' ? 'ימין' : 'מרכז', qm: 'כן', qms: mob() ? 240 : 460, qmx: 50, qmy: mob() ? 52 : 44, qmo: 16, qmcol: '#8a5a2b', qmb: 'multiply', qmr: 0, qmf: 'מאחורי', so: 92, sw: Math.round(form.getBoundingClientRect().width) };
+    // 25.11: שורה אחרי שורה. נמדד ממה שרואים; מוחל רק כשמזיזים (כך המחשב לא זז אף פיקסל)
+    var K = hero.querySelector('.h2-k'), M = hero.querySelector('.h2-more'), MA = M && M.querySelector('a'), cs = function (e) { return getComputedStyle(e); };
+    var ilw = Math.max(1, inn.clientWidth - parseFloat(cs(inn).paddingLeft) - parseFloat(cs(inn).paddingRight));
+    base.ks = Math.round(parseFloat(cs(K).fontSize)); base.kb = Math.round(parseFloat(cs(K).marginBottom));
+    base.qlh = Math.round(parseFloat(cs(q).lineHeight) / parseFloat(cs(q).fontSize) * 50) / 50 || 1.12;
+    base.rt = Math.round(parseFloat(cs(refEl).marginTop)); base.rs = Math.round(parseFloat(cs(refEl).fontSize));
+    base.mt = M ? Math.round(parseFloat(cs(M).marginTop)) : 8; base.ms = MA ? Math.round(parseFloat(cs(MA).fontSize)) : 21;
+    base.zg = 'לא'; base.zgo = 70; base.zgc = '#fff4dc'; base.zgw = 110; base.zgh = 70; base.zgx = 0; base.zgy = 0; base.zgb = 24; base.zgr = 50;
+    base.l1 = 'לא'; base.lw = Math.min(100, Math.round(lede.getBoundingClientRect().width / ilw * 100));
+    base.llh = Math.round(parseFloat(cs(lede).lineHeight) / parseFloat(cs(lede).fontSize) * 50) / 50 || 1.3; base.lsp = Math.round((parseFloat(cs(lede).letterSpacing) || 0) * 10) / 10;
+  }
+  var zgEl = document.createElement('span'); zgEl.className = 'h2-zg'; zgEl.setAttribute('aria-hidden', 'true');
+  function lines() {
+    if (v.zg === 'כן') { if (zgEl.parentNode !== lede) lede.appendChild(zgEl); lede.style.setProperty('position', 'relative'); zgEl.style.cssText = 'position:absolute;z-index:-1;pointer-events:none;left:50%;top:50%;width:' + v.zgw + '%;height:' + v.zgh + 'px;transform:translate(calc(-50% - ' + v.zgx + 'px),calc(-50% + ' + v.zgy + 'px));background:' + v.zgc + ';opacity:' + v.zgo / 100 + ';filter:blur(' + v.zgb + 'px);border-radius:' + v.zgr + '%;'; }
+    else if (zgEl.parentNode) zgEl.parentNode.removeChild(zgEl);
+    var K = hero.querySelector('.h2-k'), M = hero.querySelector('.h2-more'), MA = M && M.querySelector('a');
+    var put = function (k, el, prop, val) { if (!el) return; if (v[k] !== undefined && v[k] !== base[k]) el.style.setProperty(prop, val, 'important'); else el.style.removeProperty(prop); };
+    put('ks', K, 'font-size', v.ks + 'px'); put('kb', K, 'margin-bottom', v.kb + 'px');
+    put('qlh', q, 'line-height', String(v.qlh));
+    put('rt', refEl, 'margin-top', v.rt + 'px'); put('rs', refEl, 'font-size', v.rs + 'px');
+    put('mt', M, 'margin-top', v.mt + 'px'); put('ms', MA, 'font-size', v.ms + 'px');
+    put('l1', lede, 'white-space', 'nowrap'); put('l1', lede, 'text-wrap', 'nowrap');
+    if (v.l1 === 'כן') { lede.style.setProperty('max-width', 'none', 'important'); lede.style.setProperty('width', 'auto', 'important'); }
+    else put('lw', lede, 'max-width', v.lw + '%');
+    put('llh', lede, 'line-height', String(v.llh)); put('lsp', lede, 'letter-spacing', v.lsp + 'px');
   }
   var cyc = null, orig = null, lastDemo = null, refEl = hero.querySelector('.h2-ref');
   function sample(kind) {
@@ -1531,6 +1562,7 @@ window.H2_PRESET = {
     [].forEach.call(hero.querySelectorAll('.h2-q, .h2-k, .h2-ref, .lede'), function (e) { e.style.setProperty('text-align', J[1], 'important'); });
     qm.style.cssText = 'display:' + (v.qm === 'כן' ? 'block' : 'none') + ';left:' + v.qmx + '%;top:' + v.qmy + '%;font-size:' + v.qms + 'px;opacity:' + v.qmo / 100 + ';color:' + v.qmcol + ';mix-blend-mode:' + v.qmb + ';transform:translate(-50%,-50%) rotate(' + v.qmr + 'deg);z-index:' + (v.qmf === 'מלפני' ? 2 : 0) + ';';
     form.style.setProperty('background', 'rgba(255, 253, 246, ' + v.so / 100 + ')'); form.style.setProperty('width', v.sw + 'px', 'important'); form.style.setProperty('max-width', '100%', 'important');
+    lines();
   }
   function text() { return (mob() ? 'טלפון' : 'מחשב') + ' | פריסה ' + root.getAttribute('data-hv') + ' | כתב יד ' + root.getAttribute('data-hw') + ' | ' + F.filter(function (f) { return f[0] !== 'h'; }).map(function (f) { return f[0] + '=' + v[f[0]]; }).join(', ') + ' | מסך ' + window.innerWidth + 'x' + window.innerHeight; }
   var box = document.createElement('details'); box.className = 'h2c'; box.open = !mob();
