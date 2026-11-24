@@ -1462,6 +1462,7 @@ window.H2_PRESET = {
     ['h', 'המשפט שמעל החיפוש'], ['lbx', 'להציג את התיבה (קו מקווקו)', ['לא', 'כן']], ['lbw', 'רוחב התיבה (המלל נשבר לפיו)', 100, 1000, 1, 'px'], ['lbh', 'גובה התיבה', 10, 240, 1, 'px'], ['ls', 'גודל', 12, 52, 0.5, 'px'], ['lsp', 'ריווח אותיות', -3, 6, 0.1, 'px'], ['llh', 'מרווח בין השורות', 0.8, 2, 0.02, ''], ['gap', 'מרווח מעליו (מהציטוט)', -40, 200, 1, 'px'], ['lb', 'מרווח עד החיפוש', -20, 90, 1, 'px'], ['lx', 'ימינה / שמאלה', -40, 40, .5, 'vw'], ['lc', 'צבע', 'color'], ['lg', 'זוהר', 0, 80, 1, 'px'], ['lgc', 'צבע הזוהר', 'color'], ['lgo', 'עוצמת הזוהר', 1, 4, 1, ''], ['lds', 'צל (דרופ שדו): עוצמה', 0, 100, 1, '%'], ['ldx', 'צל: ימינה / שמאלה', -20, 20, 1, 'px'], ['ldy', 'צל: למעלה / למטה', -20, 20, 1, 'px'], ['ldb', 'צל: רכות', 0, 40, 1, 'px'], ['ldc', 'צל: צבע', 'color'],
     ['h', 'שכבת זוהר נוספת מאחורי המשפט'], ['zg', 'להציג', ['לא', 'כן']], ['zgo', 'שקיפות', 0, 100, 1, '%'], ['zgc', 'צבע', 'color'], ['zgw', 'רוחב', 20, 200, 1, '%'], ['zgh', 'גובה', 10, 300, 1, 'px'], ['zgx', 'ימינה / שמאלה', -200, 200, 1, 'px'], ['zgy', 'למעלה / למטה', -150, 150, 1, 'px'], ['zgb', 'רכות (טשטוש)', 0, 80, 1, 'px'], ['zgr', 'עיגול הפינות', 0, 50, 1, '%'],
     ['h', 'תמונת הרקע (הזריחה)'], ['bgz', 'הגדלה', 100, 250, 1, '%'], ['bgx', 'ימינה / שמאלה', 0, 100, .5, '%'], ['bgy', 'למעלה / למטה', 0, 100, .5, '%'],
+    ['h', 'גרדיאנט כהה מלמטה'], ['gdo', 'חוזק (0 = כבוי)', 0, 100, 1, '%'], ['gdh', 'גובה', 5, 100, 1, '%'], ['gdf', 'עדינות המעבר', 0, 100, 1, '%'], ['gdc', 'צבע', 'color'],
     ['h', 'הרב'], ['size', 'גודל', 20, 170, 1, '%'], ['x', 'ימינה / שמאלה', -20, 120, .5, '%'], ['y', 'למעלה / למטה', -40, 70, .5, '%'], ['op', 'שקיפות', 0, 100, 1, '%'],
     ['blend', 'סוג בלנד', ['multiply', 'normal', 'soft-light', 'overlay', 'hard-light', 'luminosity', 'darken', 'color-burn', 'screen']],
     ['fade', 'פייד בקצוות', 0, 100, 1, ''], ['sep', 'גוון חום', 0, 100, 1, '%'], ['br', 'בהירות', 60, 140, 1, '%'], ['flip', 'היפוך כיוון', ['לא', 'כן']],
@@ -1497,6 +1498,7 @@ window.H2_PRESET = {
     var hcs = getComputedStyle(homeEl), bp = hcs.backgroundPosition.split(' ');
     base.bgz = 100; base.bgx = Math.round(parseFloat(bp[0]) * 2) / 2 || 50; base.bgy = bp[1] === undefined ? 100 : (Math.round(parseFloat(bp[1]) * 2) / 2); if (isNaN(base.bgy)) base.bgy = 100;
     base.hwms = 0; base.hwmx = mob() ? 50 : 82; base.hwmy = mob() ? 40 : 35; base.hwmw = mob() ? 50 : 22; base.hwmh = 40; base.hwmf = 60;
+    base.gdo = 0; base.gdh = 45; base.gdf = 70; base.gdc = '#000000';
     base.lds = 0; base.ldx = 0; base.ldy = 3; base.ldb = 6; base.ldc = '#1a0f04';
     base.zg = 'לא'; base.zgo = 70; base.zgc = '#fff4dc'; base.zgw = 110; base.zgh = 70; base.zgx = 0; base.zgy = 0; base.zgb = 24; base.zgr = 50;
     var LR = lede.getBoundingClientRect(); base.lbx = 'לא'; base.lbw = Math.round(LR.width); base.lbh = Math.round(LR.height);
@@ -1523,8 +1525,15 @@ window.H2_PRESET = {
       h.style.setProperty('-webkit-mask-image', m); h.style.setProperty('mask-image', m); h.style.setProperty('mask-composite', comp.join(', ')); h.style.setProperty('-webkit-mask-composite', wcomp.join(', '));
     });
   }
+  var gdEl = document.createElement('div'); gdEl.className = 'h2-gd'; gdEl.setAttribute('aria-hidden', 'true');
+  function gd() { // גרדיאנט כהה מלמטה: מעל הרקע והרב, מתחת למלל
+    if (!v.gdo) { if (gdEl.parentNode) gdEl.parentNode.removeChild(gdEl); return; }
+    if (gdEl.parentNode !== hero) hero.insertBefore(gdEl, inn);
+    var n = parseInt(v.gdc.slice(1), 16), rgb = (n >> 16) + ',' + (n >> 8 & 255) + ',' + (n & 255), solid = Math.round((100 - v.gdf) * .9);
+    gdEl.style.cssText = 'position:absolute;z-index:0;left:0;right:0;bottom:0;pointer-events:none;height:' + v.gdh + '%;background:linear-gradient(to top, rgba(' + rgb + ',' + v.gdo / 100 + ') 0%, rgba(' + rgb + ',' + v.gdo / 100 + ') ' + solid + '%, rgba(' + rgb + ',0) 100%);';
+  }
   function lines() {
-    bg(); hwHole();
+    bg(); hwHole(); gd();
     if (v.zg === 'כן') { if (zgEl.parentNode !== lede) lede.appendChild(zgEl); lede.style.setProperty('position', 'relative'); zgEl.style.cssText = 'position:absolute;z-index:-1;pointer-events:none;left:50%;top:50%;width:' + v.zgw + '%;height:' + v.zgh + 'px;transform:translate(calc(-50% - ' + v.zgx + 'px),calc(-50% + ' + v.zgy + 'px));background:' + v.zgc + ';opacity:' + v.zgo / 100 + ';filter:blur(' + v.zgb + 'px);border-radius:' + v.zgr + '%;'; }
     else if (zgEl.parentNode) zgEl.parentNode.removeChild(zgEl);
     var K = hero.querySelector('.h2-k'), M = hero.querySelector('.h2-more'), MA = M && M.querySelector('a');
