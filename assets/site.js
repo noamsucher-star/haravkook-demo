@@ -1458,7 +1458,7 @@ window.H2_PRESET = {
   var mob = function () { return window.innerWidth < 901; };
   var CTL = /[?&]ctl=1/.test(location.search); // 25.11: הלוח מוסתר לגולשים; ההגדרות של נועם (ctl-preset.js) נטענות תמיד. לכיוון: להוסיף ?ctl=1 לכתובת
   var F = [
-    ['h', 'המשפט שמעל החיפוש'], ['l1', 'שורה אחת', ['לא', 'כן']], ['ls', 'גודל', 12, 52, 0.5, 'px'], ['lsp', 'ריווח אותיות', -3, 6, 0.1, 'px'], ['lw', 'רוחב (כשיותר משורה)', 30, 100, 1, '%'], ['llh', 'מרווח בין השורות', 0.8, 2, 0.02, ''], ['gap', 'מרווח מעליו (מהציטוט)', -40, 200, 1, 'px'], ['lb', 'מרווח עד החיפוש', -20, 90, 1, 'px'], ['lx', 'ימינה / שמאלה', -40, 40, .5, 'vw'], ['lc', 'צבע', 'color'], ['lg', 'זוהר', 0, 80, 1, 'px'], ['lgc', 'צבע הזוהר', 'color'], ['lgo', 'עוצמת הזוהר', 1, 4, 1, ''],
+    ['h', 'המשפט שמעל החיפוש'], ['lbx', 'להציג את התיבה (קו מקווקו)', ['לא', 'כן']], ['lbw', 'רוחב התיבה (המלל נשבר לפיו)', 100, 1000, 1, 'px'], ['lbh', 'גובה התיבה', 10, 240, 1, 'px'], ['ls', 'גודל', 12, 52, 0.5, 'px'], ['lsp', 'ריווח אותיות', -3, 6, 0.1, 'px'], ['llh', 'מרווח בין השורות', 0.8, 2, 0.02, ''], ['gap', 'מרווח מעליו (מהציטוט)', -40, 200, 1, 'px'], ['lb', 'מרווח עד החיפוש', -20, 90, 1, 'px'], ['lx', 'ימינה / שמאלה', -40, 40, .5, 'vw'], ['lc', 'צבע', 'color'], ['lg', 'זוהר', 0, 80, 1, 'px'], ['lgc', 'צבע הזוהר', 'color'], ['lgo', 'עוצמת הזוהר', 1, 4, 1, ''],
     ['h', 'שכבת זוהר נוספת מאחורי המשפט'], ['zg', 'להציג', ['לא', 'כן']], ['zgo', 'שקיפות', 0, 100, 1, '%'], ['zgc', 'צבע', 'color'], ['zgw', 'רוחב', 20, 200, 1, '%'], ['zgh', 'גובה', 10, 300, 1, 'px'], ['zgx', 'ימינה / שמאלה', -200, 200, 1, 'px'], ['zgy', 'למעלה / למטה', -150, 150, 1, 'px'], ['zgb', 'רכות (טשטוש)', 0, 80, 1, 'px'], ['zgr', 'עיגול הפינות', 0, 50, 1, '%'],
     ['h', 'הרב'], ['size', 'גודל', 20, 170, 1, '%'], ['x', 'ימינה / שמאלה', -20, 120, .5, '%'], ['y', 'למעלה / למטה', -40, 70, .5, '%'], ['op', 'שקיפות', 0, 100, 1, '%'],
     ['blend', 'סוג בלנד', ['multiply', 'normal', 'soft-light', 'overlay', 'hard-light', 'luminosity', 'darken', 'color-burn', 'screen']],
@@ -1493,7 +1493,7 @@ window.H2_PRESET = {
     base.rt = Math.round(parseFloat(cs(refEl).marginTop)); base.rs = Math.round(parseFloat(cs(refEl).fontSize));
     base.mt = M ? Math.round(parseFloat(cs(M).marginTop)) : 8; base.ms = MA ? Math.round(parseFloat(cs(MA).fontSize)) : 21;
     base.zg = 'לא'; base.zgo = 70; base.zgc = '#fff4dc'; base.zgw = 110; base.zgh = 70; base.zgx = 0; base.zgy = 0; base.zgb = 24; base.zgr = 50;
-    base.l1 = 'לא'; base.lw = Math.min(100, Math.round(lede.getBoundingClientRect().width / ilw * 100));
+    var LR = lede.getBoundingClientRect(); base.lbx = 'לא'; base.lbw = Math.round(LR.width); base.lbh = Math.round(LR.height);
     base.llh = Math.round(parseFloat(cs(lede).lineHeight) / parseFloat(cs(lede).fontSize) * 50) / 50 || 1.3; base.lsp = Math.round((parseFloat(cs(lede).letterSpacing) || 0) * 10) / 10;
   }
   var zgEl = document.createElement('span'); zgEl.className = 'h2-zg'; zgEl.setAttribute('aria-hidden', 'true');
@@ -1506,9 +1506,11 @@ window.H2_PRESET = {
     put('qlh', q, 'line-height', String(v.qlh));
     put('rt', refEl, 'margin-top', v.rt + 'px'); put('rs', refEl, 'font-size', v.rs + 'px');
     put('mt', M, 'margin-top', v.mt + 'px'); put('ms', MA, 'font-size', v.ms + 'px');
-    put('l1', lede, 'white-space', 'nowrap'); put('l1', lede, 'text-wrap', 'nowrap');
-    if (v.l1 === 'כן') { lede.style.setProperty('max-width', 'none', 'important'); lede.style.setProperty('width', 'auto', 'important'); }
-    else put('lw', lede, 'max-width', v.lw + '%');
+    // תיבת המשפט: רוחב קבוע בפיקסלים (המלל נשבר לפיו, בלי לדחוף את שאר הפתיח) וגובה (המלל באמצע התיבה)
+    var bw = v.lbw !== base.lbw; put('lbw', lede, 'width', v.lbw + 'px'); if (bw) { lede.style.setProperty('max-width', 'none', 'important'); lede.style.setProperty('justify-self', 'center', 'important'); lede.style.setProperty('margin-inline', '-600px', 'important'); } else ['max-width', 'justify-self', 'margin-inline'].forEach(function (p) { lede.style.removeProperty(p); }); // שוליים שליליים: התיבה לא מרחיבה את שאר הפתיח
+    // כשמשנים רוחב, הגובה נשאר כמו שהיה, כדי ששום דבר מעל לא יזוז (אלא אם משנים גובה בעצמך)
+    if (bw || v.lbh !== base.lbh) { lede.style.setProperty('height', v.lbh + 'px', 'important'); lede.style.setProperty('display', 'grid', 'important'); lede.style.setProperty('align-content', 'center', 'important'); } else ['height', 'display', 'align-content'].forEach(function (p) { lede.style.removeProperty(p); });
+    lede.style.outline = v.lbx === 'כן' ? '2px dashed rgba(200, 40, 40, .85)' : ''; lede.style.outlineOffset = v.lbx === 'כן' ? '0px' : '';
     put('llh', lede, 'line-height', String(v.llh)); put('lsp', lede, 'letter-spacing', v.lsp + 'px');
   }
   var cyc = null, orig = null, lastDemo = null, refEl = hero.querySelector('.h2-ref');
