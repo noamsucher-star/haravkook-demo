@@ -1444,9 +1444,10 @@ if (typeof module !== 'undefined') module.exports = SE;
 })();
 
 
-/* ההגדרות שנועם כיוון ביד ושלח (25.11.26, מחשב, פריסה 1, מסך 1440x825). נטענות תמיד, בכל דפדפן ובכל כתובת; מה ששמור בדפדפן גובר עליהן. */
+/* מחשב: 25.11. טלפון (390x844): 25.11, נשלח מדף כיוון הטלפון. ההגדרות שנועם כיוון ביד ושלח (25.11.26, מחשב, פריסה 1, מסך 1440x825). נטענות תמיד, בכל דפדפן ובכל כתובת; מה ששמור בדפדפן גובר עליהן. */
 window.H2_PRESET = {
-  "d-a": {"size":96,"x":82.5,"y":1,"op":45,"blend":"multiply","fade":60,"sep":0,"br":109,"flip":"לא","hwp":"מרחבים","hwo":35,"hws":36,"hwh":59,"hwl":1,"demo":"הציטוט של היום","al":"מרכז","box":"לא","qw":56,"tb":"normal","ty":18.5,"tx":0,"qs":100,"gap":62,"qm":"לא","qms":160,"qmx":73.5,"qmy":36.5,"qmo":28,"qmcol":"#8a5a2b","qmb":"multiply","qmr":0,"qmf":"מאחורי","qc":"#2e1c0a","tc":"#3a2710","glow":69,"gc":"#fff0d0","sh":0,"shd":4,"shc":"#1a0f04","ls":27,"lx":0,"lb":9,"lc":"#3a2710","lg":69,"lgc":"#fff0d0","lgo":4,"so":60,"sw":590}
+  "d-a": {"size":96,"x":82.5,"y":1,"op":45,"blend":"multiply","fade":60,"sep":0,"br":109,"flip":"לא","hwp":"מרחבים","hwo":35,"hws":36,"hwh":59,"hwl":1,"demo":"הציטוט של היום","al":"מרכז","box":"לא","qw":56,"tb":"normal","ty":18.5,"tx":0,"qs":100,"gap":62,"qm":"לא","qms":160,"qmx":73.5,"qmy":36.5,"qmo":28,"qmcol":"#8a5a2b","qmb":"multiply","qmr":0,"qmf":"מאחורי","qc":"#2e1c0a","tc":"#3a2710","glow":69,"gc":"#fff0d0","sh":0,"shd":4,"shc":"#1a0f04","ls":27,"lx":0,"lb":9,"lc":"#3a2710","lg":69,"lgc":"#fff0d0","lgo":4,"so":60,"sw":590},
+  "m-a": {"lbx":"לא","lbw":277,"lbh":48,"ls":21,"lsp":1.2,"llh":1.12,"gap":73,"lb":-7,"lx":0,"lc":"#f1e8d1","lg":26,"lgc":"#fff0d0","lgo":1,"lds":84,"ldx":0,"ldy":3,"ldb":6,"ldc":"#1a0f04","zg":"לא","zgo":70,"zgc":"#fff4dc","zgw":110,"zgh":70,"zgx":0,"zgy":0,"zgb":24,"zgr":50,"size":55,"x":43,"y":0,"op":44,"blend":"multiply","fade":53,"sep":0,"br":110,"flip":"לא","hwp":"מרחבים","hwo":26,"hws":35,"hwh":54,"hwl":1.05,"demo":"הציטוט של היום","al":"מרכז","box":"לא","qw":100,"tb":"normal","ty":7,"tx":0,"qs":81,"qm":"לא","qms":275,"qmx":50,"qmy":52,"qmo":16,"qmcol":"#8a5a2b","qmb":"multiply","qmr":0,"qmf":"מאחורי","qc":"#2e1c0a","tc":"#2c1d0d","glow":22,"gc":"#fff0d0","sh":0,"shd":4,"shc":"#1a0f04","so":82,"sw":300,"ks":21,"kb":-12,"qlh":1.06,"rt":-9,"rs":21,"mt":-9,"ms":21}
 };
 
 
@@ -1460,10 +1461,11 @@ window.H2_PRESET = {
   var F = [
     ['h', 'המשפט שמעל החיפוש'], ['lbx', 'להציג את התיבה (קו מקווקו)', ['לא', 'כן']], ['lbw', 'רוחב התיבה (המלל נשבר לפיו)', 100, 1000, 1, 'px'], ['lbh', 'גובה התיבה', 10, 240, 1, 'px'], ['ls', 'גודל', 12, 52, 0.5, 'px'], ['lsp', 'ריווח אותיות', -3, 6, 0.1, 'px'], ['llh', 'מרווח בין השורות', 0.8, 2, 0.02, ''], ['gap', 'מרווח מעליו (מהציטוט)', -40, 200, 1, 'px'], ['lb', 'מרווח עד החיפוש', -20, 90, 1, 'px'], ['lx', 'ימינה / שמאלה', -40, 40, .5, 'vw'], ['lc', 'צבע', 'color'], ['lg', 'זוהר', 0, 80, 1, 'px'], ['lgc', 'צבע הזוהר', 'color'], ['lgo', 'עוצמת הזוהר', 1, 4, 1, ''], ['lds', 'צל (דרופ שדו): עוצמה', 0, 100, 1, '%'], ['ldx', 'צל: ימינה / שמאלה', -20, 20, 1, 'px'], ['ldy', 'צל: למעלה / למטה', -20, 20, 1, 'px'], ['ldb', 'צל: רכות', 0, 40, 1, 'px'], ['ldc', 'צל: צבע', 'color'],
     ['h', 'שכבת זוהר נוספת מאחורי המשפט'], ['zg', 'להציג', ['לא', 'כן']], ['zgo', 'שקיפות', 0, 100, 1, '%'], ['zgc', 'צבע', 'color'], ['zgw', 'רוחב', 20, 200, 1, '%'], ['zgh', 'גובה', 10, 300, 1, 'px'], ['zgx', 'ימינה / שמאלה', -200, 200, 1, 'px'], ['zgy', 'למעלה / למטה', -150, 150, 1, 'px'], ['zgb', 'רכות (טשטוש)', 0, 80, 1, 'px'], ['zgr', 'עיגול הפינות', 0, 50, 1, '%'],
+    ['h', 'תמונת הרקע (הזריחה)'], ['bgz', 'הגדלה', 100, 250, 1, '%'], ['bgx', 'ימינה / שמאלה', 0, 100, .5, '%'], ['bgy', 'למעלה / למטה', 0, 100, .5, '%'],
     ['h', 'הרב'], ['size', 'גודל', 20, 170, 1, '%'], ['x', 'ימינה / שמאלה', -20, 120, .5, '%'], ['y', 'למעלה / למטה', -40, 70, .5, '%'], ['op', 'שקיפות', 0, 100, 1, '%'],
     ['blend', 'סוג בלנד', ['multiply', 'normal', 'soft-light', 'overlay', 'hard-light', 'luminosity', 'darken', 'color-burn', 'screen']],
     ['fade', 'פייד בקצוות', 0, 100, 1, ''], ['sep', 'גוון חום', 0, 100, 1, '%'], ['br', 'בהירות', 60, 140, 1, '%'], ['flip', 'היפוך כיוון', ['לא', 'כן']],
-    ['h', 'כתב היד ברקע'], ['hwp', 'איזו פסקה', ['מרחבים', 'שמעו אלי עמי']], ['hwo', 'שקיפות', 0, 100, 1, '%'], ['hws', 'גודל אותיות', 12, 48, 1, 'px'], ['hwh', 'עד איזה גובה', 10, 100, 1, '%'], ['hwl', 'מרווח בין השורות', 0.8, 3.2, 0.05, ''],
+    ['h', 'כתב היד ברקע'], ['hwp', 'איזו פסקה', ['מרחבים', 'שמעו אלי עמי']], ['hwo', 'שקיפות', 0, 100, 1, '%'], ['hws', 'גודל אותיות', 12, 48, 1, 'px'], ['hwh', 'עד איזה גובה', 10, 100, 1, '%'], ['hwl', 'מרווח בין השורות', 0.8, 3.2, 0.05, ''], ['hwms', 'שקוף באמצע (מעל פני הרב): עוצמה', 0, 100, 1, '%'], ['hwmx', 'מרכז השקיפות: ימינה / שמאלה', 0, 100, .5, '%'], ['hwmy', 'מרכז השקיפות: למעלה / למטה', 0, 100, .5, '%'], ['hwmw', 'השקיפות: רוחב', 5, 100, 1, '%'], ['hwmh', 'השקיפות: גובה', 5, 100, 1, '%'], ['hwmf', 'השקיפות: רכות המעבר', 0, 100, 1, '%'],
     ['h', 'המלל'], ['demo', 'ציטוט לדוגמה (לבדיקת אורך)', ['הציטוט של היום', 'קצר', 'בינוני', 'ארוך', 'ארוך מאוד']], ['al', 'יישור המלל', ['מרכז', 'ימין', 'שמאל']], ['box', 'להציג את תיבת המלל', ['לא', 'כן']], ['qw', 'רוחב תיבת הציטוט', 30, 100, 1, '%'], ['tb', 'בלנד למלל', ['normal', 'multiply', 'overlay', 'soft-light', 'hard-light', 'color-burn', 'darken', 'luminosity', 'difference']], ['ty', 'מרווח מלמטה', 0, 50, .5, 'vh'], ['tx', 'ימינה / שמאלה', -40, 40, .5, 'vw'], ['qs', 'גודל הציטוט', 50, 150, 1, '%'],
     ['h', 'גרשיים ברקע (פלטפורמה בולד)'], ['qm', 'להציג', ['כן', 'לא']], ['qms', 'גודל', 40, 1200, 5, 'px'], ['qmx', 'ימינה / שמאלה', -10, 110, .5, '%'], ['qmy', 'למעלה / למטה', -10, 110, .5, '%'], ['qmo', 'שקיפות', 0, 100, 1, '%'], ['qmcol', 'צבע', 'color'], ['qmb', 'סוג בלנד', ['multiply', 'normal', 'overlay', 'soft-light', 'screen', 'color-burn', 'luminosity']], ['qmr', 'סיבוב', -45, 45, 1, '°'], ['qmf', 'מאחורי או מלפני המלל', ['מאחורי', 'מלפני']],
     ['h', 'צבע ואפקטים למלל'], ['qc', 'צבע הציטוט', 'color'], ['tc', 'צבע המלל הקטן', 'color'], ['glow', 'זוהר מאחורי המלל', 0, 70, 1, 'px'], ['gc', 'צבע הזוהר', 'color'], ['sh', 'צל (דרופ שדו)', 0, 100, 1, '%'], ['shd', 'מרחק הצל', 0, 24, 1, 'px'], ['shc', 'צבע הצל', 'color'],
@@ -1477,7 +1479,7 @@ window.H2_PRESET = {
   var v = {}, base = {}, baseFs = 0;
   var qm = document.createElement('div'); qm.className = 'h2-qm'; qm.setAttribute('aria-hidden', 'true'); qm.textContent = '"'; hero.insertBefore(qm, inn);
   function key() { return 'h2ctl-' + (mob() ? 'm' : 'd') + '-' + root.getAttribute('data-hv'); }
-  function clear() { rav.style.cssText = ''; img.style.cssText = ''; inn.style.cssText = ''; q.style.cssText = ''; qm.style.cssText = 'display:none'; form.style.cssText = ''; lede.style.cssText = ''; var qa0 = q.querySelector('a'); if (qa0) qa0.style.cssText = ''; [].forEach.call(hero.querySelectorAll('.h2-k, .h2-ref, .h2-more, .h2-more a'), function (e) { e.style.cssText = ''; }); [].forEach.call(hws, function (h) { h.style.cssText = ''; }); }
+  function clear() { (hero.closest('.home') || hero).style.removeProperty('background-position'); (hero.closest('.home') || hero).style.removeProperty('background-size'); rav.style.cssText = ''; img.style.cssText = ''; inn.style.cssText = ''; q.style.cssText = ''; qm.style.cssText = 'display:none'; form.style.cssText = ''; lede.style.cssText = ''; var qa0 = q.querySelector('a'); if (qa0) qa0.style.cssText = ''; [].forEach.call(hero.querySelectorAll('.h2-k, .h2-ref, .h2-more, .h2-more a'), function (e) { e.style.cssText = ''; }); [].forEach.call(hws, function (h) { h.style.cssText = ''; }); }
   function measure() { // נקודת הפתיחה = מה שרואים עכשיו, כדי ששום דבר לא יקפוץ
     var H = hero.getBoundingClientRect(), R = rav.getBoundingClientRect(), hw = hws[0], hwv = getComputedStyle(hw).display === 'none' ? hws[1] : hw;
     baseFs = parseFloat(getComputedStyle(q).fontSize);
@@ -1492,13 +1494,37 @@ window.H2_PRESET = {
     base.qlh = Math.round(parseFloat(cs(q).lineHeight) / parseFloat(cs(q).fontSize) * 50) / 50 || 1.12;
     base.rt = Math.round(parseFloat(cs(refEl).marginTop)); base.rs = Math.round(parseFloat(cs(refEl).fontSize));
     base.mt = M ? Math.round(parseFloat(cs(M).marginTop)) : 8; base.ms = MA ? Math.round(parseFloat(cs(MA).fontSize)) : 21;
+    var hcs = getComputedStyle(homeEl), bp = hcs.backgroundPosition.split(' ');
+    base.bgz = 100; base.bgx = Math.round(parseFloat(bp[0]) * 2) / 2 || 50; base.bgy = bp[1] === undefined ? 100 : (Math.round(parseFloat(bp[1]) * 2) / 2); if (isNaN(base.bgy)) base.bgy = 100;
+    base.hwms = 0; base.hwmx = mob() ? 50 : 82; base.hwmy = mob() ? 40 : 35; base.hwmw = mob() ? 50 : 22; base.hwmh = 40; base.hwmf = 60;
     base.lds = 0; base.ldx = 0; base.ldy = 3; base.ldb = 6; base.ldc = '#1a0f04';
     base.zg = 'לא'; base.zgo = 70; base.zgc = '#fff4dc'; base.zgw = 110; base.zgh = 70; base.zgx = 0; base.zgy = 0; base.zgb = 24; base.zgr = 50;
     var LR = lede.getBoundingClientRect(); base.lbx = 'לא'; base.lbw = Math.round(LR.width); base.lbh = Math.round(LR.height);
     base.llh = Math.round(parseFloat(cs(lede).lineHeight) / parseFloat(cs(lede).fontSize) * 50) / 50 || 1.3; base.lsp = Math.round((parseFloat(cs(lede).letterSpacing) || 0) * 10) / 10;
   }
   var zgEl = document.createElement('span'); zgEl.className = 'h2-zg'; zgEl.setAttribute('aria-hidden', 'true');
+  var homeEl = hero.closest('.home') || hero, bgImg = null, bgUrl = '';
+  function bg() { // תמונת הרקע: הגדלה ומיקום, רק כשמזיזים
+    var u = (getComputedStyle(homeEl).backgroundImage.match(/url\("?([^")]+)"?\)/) || [])[1] || '';
+    if (v.bgx !== base.bgx || v.bgy !== base.bgy) homeEl.style.setProperty('background-position', v.bgx + '% ' + v.bgy + '%', 'important'); else homeEl.style.removeProperty('background-position');
+    if (v.bgz === 100 || !u) { homeEl.style.removeProperty('background-size'); return; }
+    var go = function () { var W = homeEl.clientWidth, H = homeEl.clientHeight, k = Math.max(W / bgImg.naturalWidth, H / bgImg.naturalHeight) * v.bgz / 100; homeEl.style.setProperty('background-size', Math.round(bgImg.naturalWidth * k) + 'px ' + Math.round(bgImg.naturalHeight * k) + 'px', 'important'); };
+    if (bgImg && bgUrl === u && bgImg.complete) go(); else { bgUrl = u; bgImg = new Image(); bgImg.onload = go; bgImg.src = u; }
+  }
+  var hwMask0 = null;
+  function hwHole() { // כתב היד: אזור שקוף יותר באמצע, במעבר חלק, כדי שלא יעלה על פני הרב
+    [].forEach.call(hws, function (h) {
+      if (!v.hwms) { h.style.removeProperty('mask-image'); h.style.removeProperty('-webkit-mask-image'); h.style.removeProperty('mask-composite'); h.style.removeProperty('-webkit-mask-composite'); return; }
+      h.style.removeProperty('mask-image'); h.style.removeProperty('-webkit-mask-image');
+      var m0 = getComputedStyle(h).maskImage || getComputedStyle(h).webkitMaskImage || 'none', a = 1 - v.hwms / 100, inner = Math.max(0, 100 - v.hwmf) * .7;
+      var hole = 'radial-gradient(' + v.hwmw + '% ' + v.hwmh + '% at ' + v.hwmx + '% ' + v.hwmy + '%, rgba(0,0,0,' + a + ') ' + inner + '%, #000 100%)';
+      var m = m0 && m0 !== 'none' ? m0 + ', ' + hole : hole, n = m0 && m0 !== 'none' ? (m0.split('gradient(').length - 1 + m0.split('url(').length - 1) : 0, comp = [], wcomp = [];
+      for (var i = 0; i <= n; i++) { comp.push('intersect'); wcomp.push('source-in'); }
+      h.style.setProperty('-webkit-mask-image', m); h.style.setProperty('mask-image', m); h.style.setProperty('mask-composite', comp.join(', ')); h.style.setProperty('-webkit-mask-composite', wcomp.join(', '));
+    });
+  }
   function lines() {
+    bg(); hwHole();
     if (v.zg === 'כן') { if (zgEl.parentNode !== lede) lede.appendChild(zgEl); lede.style.setProperty('position', 'relative'); zgEl.style.cssText = 'position:absolute;z-index:-1;pointer-events:none;left:50%;top:50%;width:' + v.zgw + '%;height:' + v.zgh + 'px;transform:translate(calc(-50% - ' + v.zgx + 'px),calc(-50% + ' + v.zgy + 'px));background:' + v.zgc + ';opacity:' + v.zgo / 100 + ';filter:blur(' + v.zgb + 'px);border-radius:' + v.zgr + '%;'; }
     else if (zgEl.parentNode) zgEl.parentNode.removeChild(zgEl);
     var K = hero.querySelector('.h2-k'), M = hero.querySelector('.h2-more'), MA = M && M.querySelector('a');
