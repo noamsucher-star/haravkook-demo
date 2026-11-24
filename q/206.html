@@ -22,7 +22,8 @@
 <link rel="apple-touch-icon" href="../assets/icon.png">
 <link rel="preload" href="../assets/fonts/platforma-bold.otf" as="font" type="font/otf" crossorigin>
 <script>(function(){['cw','pv','ic'].forEach(function(k){document.documentElement.setAttribute('data-'+k,'a')})})()</script>
-<link rel="stylesheet" href="../assets/site.css?v=mwr9m0i5">
+<script>(function(){var d='a';try{d=new URLSearchParams(location.search).get('dz')||localStorage.getItem('dz')||'a'}catch(e){}document.documentElement.setAttribute('data-dz',/^[abc]$/.test(d)?d:'a')})()</script>
+<link rel="stylesheet" href="../assets/site.css?v=mwv54hlf">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Quotation","text":"עיקר יסוד השלמות שלו היא העריגה והחפץ הקבוע אל השלמות. והחפץ הזה הוא יסוד התשובה, שהיא מנצחת תמיד על דרכו בחיים ומשלימתו באמת.","inLanguage":"he","name":"השאיפה לשלמות","url":"https://noamsucher-star.github.io/haravkook-demo/q/206.html","creator":{"@type":"Person","name":"הרב אברהם יצחק הכהן קוק"},"isPartOf":{"@type":"Book","name":"אורות התשובה","author":{"@type":"Person","name":"הרב אברהם יצחק הכהן קוק"}},"citation":"אורות התשובה ה:ו","about":["לשאוף גבוה","תשובה"]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"דף הבית","item":"https://noamsucher-star.github.io/haravkook-demo/"},{"@type":"ListItem","position":2,"name":"לשאוף גבוה","item":"https://noamsucher-star.github.io/haravkook-demo/topic/aspire.html"},{"@type":"ListItem","position":3,"name":"השאיפה לשלמות","item":"https://noamsucher-star.github.io/haravkook-demo/q/206.html"}]}</script>
 </head>
@@ -39,6 +40,7 @@
       <a href="../calendar.html">מועדים ופרשות</a>
       <a href="../rabbis.html">המבארים</a>
     </nav>
+    <a class="dz-find" href="../search.html" aria-label="חיפוש בציטוטים"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15.2 15.2 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a>
     <a class="dm-wa" href="https://whatsapp.com/channel/0029VagNtvjLI8YQk5ZISj2o" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2a8.7 8.7 0 0 0-7.5 13.1L3.3 20.8l4.6-1.2A8.7 8.7 0 1 0 12 3.2Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9.1 8.2c.2-.4.4-.4.7-.4h.5c.2 0 .4 0 .5.4l.7 1.7c.1.2 0 .4-.1.6l-.5.6c-.1.1-.2.3 0 .5.6 1 1.4 1.8 2.5 2.4.2.1.4.1.5 0l.6-.7c.2-.2.3-.2.6-.1l1.6.8c.3.1.4.2.4.4 0 .6-.2 1.3-.8 1.6-.6.4-1.5.5-3-.1-2-.8-3.6-2.6-4.2-4-.5-1.2-.3-2.1-.1-2.6Z" fill="currentColor"/></svg><span>ציטוט יומי</span></a>
     <button class="menubtn" type="button" id="menu-btn" aria-expanded="false" aria-controls="menu"><span class="hb" aria-hidden="true"><i></i><i></i><i></i></span><span class="lbl">תפריט</span></button>
     </div></div></header>
@@ -73,6 +75,7 @@
   <h2 id="give-h">לתרומה וחיזוק המיזם</h2>
   <p class="sub">כדי שעוד ועוד אנשים יקבלו חצי דקה של אור, בכל יום</p>
   <a class="givebtn" href="https://wa.me/972528663860?text=%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%AA%D7%A8%D7%95%D7%9D%20%D7%95%D7%9C%D7%97%D7%96%D7%A7%20%D7%90%D7%AA%20%D7%94%D7%9E%D7%99%D7%96%D7%9D%20%22%D7%97%D7%A6%D7%99%20%D7%93%D7%A7%D7%94%20%D7%94%D7%A8%D7%91%20%D7%A7%D7%95%D7%A7%22" target="_blank" rel="noopener" aria-label="לתרומה וחיזוק המיזם, נפתח בוואטסאפ">לחצו כאן <i class="arw" aria-hidden="true"></i></a>
+  <p class="tax46">מוכר לצורכי מס לפי סעיף 46</p>
 </div></div></section>
 </div>
 <footer class="foot"><div class="in">
@@ -97,6 +100,16 @@
   </ul>
   <div class="row"><button type="button" data-a11y-reset>איפוס</button><a href="../accessibility.html">הצהרת נגישות</a></div>
 </section>
+<button class="bot-btn" type="button" id="bot-btn" aria-expanded="false" aria-controls="bot-panel"><span class="bot-ico" aria-hidden="true"><svg viewBox="0 0 32 32"><path class="b1" d="M6 7.5h20a2.5 2.5 0 0 1 2.5 2.5v11a2.5 2.5 0 0 1-2.5 2.5H14l-6 4.5v-4.5H6A2.5 2.5 0 0 1 3.5 21V10A2.5 2.5 0 0 1 6 7.5z"/><path class="b2" d="M16 11.2l1.2 2.9 2.9 1.2-2.9 1.2L16 19.4l-1.2-2.9-2.9-1.2 2.9-1.2z"/></svg></span><span class="bot-lbl">איך אפשר לעזור?</span></button>
+<section class="bot-panel" id="bot-panel" role="dialog" aria-modal="false" aria-labelledby="bot-h" hidden>
+  <header class="bot-head"><span class="bot-av" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 8l2.4 5.6L24 16l-5.6 2.4L16 24l-2.4-5.6L8 16l5.6-2.4z"/></svg></span><div><h2 id="bot-h">העוזר החכם שלנו <span class="bot-beta" dir="ltr">(BETA)</span></h2><p>מוצא ציטוטים מתוך המאגר</p></div>
+    <button type="button" class="bot-reset" aria-label="שיחה חדשה" title="שיחה חדשה"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3M4.5 4.5v3.8h3.8"/></svg></button>
+    <button type="button" class="bot-x" aria-label="סגירת העוזר" title="סגירה"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+  <div class="bot-log" role="log" aria-live="polite" aria-label="השיחה"></div>
+  <form class="bot-form" autocomplete="off"><label class="vh" for="bot-in">מה מחפשים?</label><input class="bot-input" id="bot-in" type="text" enterkeyhint="send" placeholder="מה מחפשים? למשל: קשה לי"><button type="submit" class="bot-send" aria-label="שליחה"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></button></form>
+  <p class="bot-note">העוזר מראה רק ציטוטים מהמאגר, עם המקור.</p>
+</section>
+
 <div class="menu" id="menu" hidden>
   <div class="mback" data-mclose></div>
   <nav class="mpanel" aria-label="תפריט האתר" tabindex="-1">
@@ -118,10 +131,11 @@
     </details>
     <a class="mjoin" href="https://whatsapp.com/channel/0029VagNtvjLI8YQk5ZISj2o" target="_blank" rel="noopener">ציטוט יומי בוואטסאפ <i class="arw" aria-hidden="true"></i></a>
     <a class="mgive" href="https://wa.me/972528663860?text=%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%AA%D7%A8%D7%95%D7%9D%20%D7%95%D7%9C%D7%97%D7%96%D7%A7%20%D7%90%D7%AA%20%D7%94%D7%9E%D7%99%D7%96%D7%9D%20%22%D7%97%D7%A6%D7%99%20%D7%93%D7%A7%D7%94%20%D7%94%D7%A8%D7%91%20%D7%A7%D7%95%D7%A7%22" target="_blank" rel="noopener">לתרומה וחיזוק המיזם</a>
+    <p class="tax46 mtax">מוכר לצורכי מס לפי סעיף 46</p>
     <p class="mfoot"><a href="../about.html">על האתר</a></p>
   </nav></div>
 
 
-<script src="../assets/site.js?v=mwr9m0i5" defer></script>
+<script src="../assets/site.js?v=mwv54hlf" defer></script>
 </body>
 </html>
