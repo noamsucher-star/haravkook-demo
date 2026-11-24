@@ -1387,94 +1387,174 @@ body.a-still .bot-msg, body.a-still .bot-dots i, body.a-still .bot-btn, body.a-s
 /* (BETA) אחרי שם העוזר, קטן ועדין */
 .bot-beta { font-family: "Heebo", Arial, sans-serif; font-size: 12px; font-weight: 500; letter-spacing: .08em; color: #8a7656; vertical-align: middle; margin-inline-start: 4px; }
 
-/* ===== ליטושים 24.11.26 (מהערות המעצבת, בלי לשנות מבנה, פונט או צבע). פעיל רק כש-data-lt="on" ===== */
+/* ===== ליטושים 24.11.26 (מהערות המעצבת, בלי לשנות מבנה, פונט או צבע). עלה לאתר החי 24.11.26 ===== */
 /* 1. מלל קטן: קצת יותר גדול ומרווח */
-html[data-lt="on"] :is(.topic .promise, .dm-door .s, .dm-path .k, .dm-path .s, .dm-cover .by, .dm-nowcard .k, .dm-rabbi .nm, .dm-rabbi .ro, .who, .wh span, .fam .c, .block .sub, .today .ref, .dm-joinrow){letter-spacing: .03em;}
+html :is(.topic .promise, .dm-door .s, .dm-path .k, .dm-path .s, .dm-cover .by, .dm-nowcard .k, .dm-rabbi .nm, .dm-rabbi .ro, .who, .wh span, .fam .c, .block .sub, .today .ref, .dm-joinrow){letter-spacing: .03em;}
 /* נועם 24.11: משקל Light, גדול ונקי */
-html[data-lt="on"] .topic .promise{font-size: 24px; font-weight: 300; line-height: 1.4; letter-spacing: .024em;}
-@media (max-width: 700px) { html[data-lt="on"] #topics .topic .promise{font-size: 19.5px;} }
-html[data-lt="on"] .dm-path .k{font-size: 16px;}
-html[data-lt="on"] .dm-path .s{font-size: 18px;}
-html[data-lt="on"] .dm-cover .by{font-size: 15px;}
-html[data-lt="on"] .dm-nowcard .k{font-size: 16px;}
-html[data-lt="on"] .who, html[data-lt="on"] .wh span{font-size: 18px;}
-html[data-lt="on"] .dm-path .go, html[data-lt="on"] .dm-nowcard .go, html[data-lt="on"] .dm-all{font-size: 19px;}
+html:root .topic .promise{font-size: 24px; font-weight: 300; line-height: 1.4; letter-spacing: .024em;}
+@media (max-width: 700px) { html:root #topics .topic .promise{font-size: 19.5px;} }
+html:root .dm-path .k{font-size: 16px;}
+html:root .dm-path .s{font-size: 18px;}
+html:root .dm-cover .by{font-size: 15px;}
+html:root .dm-nowcard .k{font-size: 16px;}
+html:root .who, html:root .wh span{font-size: 18px;}
+html:root .dm-path .go, html:root .dm-nowcard .go, html:root .dm-all{font-size: 19px;}
 /* 2. איך תרצו לחפש: אותם כרטיסים, גדולים יותר */
-html[data-lt="on"] .dm-doorgrid{gap: 18px; margin-top: 26px;}
-html[data-lt="on"] .dm-door{padding: 36px 16px 30px; gap: 9px;}
-html[data-lt="on"] .dm-door .ic{width: 68px; height: 68px;}
-html[data-lt="on"] .dm-door .t{font-size: 29px;}
-html[data-lt="on"] .dm-door .s{font-size: 18px; line-height: 1.4;}
+html:root .dm-doorgrid{gap: 18px; margin-top: 26px;}
+html:root .dm-door{padding: 36px 16px 30px; gap: 9px;}
+html:root .dm-door .ic{width: 68px; height: 68px;}
+html:root .dm-door .t{font-size: 29px;}
+html:root .dm-door .s{font-size: 18px; line-height: 1.4;}
 @media (max-width: 900px) {
-  html[data-lt="on"] .dm-doorgrid{gap: 12px;}
-  html[data-lt="on"] .dm-door{padding: 26px 10px 22px;}
-  html[data-lt="on"] .dm-door .ic{width: 54px; height: 54px;}
-  html[data-lt="on"] .dm-door .t{font-size: 25px;}
-  html[data-lt="on"] .dm-door .s{font-size: 16.5px;}
+  html:root .dm-doorgrid{gap: 12px;}
+  html:root .dm-door{padding: 26px 10px 22px;}
+  html:root .dm-door .ic{width: 54px; height: 54px;}
+  html:root .dm-door .t{font-size: 25px;}
+  html:root .dm-door .s{font-size: 16.5px;}
 }
 /* 3. יותר אוויר בין האזורים בדף הבית */
-html[data-lt="on"] .home ~ main > section.block:not(.today){padding-block: clamp(58px, 6.6vw, 94px);}
-/* 4. כותרת ברורה במקום "במעגל השנה" */
-.lt-new{display: none;}
-html[data-lt="on"] .lt-old{display: none;}
-html[data-lt="on"] .lt-new{display: inline;}
+html:root .home ~ main > section.block:not(.today){padding-block: clamp(58px, 6.6vw, 94px);}
 /* 5. מבארים בדף הבית: שמות בלבד */
-html[data-lt="on"] .dm-rlist.compact .dm-rabbi .ro{display: none;}
-html[data-lt="on"] .dm-rlist.compact .dm-rabbi .nm{font-size: 19px;}
-html[data-lt="on"] .dm-rlist.compact .dm-rabbi{padding: 11px 0 10px;}
-/* מתג לפני / אחרי (דמו בלבד) */
-.lt-sw{position: fixed; z-index: 95; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 2px; padding: 5px; background: #1a1107; color: #f3d998; border: 1px solid #b88a3e; font-size: 17px; line-height: 1; box-shadow: 0 16px 34px -14px rgba(0, 0, 0, .6); white-space: nowrap;}
-.lt-sw button{min-height: 40px; padding: 0 18px; border: 0; background: none; color: inherit; font: inherit; cursor: pointer;}
-.lt-sw button[aria-pressed="true"]{background: linear-gradient(120deg, #c99a48, #f0d79c 45%, #c99a48); color: #24170b; font-weight: 700;}
-@media print { .lt-sw{display: none;} }
+html:root .dm-rlist.compact .dm-rabbi .ro{display: none;}
+html:root .dm-rlist.compact .dm-rabbi .nm{font-size: 19px;}
+html:root .dm-rlist.compact .dm-rabbi{padding: 11px 0 10px;}
 
 /* ===== ליטושים, חלק ב (24.11.26): אותה הגדלה גם בעמודים הפנימיים (נושא, ציטוט, מסלול, ספרים, מועדים, מבארים, חיפוש) ===== */
-html[data-lt="on"] .card .title{font-size: 22px !important;}
-html[data-lt="on"] .card .ref{font-size: 21px !important;}
-html[data-lt="on"] details.biur summary .wh b{font-size: 20px !important;}
-html[data-lt="on"] details.biur summary .wh span{font-size: 19px !important;}
-html[data-lt="on"] .bh .bn{font-size: 19px !important;}
-html[data-lt="on"] .bh .br{font-size: 18.5px !important;}
-html[data-lt="on"] .biurtext{font-size: 21px !important; line-height: 1.62;}
-html[data-lt="on"] .cardbar .tags a, html[data-lt="on"] .cardbar > a, html[data-lt="on"] .cardbar > button{font-size: 20px !important;}
-html[data-lt="on"] .tools2 label, html[data-lt="on"] .tools2 .n{font-size: 19.5px !important;}
-html[data-lt="on"] .pagehead .back{font-size: 19.5px !important;}
-html[data-lt="on"] .side nav a span{font-size: 20px !important;}
-html[data-lt="on"] .side nav a .count{font-size: 19px !important;}
-html[data-lt="on"] .qnav .k{font-size: 19px !important;}
-html[data-lt="on"] .dm-mini .t{font-size: 21px !important;}
-html[data-lt="on"] .dm-mini .q{font-size: 18.5px !important;}
-html[data-lt="on"] .dm-tags a{font-size: 18.5px !important;}
-html[data-lt="on"] .dm-reader .prog .n{font-size: 17.5px !important;}
-html[data-lt="on"] .dm-showall{font-size: 18.5px !important;}
-html[data-lt="on"] .joinin .alt{font-size: 19px !important;}
-html[data-lt="on"] .tax46{font-size: 16px !important;}
-html[data-lt="on"] .foot, html[data-lt="on"] .foot p, html[data-lt="on"] .foot .brand span{font-size: 16px !important;}
-html[data-lt="on"] .dm-cover.big .by{font-size: 15.5px !important;}
-html[data-lt="on"] .dm-cover.big .n{font-size: 16.5px !important;}
-html[data-lt="on"] .dm-rlist:not(.compact) .dm-rabbi .ro{font-size: 17.5px !important;}
-html[data-lt="on"] .bookrow .count{font-size: 20px !important;}
-html[data-lt="on"] .smrow a, html[data-lt="on"] .smfeel .smh{font-size: 19.5px !important;}
+html:root .card .title{font-size: 22px !important;}
+html:root .card .ref{font-size: 21px !important;}
+html:root details.biur summary .wh b{font-size: 20px !important;}
+html:root details.biur summary .wh span{font-size: 19px !important;}
+html:root .bh .bn{font-size: 19px !important;}
+html:root .bh .br{font-size: 18.5px !important;}
+html:root .biurtext{font-size: 21px !important; line-height: 1.62;}
+html:root .cardbar .tags a, html:root .cardbar > a, html:root .cardbar > button{font-size: 20px !important;}
+html:root .tools2 label, html:root .tools2 .n{font-size: 19.5px !important;}
+html:root .pagehead .back{font-size: 19.5px !important;}
+html:root .side nav a span{font-size: 20px !important;}
+html:root .side nav a .count{font-size: 19px !important;}
+html:root .qnav .k{font-size: 19px !important;}
+html:root .dm-mini .t{font-size: 21px !important;}
+html:root .dm-mini .q{font-size: 18.5px !important;}
+html:root .dm-tags a{font-size: 18.5px !important;}
+html:root .dm-reader .prog .n{font-size: 17.5px !important;}
+html:root .dm-showall{font-size: 18.5px !important;}
+html:root .joinin .alt{font-size: 19px !important;}
+html:root .tax46{font-size: 16px !important;}
+html:root .foot, html:root .foot p, html:root .foot .brand span{font-size: 16px !important;}
+html:root .dm-cover.big .by{font-size: 15.5px !important;}
+html:root .dm-cover.big .n{font-size: 16.5px !important;}
+html:root .dm-rlist:not(.compact) .dm-rabbi .ro{font-size: 17.5px !important;}
+html:root .bookrow .count{font-size: 20px !important;}
+html:root .smrow a, html:root .smfeel .smh{font-size: 19.5px !important;}
 @media (max-width: 700px) {
-  html[data-lt="on"] .card .title{font-size: 21px !important;}
-  html[data-lt="on"] .card .ref{font-size: 19.5px !important;}
-  html[data-lt="on"] details.biur summary .wh b{font-size: 18.5px !important;}
-  html[data-lt="on"] details.biur summary .wh span{font-size: 17.5px !important;}
-  html[data-lt="on"] .bh .bn{font-size: 18px !important;}
-  html[data-lt="on"] .bh .br{font-size: 17px !important;}
-  html[data-lt="on"] .biurtext{font-size: 20px !important;}
-  html[data-lt="on"] .cardbar .tags a, html[data-lt="on"] .cardbar > a, html[data-lt="on"] .cardbar > button{font-size: 19px !important;}
-  html[data-lt="on"] .tools2 label, html[data-lt="on"] .tools2 .n, html[data-lt="on"] .pagehead .back, html[data-lt="on"] .smrow a, html[data-lt="on"] .smfeel .smh{font-size: 18.5px !important;}
-  html[data-lt="on"] .qnav .k, html[data-lt="on"] .joinin .alt{font-size: 18px !important;}
-  html[data-lt="on"] .dm-mini .t{font-size: 20px !important;}
-  html[data-lt="on"] .dm-mini .q, html[data-lt="on"] .dm-tags a, html[data-lt="on"] .dm-showall{font-size: 17.5px !important;}
-  html[data-lt="on"] .dm-reader .prog .n, html[data-lt="on"] .dm-rlist:not(.compact) .dm-rabbi .ro{font-size: 16.5px !important;}
-  html[data-lt="on"] .tax46{font-size: 15px !important;}
-  html[data-lt="on"] .foot, html[data-lt="on"] .foot p, html[data-lt="on"] .foot .brand span{font-size: 15.5px !important;}
+  html:root .card .title{font-size: 21px !important;}
+  html:root .card .ref{font-size: 19.5px !important;}
+  html:root details.biur summary .wh b{font-size: 18.5px !important;}
+  html:root details.biur summary .wh span{font-size: 17.5px !important;}
+  html:root .bh .bn{font-size: 18px !important;}
+  html:root .bh .br{font-size: 17px !important;}
+  html:root .biurtext{font-size: 20px !important;}
+  html:root .cardbar .tags a, html:root .cardbar > a, html:root .cardbar > button{font-size: 19px !important;}
+  html:root .tools2 label, html:root .tools2 .n, html:root .pagehead .back, html:root .smrow a, html:root .smfeel .smh{font-size: 18.5px !important;}
+  html:root .qnav .k, html:root .joinin .alt{font-size: 18px !important;}
+  html:root .dm-mini .t{font-size: 20px !important;}
+  html:root .dm-mini .q, html:root .dm-tags a, html:root .dm-showall{font-size: 17.5px !important;}
+  html:root .dm-reader .prog .n, html:root .dm-rlist:not(.compact) .dm-rabbi .ro{font-size: 16.5px !important;}
+  html:root .tax46{font-size: 15px !important;}
+  html:root .foot, html:root .foot p, html:root .foot .brand span{font-size: 15.5px !important;}
 }
 
 /* נועם 24.11: שמות הנושאים והספרים בעמודה שבצד גדולים יותר */
-html[data-lt="on"] .side nav a span{font-size: 22.5px !important;}
-html[data-lt="on"] .side nav a .count{font-size: 20.5px !important;}
-html[data-lt="on"] .side nav h2{font-size: 21.5px !important;}
-html[data-lt="on"] .side nav a{padding-block: 8px;}
+html:root .side nav a span{font-size: 22.5px !important;}
+html:root .side nav a .count{font-size: 20.5px !important;}
+html:root .side nav h2{font-size: 21.5px !important;}
+html:root .side nav a{padding-block: 8px;}
+
+/* ================= פתיח חדש (24.11.26), לפי הפריסה שנועם שלח =================
+   לוגו מימין, הציטוט היומי במרכז הפתיח, הרב וכתב היד ברקע בפייד, חיפוש מעוגל.
+   הפתיח ממלא את כל המסך הראשון; הפס הרץ נראה רק כשגוללים. */
+
+/* ---------- סרגל: לוגו בימין, ואחריו תפריט, ציטוט יומי, קישורים ---------- */
+html:root .bar .logo-t{font-family: var(--display); font-weight: 700; font-size: 35px; line-height: 1; letter-spacing: .005em; color: #24170b; text-decoration: none; white-space: nowrap; margin: 0; padding-block: 4px;}
+html:root .bar .box{flex-direction: row; justify-content: flex-start; gap: 10px;}
+html:root .bar .logo-t{order: 0; margin-left: auto;}
+html:root .bar .dm-wa{order: 1;}
+html:root .bar .menubtn{order: 2;}
+@media (min-width: 1001px) {
+  html:root .bar .logo-t{margin-left: 56px;}
+  html:root .bar .menubtn{order: 1;}
+  html:root .bar .dm-wa{order: 2;}
+  html:root .bar .dm-wa span{display: inline;}
+  html:root .bar .navlinks{order: 3; margin: 0 14px 0 0; gap: 4px;}
+  html:root .bar .navlinks a{padding: 8px 12px;}
+}
+@media (max-width: 560px) { html:root .bar .logo-t{font-size: 25px;} }
+
+/* ---------- הפתיח ---------- */
+html:root .home.h2{background-position: center bottom;}
+html:root .home.h2 .hero{position: relative; min-height: calc(100vh - 67px); min-height: calc(100svh - 67px); display: grid; align-items: end;}
+/* כתב היד של הרב, דהוי, בחלק העליון */
+.h2-hw{position: absolute; z-index: 0; inset: 0 0 auto 0; height: 62%; overflow: hidden; pointer-events: none; user-select: none; font-family: var(--hw); font-size: clamp(20px, 1.9vw, 31px); line-height: 1.5; text-align: justify; color: #e7c98a; opacity: .2; padding: 6px 0 0; -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 42%, transparent 100%); mask-image: linear-gradient(180deg, #000 0%, #000 42%, transparent 100%);}
+/* הרב, גדול בצד ימין, נמס אל הרקע */
+.h2-rav{position: absolute; z-index: 0; top: 3%; right: clamp(-40px, 1vw, 40px); height: 80%; aspect-ratio: 713 / 782; pointer-events: none; -webkit-mask-image: radial-gradient(ellipse 62% 64% at 50% 40%, #000 30%, rgba(0, 0, 0, .55) 58%, transparent 80%); mask-image: radial-gradient(ellipse 62% 64% at 50% 40%, #000 30%, rgba(0, 0, 0, .55) 58%, transparent 80%);}
+.h2-rav img{width: 100%; height: 100%; object-fit: contain; display: block; filter: sepia(.82) saturate(1.25) hue-rotate(-8deg) brightness(.82) contrast(1.06); opacity: .74;}
+html:root .h2-in{position: relative; z-index: 1; width: 100%; display: grid; justify-items: center; text-align: center; gap: 0; padding-block: 40px clamp(90px, 21vh, 250px);}
+.h2-k{font-family: var(--display); font-weight: 300; font-size: clamp(22px, 2vw, 33px); letter-spacing: .04em; color: #f1e2bd; margin: 0 0 6px;}
+.h2-q{margin: 0; font-family: var(--display); font-weight: 700; line-height: 1.12; text-wrap: balance; max-width: 22ch; font-size: clamp(44px, 5.5vw, 96px);}
+.h2-q a{text-decoration: none; display: inline-block; padding: .16em .12em .12em; margin: -.16em -.12em -.12em; color: #f3dfaa; background: linear-gradient(180deg, #fff7de 8%, #f1dba2 52%, #c99a48 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 2px 12px rgba(10, 6, 2, .55));}
+.h2-q[data-len="m"]{font-size: clamp(38px, 4.3vw, 76px); max-width: 28ch;}
+.h2-q[data-len="l"]{font-size: clamp(32px, 3.3vw, 58px); max-width: 36ch;}
+.h2-q[data-len="xl"]{font-size: clamp(27px, 2.6vw, 46px); max-width: 44ch;}
+.h2-ref{font-family: var(--display); font-weight: 300; font-size: clamp(21px, 1.95vw, 32px); letter-spacing: .03em; color: #f1e2bd; margin: 10px 0 0;}
+html:root .home.h2 .lede{font-size: clamp(21px, 1.95vw, 31px); font-weight: 300; color: #f1e2bd; margin: clamp(46px, 9.5vh, 110px) 0 16px; max-width: none; width: auto; white-space: normal;}
+/* חיפוש מעוגל ומודרני */
+html:root .home.h2 form.search{-webkit-mask: none; mask: none; border-radius: 999px; overflow: hidden; width: min(540px, 100%); max-width: none; background: rgba(238, 230, 214, .62); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: 0 0 0 1px rgba(255, 244, 214, .22), 0 18px 40px -22px rgba(0, 0, 0, .8); transition: background-color .25s, box-shadow .25s;}
+html:root .home.h2 form.search:focus-within{background: rgba(255, 250, 238, .94); box-shadow: 0 0 0 2px #e6c27a, 0 18px 40px -22px rgba(0, 0, 0, .8);}
+html:root .home.h2 form.search input{font-size: 19px; padding: 15px 26px; color: #24170b;}
+html:root .home.h2 form.search input::placeholder{color: #4b3d26;}
+html:root .home.h2 form.search button{border-radius: 0; padding: 0 26px; font-size: 19px;}
+@media (max-width: 900px) {
+  html:root .home.h2 .hero{min-height: calc(100svh - 62px);}
+  .h2-rav{top: 2%; right: 50%; transform: translateX(50%); height: 52%;}
+  .h2-hw{font-size: 19px; height: 50%;}
+  html:root .h2-in{padding-block: 30px clamp(40px, 9vh, 90px) !important; display: grid !important;}
+  .h2-k{font-size: 21px;}
+  .h2-q{font-size: clamp(38px, 11vw, 60px); max-width: none;}
+  .h2-q[data-len="m"]{font-size: clamp(32px, 8.8vw, 48px);}
+  .h2-q[data-len="l"]{font-size: clamp(27px, 7.2vw, 40px);}
+  .h2-q[data-len="xl"]{font-size: clamp(23px, 6vw, 33px);}
+  .h2-ref{font-size: 20px;}
+  html:root .home.h2 .lede{font-size: 20px !important; margin: clamp(26px, 5vh, 50px) 0 14px !important; line-height: 1.35 !important; text-wrap: balance;}
+  html:root .home.h2 form.search{width: 100% !important;}
+}
+
+/* ---------- הפס הרץ: בלי צבע רקע, רק קו שתוחם אותו מלמטה ---------- */
+html:root .hw-band{background: none; border-top: 0; border-bottom: 1px solid rgba(201, 154, 72, .45);}
+
+/* ---------- לא חוזרים פעמיים: מתחת לפתיח נשאר רק הביאור והפעולות של הציטוט ---------- */
+html:root .home.h2 ~ main .today .kicker, html:root .home.h2 ~ main .today .in > div:not(.biurbox), html:root .home.h2 ~ main .today .hw-bg{display: none;}
+html:root .home.h2 ~ main .today{padding-block: 34px 30px;}
+html:root .home.h2 ~ main .today details.biur:not([open]){margin-right: 0;}
+html:root .home.h2 ~ main .today .todaybar{margin-left: 0;}
+
+/* ---------- כיוונון אחרי צילום ראשון: הציטוט בשורה רחבה, הרב בימין ודהוי יותר ---------- */
+.h2-q{max-width: min(94%, 30ch);}
+.h2-q[data-len="m"]{max-width: min(94%, 40ch);}
+.h2-q[data-len="l"]{max-width: min(94%, 52ch);}
+.h2-q[data-len="xl"]{max-width: min(94%, 64ch);}
+.h2-hw{opacity: .26;}
+@media (min-width: 901px) {
+  .h2-rav{top: -3%; right: -3%; height: 84%;}
+  .h2-rav img{opacity: .6; filter: sepia(.85) saturate(1.2) hue-rotate(-8deg) brightness(.72) contrast(1.08);}
+}
+html:root .home.h2 .lede{animation: none; opacity: 1;}
+@media (min-width: 901px) {
+  html:root .h2-in{max-width: min(1500px, 95vw);}
+  .h2-rav{top: -9%; right: -8%; height: 84%;}
+}
+@media (min-width: 901px) { .h2-q, .h2-q[data-len]{max-width: 94%;} }
+html:root .home.h2 ~ main .today .in::before{content: none;}
+@media (max-width: 900px) {
+  html:root.sp2 .home.h2 .hero .lede, html:root .home.h2 .hero .lede{text-align: center !important; text-align-last: center !important; letter-spacing: .02em !important; word-spacing: 0 !important; width: auto !important; max-width: 22ch !important; text-wrap: balance !important;}
+  html:root .home.h2 .lede .lb{display: none;}
+}

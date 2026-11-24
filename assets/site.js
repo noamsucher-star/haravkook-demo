@@ -1378,31 +1378,36 @@ if (typeof module !== 'undefined') module.exports = SE;
 
 
 
-/* ליטושים 24.11.26: מתג לפני / אחרי (דמו בלבד) */
+/* ליטושים 24.11.26: הקו שמתחת ל"נושאים קרובים" באותו גובה כמו הקו שמתחת לשורת הסינון */
 (function () {
-  var root = document.documentElement, sw = document.createElement('div');
-  sw.className = 'lt-sw'; sw.setAttribute('role', 'group'); sw.setAttribute('aria-label', 'לפני ואחרי הליטושים');
-  sw.innerHTML = '<button type="button" data-lt="off">לפני</button><button type="button" data-lt="on">אחרי</button>';
-  function mark() { var c = root.getAttribute('data-lt'); [].forEach.call(sw.children, function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-lt') === c ? 'true' : 'false'); }); }
-  sw.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; root.setAttribute('data-lt', b.getAttribute('data-lt')); try { localStorage.setItem('lt', b.getAttribute('data-lt')); } catch (x) {} mark(); });
-  document.body.appendChild(sw); mark();
-})();
-
-/* נועם 24.11: הקו שמתחת ל"נושאים קרובים" באותו גובה כמו הקו שמתחת לשורת הסינון */
-(function () {
-  var root = document.documentElement;
   function fit() {
     var t = document.querySelector('.tools2'), s = document.querySelector('.side'), h = s && s.querySelector('nav h2');
     if (!t || !h) return;
     h.style.paddingTop = '';
-    if (root.getAttribute('data-lt') !== 'on' || getComputedStyle(s).position !== 'sticky' && window.innerWidth < 901) return;
+    if (window.innerWidth < 901) return;
     var st = s.getBoundingClientRect(), tt = t.getBoundingClientRect();
-    if (Math.abs(st.top - tt.top) > 3 || st.left > tt.left && st.right < tt.right) return; // רק כשהעמודה מתחילה באותו גובה, לצד הרשימה
+    if (Math.abs(st.top - tt.top) > 3) return; // רק כשהעמודה מתחילה באותו גובה, לצד הרשימה
     var d = tt.bottom - h.getBoundingClientRect().bottom;
     if (d > 0 && d < 60) h.style.paddingTop = d + 'px';
   }
   window.addEventListener('load', fit); window.addEventListener('resize', fit);
-  document.addEventListener('click', function (e) { if (e.target.closest('.lt-sw')) setTimeout(fit, 0); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
   fit();
+})();
+
+
+/* פתיח חדש (24.11.26): הציטוט שבפתיח הוא "חצי דקה להיום". מסתנכרן עם הבלוק שמתחת (גם ב"ציטוט נוסף") */
+(function () {
+  var q = document.getElementById('h2-q'), ref = document.getElementById('h2-ref'), box = document.querySelector('.today > .in');
+  if (!q) return;
+  function size() { var n = q.textContent.trim().length; q.setAttribute('data-len', n > 150 ? 'xl' : n > 95 ? 'l' : n > 48 ? 'm' : 's'); }
+  function sync() {
+    if (!box) return size();
+    var a = box.querySelector('.q a'), r = box.querySelector('.ref'), t = q.querySelector('a');
+    if (a && t && a.textContent.trim() && t.textContent !== a.textContent) { t.textContent = a.textContent; t.setAttribute('href', a.getAttribute('href')); }
+    if (r && ref) { var x = r.textContent.replace(/^\s*מקור:\s*/, '').trim(); if (ref.textContent !== x) ref.textContent = x; }
+    size();
+  }
+  sync();
+  if (box && 'MutationObserver' in window) new MutationObserver(sync).observe(box, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['data-i'] });
 })();
