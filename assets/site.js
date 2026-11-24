@@ -1545,3 +1545,54 @@ window.H2_PRESET = {
   var wasMob = mob(); window.addEventListener('resize', function () { if (mob() !== wasMob) { wasMob = mob(); start(); } });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { setTimeout(start, 60); }); else setTimeout(start, 300);
 })();
+
+
+/* כניסה מהירה של כתב היד ברקע הפתיח (25.11.26). 3 אפשרויות, מתג data-hwa:
+   a = נכתב שורה אחרי שורה, מימין לשמאל   b = כל השורות נכתבות יחד מימין לשמאל   c = גל רך שנפתח מהפינה הימנית העליונה
+   לא משנה שום דבר בפריסה: רק עוטף כל מילה ומוסיף לה השהיה. */
+(function () {
+  var hero = document.querySelector('.home.h2 .hero'); if (!hero) return;
+  var root = document.documentElement, still = function () { return (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) || document.body.classList.contains('a-still'); };
+  function wrap(el) { // פעם אחת: כל מילה ב-span
+    if (el.getAttribute('data-w')) return; el.setAttribute('data-w', '1');
+    var words = el.textContent.split(/\s+/).filter(Boolean), f = document.createDocumentFragment();
+    words.forEach(function (w, i) { var s = document.createElement('span'); s.className = 'w'; s.textContent = w; f.appendChild(s); if (i < words.length - 1) f.appendChild(document.createTextNode(' ')); });
+    el.textContent = ''; el.appendChild(f);
+  }
+  function play() {
+    var mode = root.getAttribute('data-hwa') || 'a';
+    [].forEach.call(hero.querySelectorAll('.h2-hw'), function (el) {
+      el.classList.remove('hw-go');
+      if (getComputedStyle(el).display === 'none') return;
+      wrap(el);
+      if (still()) return;
+      var R = el.getBoundingClientRect(), ws = el.querySelectorAll('.w'), tops = [], line = -1, last = null, items = [];
+      for (var i = 0; i < ws.length; i++) {
+        var r = ws[i].getBoundingClientRect(); if (r.top > R.bottom) { ws[i].style.cssText = ''; continue; }
+        if (last === null || Math.abs(r.top - last) > 4) { line++; last = r.top; }
+        items.push([ws[i], line, Math.max(0, Math.min(1, (R.right - r.right) / Math.max(1, R.width)))]);
+      }
+      var lines = line + 1;
+      items.forEach(function (it) {
+        var l = it[1], p = it[2], d, du;
+        if (mode === 'a') { d = l * 85 + p * 95; du = 240; }                       // שורה אחרי שורה
+        else if (mode === 'b') { d = p * 650 + l * 22; du = 300; }                 // כל השורות יחד
+        else { d = (p * .62 + (l / Math.max(1, lines)) * .38) * 1000; du = 720; }  // גל רך
+        it[0].style.cssText = '--d:' + Math.round(d) + 'ms;--du:' + du + 'ms';
+      });
+      void el.offsetWidth; el.setAttribute('data-hwa', mode); el.classList.add('hw-go');
+    });
+  }
+  window.h2PlayHw = play;
+  var ready = function () { setTimeout(play, 260); };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(ready); else setTimeout(ready, 500);
+  // מתג הדמו: בחירת כניסה + "נגן שוב"
+  var sw = document.querySelector('.hw-sw');
+  if (sw) {
+    var g = document.createElement('span'); g.className = 'hwa';
+    g.innerHTML = '<i></i><b>כניסת כתב היד</b><button type="button" data-k="hwa" data-v="a">1 שורה שורה</button><button type="button" data-k="hwa" data-v="b">2 הכול יחד</button><button type="button" data-k="hwa" data-v="c">3 גל רך</button><button type="button" data-replay>נגן שוב ↻</button>';
+    while (g.firstChild) sw.appendChild(g.firstChild);
+    [].forEach.call(sw.querySelectorAll('button[data-k="hwa"]'), function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-v') === (root.getAttribute('data-hwa') || 'a') ? 'true' : 'false'); });
+    sw.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; if (b.hasAttribute('data-replay') || b.getAttribute('data-k') === 'hwa' || b.getAttribute('data-k') === 'hw') setTimeout(play, 40); });
+  }
+})();
