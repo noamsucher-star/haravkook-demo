@@ -1596,3 +1596,34 @@ html:root .home.h2 form.search:focus-within{background: rgba(255, 253, 246, .97)
   html:root .home.h2{background-image: url(hero-sun-phone.webp); background-position: center bottom;}
   .h2-rav img{opacity: .5 !important;}
 }
+
+/* ================= תמונת הרב הקודמת (עם הידיים) בבלנד + 3 כיווני פריסה (מתג data-hv) ================= */
+.h2-rav{aspect-ratio: 649 / 945; mix-blend-mode: multiply; -webkit-mask-image: radial-gradient(ellipse 58% 52% at 50% 36%, #000 34%, rgba(0, 0, 0, .6) 62%, transparent 86%); mask-image: radial-gradient(ellipse 58% 52% at 50% 36%, #000 34%, rgba(0, 0, 0, .6) 62%, transparent 86%);}
+.h2-rav img{object-fit: cover; filter: sepia(.55) saturate(1.1) hue-rotate(-6deg) brightness(1.04) contrast(1.04) !important; opacity: .72 !important;}
+.hw-sw{align-items: center; font-size: 15px;}
+.hw-sw b{font-weight: 400; color: #cdb37c; padding: 0 8px 0 4px;}
+.hw-sw i{width: 1px; align-self: stretch; background: rgba(184, 138, 62, .6); margin: 4px 6px;}
+.hw-sw button{padding: 0 12px;}
+@media (max-width: 900px) { .hw-sw{flex-wrap: wrap; justify-content: center; width: calc(100% - 150px); font-size: 13px;} .hw-sw b, .hw-sw i{display: none;} .hw-sw button{padding: 0 8px; min-height: 34px;} }
+@media (min-width: 901px) {
+  /* 1. הרב בימין, המלל במרכז */
+  html[data-hv="a"] .h2-rav{top: -1%; right: 1%; height: 96%;}
+  /* 2. הרב במרכז, גדול ודהוי מאחורי המלל, הכול סימטרי */
+  html[data-hv="b"] .h2-rav{top: -5%; right: 50%; transform: translateX(50%); height: 100%; -webkit-mask-image: radial-gradient(ellipse 60% 46% at 50% 30%, #000 30%, rgba(0, 0, 0, .5) 62%, transparent 88%); mask-image: radial-gradient(ellipse 60% 46% at 50% 30%, #000 30%, rgba(0, 0, 0, .5) 62%, transparent 88%);}
+  html[data-hv="b"] .h2-rav img{opacity: .6 !important;}
+  html[data-hv="b"] .h2-hw{-webkit-mask-image: linear-gradient(180deg, #000 0%, #000 40%, transparent 100%), linear-gradient(to left, #000 0%, #000 22%, transparent 40%, transparent 60%, #000 78%, #000 100%); mask-image: linear-gradient(180deg, #000 0%, #000 40%, transparent 100%), linear-gradient(to left, #000 0%, #000 22%, transparent 40%, transparent 60%, #000 78%, #000 100%);}
+  html[data-hv="b"] .h2-in{padding-bottom: clamp(60px, 12vh, 150px);}
+  /* 3. הרב בשמאל, המלל מיושר לימין */
+  html[data-hv="c"] .h2-rav{top: -1%; right: auto; left: 2%; height: 96%;}
+  html[data-hv="c"] .h2-hw{-webkit-mask-image: linear-gradient(180deg, #000 0%, #000 40%, transparent 100%), linear-gradient(to right, transparent 0%, rgba(0, 0, 0, .12) 24%, rgba(0, 0, 0, .55) 46%, #000 70%); mask-image: linear-gradient(180deg, #000 0%, #000 40%, transparent 100%), linear-gradient(to right, transparent 0%, rgba(0, 0, 0, .12) 24%, rgba(0, 0, 0, .55) 46%, #000 70%);}
+  html[data-hv="c"] .h2-in{justify-items: start; text-align: right; padding-right: clamp(40px, 7vw, 130px); padding-bottom: clamp(70px, 15vh, 190px);}
+  html[data-hv="c"] .h2-q, html[data-hv="c"] .h2-q[data-len]{max-width: 58%; font-size: clamp(42px, 5vw, 86px);}
+  html[data-hv="c"] .h2-q[data-len="m"]{font-size: clamp(36px, 3.9vw, 68px);}
+  html[data-hv="c"] .h2-q[data-len="l"]{font-size: clamp(30px, 3vw, 52px);}
+  html[data-hv="c"] .h2-q[data-len="xl"]{font-size: clamp(26px, 2.4vw, 42px);}
+  html[data-hv="c"] .h2-q a{margin-right: 0;}
+}
+@media (max-width: 900px) { .h2-rav{height: 60%; top: 0;} }
+html:root .home.h2 form.search{animation: none; opacity: 1; background: rgba(255, 253, 246, .92);}
+html:root .home.h2 .lede{text-shadow: 0 0 10px rgba(255, 246, 226, .95), 0 0 26px rgba(255, 240, 210, .9), 0 0 44px rgba(255, 240, 210, .7);}
+.h2-hw{opacity: .5;}

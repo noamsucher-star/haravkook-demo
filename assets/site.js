@@ -1412,13 +1412,13 @@ if (typeof module !== 'undefined') module.exports = SE;
   if (box && 'MutationObserver' in window) new MutationObserver(sync).observe(box, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['data-i'] });
 })();
 
-/* מתג דמו: שתי פסקאות לרקע כתב היד */
+/* מתג דמו: 3 כיווני פריסה + 2 פסקאות לכתב היד */
 (function () {
   if (!document.querySelector('.h2-hw')) return;
   var root = document.documentElement, sw = document.createElement('div');
-  sw.className = 'hw-sw'; sw.setAttribute('role', 'group'); sw.setAttribute('aria-label', 'פסקת כתב היד ברקע');
-  sw.innerHTML = '<button type="button" data-hw="a">פסקה 1: מרחבים</button><button type="button" data-hw="b">פסקה 2: שמעו אלי עמי</button>';
-  function mark() { var c = root.getAttribute('data-hw'); [].forEach.call(sw.children, function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-hw') === c ? 'true' : 'false'); }); }
-  sw.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; root.setAttribute('data-hw', b.getAttribute('data-hw')); try { localStorage.setItem('hw', b.getAttribute('data-hw')); } catch (x) {} mark(); });
+  sw.className = 'hw-sw'; sw.setAttribute('role', 'group'); sw.setAttribute('aria-label', 'גרסאות לפתיח');
+  sw.innerHTML = '<b>פריסה</b><button type="button" data-k="hv" data-v="a">1 הרב בימין</button><button type="button" data-k="hv" data-v="b">2 הרב במרכז</button><button type="button" data-k="hv" data-v="c">3 הרב בשמאל</button><i></i><b>כתב יד</b><button type="button" data-k="hw" data-v="a">מרחבים</button><button type="button" data-k="hw" data-v="b">שמעו אלי עמי</button>';
+  function mark() { [].forEach.call(sw.querySelectorAll('button'), function (b) { b.setAttribute('aria-pressed', root.getAttribute('data-' + b.getAttribute('data-k')) === b.getAttribute('data-v') ? 'true' : 'false'); }); }
+  sw.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; root.setAttribute('data-' + b.getAttribute('data-k'), b.getAttribute('data-v')); try { localStorage.setItem(b.getAttribute('data-k'), b.getAttribute('data-v')); } catch (x) {} mark(); });
   document.body.appendChild(sw); mark();
 })();
