@@ -1436,17 +1436,18 @@ if (typeof module !== 'undefined') module.exports = SE;
     ['fade', 'פייד בקצוות', 0, 100, 1, ''], ['sep', 'גוון חום', 0, 100, 1, '%'], ['br', 'בהירות', 60, 140, 1, '%'], ['flip', 'היפוך כיוון', ['לא', 'כן']],
     ['h', 'כתב היד ברקע'], ['hwp', 'איזו פסקה', ['מרחבים', 'שמעו אלי עמי']], ['hwo', 'שקיפות', 0, 100, 1, '%'], ['hws', 'גודל אותיות', 12, 48, 1, 'px'], ['hwh', 'עד איזה גובה', 10, 100, 1, '%'],
     ['h', 'המלל'], ['ty', 'מרווח מלמטה', 0, 50, .5, 'vh'], ['tx', 'ימינה / שמאלה', -40, 40, .5, 'vw'], ['qs', 'גודל הציטוט', 50, 150, 1, '%'], ['gap', 'מרווח עד משפט הארכיון', 0, 160, 2, 'px'],
+    ['h', 'צבע ואפקטים למלל'], ['qc', 'צבע הציטוט', 'color'], ['tc', 'צבע המלל הקטן', 'color'], ['glow', 'זוהר מאחורי המלל', 0, 70, 1, 'px'], ['gc', 'צבע הזוהר', 'color'], ['sh', 'צל (דרופ שדו)', 0, 100, 1, '%'], ['shd', 'מרחק הצל', 0, 24, 1, 'px'], ['shc', 'צבע הצל', 'color'],
     ['h', 'החיפוש'], ['so', 'אטימות', 30, 100, 1, '%'], ['sw', 'רוחב', 240, 900, 10, 'px']
   ];
   var v = {}, base = {}, baseFs = 0;
   function key() { return 'h2ctl-' + (mob() ? 'm' : 'd') + '-' + root.getAttribute('data-hv'); }
-  function clear() { rav.style.cssText = ''; img.style.cssText = ''; inn.style.cssText = ''; q.style.fontSize = ''; form.style.cssText = ''; lede.style.cssText = ''; [].forEach.call(hws, function (h) { h.style.cssText = ''; }); }
+  function clear() { rav.style.cssText = ''; img.style.cssText = ''; inn.style.cssText = ''; q.style.fontSize = ''; form.style.cssText = ''; lede.style.cssText = ''; var qa0 = q.querySelector('a'); if (qa0) qa0.style.cssText = ''; [].forEach.call(hero.querySelectorAll('.h2-k, .h2-ref'), function (e) { e.style.cssText = ''; }); [].forEach.call(hws, function (h) { h.style.cssText = ''; }); }
   function measure() { // נקודת הפתיחה = מה שרואים עכשיו, כדי ששום דבר לא יקפוץ
     var H = hero.getBoundingClientRect(), R = rav.getBoundingClientRect(), hw = hws[0], hwv = getComputedStyle(hw).display === 'none' ? hws[1] : hw;
     baseFs = parseFloat(getComputedStyle(q).fontSize);
     base = { size: Math.round(R.height / H.height * 100), x: Math.round((R.left + R.width / 2 - H.left) / H.width * 200) / 2, y: Math.round((R.top - H.top) / H.height * 200) / 2, op: Math.round(parseFloat(getComputedStyle(img).opacity) * 100), hwp: root.getAttribute('data-hw') === 'b' ? 'שמעו אלי עמי' : 'מרחבים', blend: 'multiply', fade: 86, sep: 55, br: 104, flip: 'לא',
       hwo: Math.round(parseFloat(getComputedStyle(hwv).opacity) * 100), hws: Math.round(parseFloat(getComputedStyle(hwv).fontSize)), hwh: Math.round(hwv.getBoundingClientRect().height / H.height * 100),
-      ty: Math.round(parseFloat(getComputedStyle(inn).paddingBottom) / window.innerHeight * 200) / 2, tx: 0, qs: 100, gap: Math.round(parseFloat(getComputedStyle(lede).marginTop)), so: 92, sw: Math.round(form.getBoundingClientRect().width) };
+      ty: Math.round(parseFloat(getComputedStyle(inn).paddingBottom) / window.innerHeight * 200) / 2, tx: 0, qs: 100, gap: Math.round(parseFloat(getComputedStyle(lede).marginTop)), qc: '#2e1c0a', tc: '#3a2710', glow: 22, gc: '#fff0d0', sh: 0, shd: 4, shc: '#1a0f04', so: 92, sw: Math.round(form.getBoundingClientRect().width) };
   }
   function apply() {
     root.setAttribute('data-hw', v.hwp === 'שמעו אלי עמי' ? 'b' : 'a');
@@ -1459,6 +1460,11 @@ if (typeof module !== 'undefined') module.exports = SE;
     inn.style.setProperty('padding-bottom', v.ty + 'vh', 'important'); inn.style.transform = v.tx ? 'translateX(' + (-v.tx) + 'vw)' : '';
     q.style.fontSize = (baseFs * v.qs / 100) + 'px';
     lede.style.setProperty('margin-top', v.gap + 'px', 'important');
+    var qa = q.querySelector('a'), hex = function (h, a) { var n = parseInt(h.slice(1), 16); return 'rgba(' + (n >> 16) + ',' + (n >> 8 & 255) + ',' + (n & 255) + ',' + a + ')'; };
+    var fl = (v.glow ? 'drop-shadow(0 0 ' + v.glow + 'px ' + v.gc + ') drop-shadow(0 0 ' + Math.round(v.glow / 2) + 'px ' + v.gc + ')' : '') + (v.sh ? ' drop-shadow(0 ' + v.shd + 'px ' + Math.round(v.shd * 1.5) + 'px ' + hex(v.shc, v.sh / 100) + ')' : '');
+    if (qa) { qa.style.background = 'none'; qa.style.webkitTextFillColor = v.qc; qa.style.color = v.qc; qa.style.filter = fl.trim() || 'none'; }
+    var ts = [v.glow ? '0 0 ' + Math.round(v.glow * .6) + 'px ' + v.gc + ', 0 0 ' + Math.round(v.glow * 1.4) + 'px ' + v.gc : '', v.sh ? '0 ' + Math.max(1, Math.round(v.shd / 2)) + 'px ' + v.shd + 'px ' + hex(v.shc, v.sh / 100) : ''].filter(Boolean).join(', ') || 'none';
+    [].forEach.call(hero.querySelectorAll('.h2-k, .h2-ref, .lede'), function (e) { e.style.setProperty('color', v.tc, 'important'); e.style.setProperty('text-shadow', ts, 'important'); });
     form.style.setProperty('background', 'rgba(255, 253, 246, ' + v.so / 100 + ')'); form.style.setProperty('width', v.sw + 'px', 'important'); form.style.setProperty('max-width', '100%', 'important');
   }
   function text() { return (mob() ? 'טלפון' : 'מחשב') + ' | פריסה ' + root.getAttribute('data-hv') + ' | כתב יד ' + root.getAttribute('data-hw') + ' | ' + F.filter(function (f) { return f[0] !== 'h'; }).map(function (f) { return f[0] + '=' + v[f[0]]; }).join(', ') + ' | מסך ' + window.innerWidth + 'x' + window.innerHeight; }
@@ -1466,6 +1472,7 @@ if (typeof module !== 'undefined') module.exports = SE;
   var html = '<summary>כיוון ידני ⚙</summary><div class="bd">';
   F.forEach(function (f) {
     if (f[0] === 'h') { html += '<h4>' + f[1] + '</h4>'; return; }
+    if (f[2] === 'color') { html += '<label class="col">' + f[1] + '<input type="color" data-k="' + f[0] + '"></label>'; return; }
     if (Array.isArray(f[2])) html += '<label>' + f[1] + '<select data-k="' + f[0] + '">' + f[2].map(function (o) { return '<option>' + o + '</option>'; }).join('') + '</select></label>';
     else html += '<label>' + f[1] + '<output data-o="' + f[0] + '"></output><input type="range" data-k="' + f[0] + '" min="' + f[2] + '" max="' + f[3] + '" step="' + f[4] + '" data-u="' + f[5] + '"></label>';
   });

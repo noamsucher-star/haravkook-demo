@@ -1650,3 +1650,5 @@ html:root .home.h2 .lede{text-shadow: 0 0 10px rgba(255, 246, 226, .95), 0 0 26p
   .hw-sw{display: none !important;} /* בטלפון שלוש הפריסות זהות; בחירת הפסקה נמצאת בלוח */
 }
 @media print { .h2c, .hw-sw{display: none;} }
+.h2c label.col{grid-template-columns: 1fr 64px;}
+.h2c input[type="color"]{width: 64px; height: 32px; padding: 0; border: 1px solid #6b4f24; background: #2c1d0d; cursor: pointer;}
