@@ -1472,3 +1472,9 @@ html[data-lt="on"] .smrow a, html[data-lt="on"] .smfeel .smh{font-size: 19.5px !
   html[data-lt="on"] .tax46{font-size: 15px !important;}
   html[data-lt="on"] .foot, html[data-lt="on"] .foot p, html[data-lt="on"] .foot .brand span{font-size: 15.5px !important;}
 }
+
+/* נועם 24.11: שמות הנושאים והספרים בעמודה שבצד גדולים יותר */
+html[data-lt="on"] .side nav a span{font-size: 22.5px !important;}
+html[data-lt="on"] .side nav a .count{font-size: 20.5px !important;}
+html[data-lt="on"] .side nav h2{font-size: 21.5px !important;}
+html[data-lt="on"] .side nav a{padding-block: 8px;}

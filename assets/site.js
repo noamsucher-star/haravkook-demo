@@ -1387,3 +1387,22 @@ if (typeof module !== 'undefined') module.exports = SE;
   sw.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; root.setAttribute('data-lt', b.getAttribute('data-lt')); try { localStorage.setItem('lt', b.getAttribute('data-lt')); } catch (x) {} mark(); });
   document.body.appendChild(sw); mark();
 })();
+
+/* נועם 24.11: הקו שמתחת ל"נושאים קרובים" באותו גובה כמו הקו שמתחת לשורת הסינון */
+(function () {
+  var root = document.documentElement;
+  function fit() {
+    var t = document.querySelector('.tools2'), s = document.querySelector('.side'), h = s && s.querySelector('nav h2');
+    if (!t || !h) return;
+    h.style.paddingTop = '';
+    if (root.getAttribute('data-lt') !== 'on' || getComputedStyle(s).position !== 'sticky' && window.innerWidth < 901) return;
+    var st = s.getBoundingClientRect(), tt = t.getBoundingClientRect();
+    if (Math.abs(st.top - tt.top) > 3 || st.left > tt.left && st.right < tt.right) return; // רק כשהעמודה מתחילה באותו גובה, לצד הרשימה
+    var d = tt.bottom - h.getBoundingClientRect().bottom;
+    if (d > 0 && d < 60) h.style.paddingTop = d + 'px';
+  }
+  window.addEventListener('load', fit); window.addEventListener('resize', fit);
+  document.addEventListener('click', function (e) { if (e.target.closest('.lt-sw')) setTimeout(fit, 0); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  fit();
+})();
