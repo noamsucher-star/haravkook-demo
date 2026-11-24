@@ -1427,3 +1427,48 @@ html[data-lt="on"] .dm-rlist.compact .dm-rabbi{padding: 11px 0 10px;}
 .lt-sw button{min-height: 40px; padding: 0 18px; border: 0; background: none; color: inherit; font: inherit; cursor: pointer;}
 .lt-sw button[aria-pressed="true"]{background: linear-gradient(120deg, #c99a48, #f0d79c 45%, #c99a48); color: #24170b; font-weight: 700;}
 @media print { .lt-sw{display: none;} }
+
+/* ===== ליטושים, חלק ב (24.11.26): אותה הגדלה גם בעמודים הפנימיים (נושא, ציטוט, מסלול, ספרים, מועדים, מבארים, חיפוש) ===== */
+html[data-lt="on"] .card .title{font-size: 22px !important;}
+html[data-lt="on"] .card .ref{font-size: 21px !important;}
+html[data-lt="on"] details.biur summary .wh b{font-size: 20px !important;}
+html[data-lt="on"] details.biur summary .wh span{font-size: 19px !important;}
+html[data-lt="on"] .bh .bn{font-size: 19px !important;}
+html[data-lt="on"] .bh .br{font-size: 18.5px !important;}
+html[data-lt="on"] .biurtext{font-size: 21px !important; line-height: 1.62;}
+html[data-lt="on"] .cardbar .tags a, html[data-lt="on"] .cardbar > a, html[data-lt="on"] .cardbar > button{font-size: 20px !important;}
+html[data-lt="on"] .tools2 label, html[data-lt="on"] .tools2 .n{font-size: 19.5px !important;}
+html[data-lt="on"] .pagehead .back{font-size: 19.5px !important;}
+html[data-lt="on"] .side nav a span{font-size: 20px !important;}
+html[data-lt="on"] .side nav a .count{font-size: 19px !important;}
+html[data-lt="on"] .qnav .k{font-size: 19px !important;}
+html[data-lt="on"] .dm-mini .t{font-size: 21px !important;}
+html[data-lt="on"] .dm-mini .q{font-size: 18.5px !important;}
+html[data-lt="on"] .dm-tags a{font-size: 18.5px !important;}
+html[data-lt="on"] .dm-reader .prog .n{font-size: 17.5px !important;}
+html[data-lt="on"] .dm-showall{font-size: 18.5px !important;}
+html[data-lt="on"] .joinin .alt{font-size: 19px !important;}
+html[data-lt="on"] .tax46{font-size: 16px !important;}
+html[data-lt="on"] .foot, html[data-lt="on"] .foot p, html[data-lt="on"] .foot .brand span{font-size: 16px !important;}
+html[data-lt="on"] .dm-cover.big .by{font-size: 15.5px !important;}
+html[data-lt="on"] .dm-cover.big .n{font-size: 16.5px !important;}
+html[data-lt="on"] .dm-rlist:not(.compact) .dm-rabbi .ro{font-size: 17.5px !important;}
+html[data-lt="on"] .bookrow .count{font-size: 20px !important;}
+html[data-lt="on"] .smrow a, html[data-lt="on"] .smfeel .smh{font-size: 19.5px !important;}
+@media (max-width: 700px) {
+  html[data-lt="on"] .card .title{font-size: 21px !important;}
+  html[data-lt="on"] .card .ref{font-size: 19.5px !important;}
+  html[data-lt="on"] details.biur summary .wh b{font-size: 18.5px !important;}
+  html[data-lt="on"] details.biur summary .wh span{font-size: 17.5px !important;}
+  html[data-lt="on"] .bh .bn{font-size: 18px !important;}
+  html[data-lt="on"] .bh .br{font-size: 17px !important;}
+  html[data-lt="on"] .biurtext{font-size: 20px !important;}
+  html[data-lt="on"] .cardbar .tags a, html[data-lt="on"] .cardbar > a, html[data-lt="on"] .cardbar > button{font-size: 19px !important;}
+  html[data-lt="on"] .tools2 label, html[data-lt="on"] .tools2 .n, html[data-lt="on"] .pagehead .back, html[data-lt="on"] .smrow a, html[data-lt="on"] .smfeel .smh{font-size: 18.5px !important;}
+  html[data-lt="on"] .qnav .k, html[data-lt="on"] .joinin .alt{font-size: 18px !important;}
+  html[data-lt="on"] .dm-mini .t{font-size: 20px !important;}
+  html[data-lt="on"] .dm-mini .q, html[data-lt="on"] .dm-tags a, html[data-lt="on"] .dm-showall{font-size: 17.5px !important;}
+  html[data-lt="on"] .dm-reader .prog .n, html[data-lt="on"] .dm-rlist:not(.compact) .dm-rabbi .ro{font-size: 16.5px !important;}
+  html[data-lt="on"] .tax46{font-size: 15px !important;}
+  html[data-lt="on"] .foot, html[data-lt="on"] .foot p, html[data-lt="on"] .foot .brand span{font-size: 15.5px !important;}
+}
