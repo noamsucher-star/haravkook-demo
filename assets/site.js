@@ -1459,13 +1459,16 @@ window.H2_PRESET = {
       hwl: Math.round(parseFloat(getComputedStyle(hwv).lineHeight) / parseFloat(getComputedStyle(hwv).fontSize) * 20) / 20 || 1.5, demo: 'הציטוט של היום', box: 'לא', qw: Math.round(q.getBoundingClientRect().width / Math.max(1, inn.clientWidth - parseFloat(getComputedStyle(inn).paddingLeft) - parseFloat(getComputedStyle(inn).paddingRight)) * 100) > 92 ? (mob() ? 100 : 94) : 94, tb: 'normal',
       ty: Math.round(parseFloat(getComputedStyle(inn).paddingBottom) / window.innerHeight * 200) / 2, tx: 0, qs: 100, gap: Math.round(parseFloat(getComputedStyle(lede).marginTop)), qc: '#2e1c0a', tc: '#3a2710', glow: 22, gc: '#fff0d0', sh: 0, shd: 4, shc: '#1a0f04', ls: Math.round(parseFloat(getComputedStyle(lede).fontSize)), lx: 0, lb: Math.round(parseFloat(getComputedStyle(lede).marginBottom)), lc: '#3a2710', lg: 26, lgc: '#fff0d0', lgo: 3, al: getComputedStyle(inn).textAlign === 'right' || getComputedStyle(inn).textAlign === 'start' ? 'ימין' : 'מרכז', qm: 'כן', qms: mob() ? 240 : 460, qmx: 50, qmy: mob() ? 52 : 44, qmo: 16, qmcol: '#8a5a2b', qmb: 'multiply', qmr: 0, qmf: 'מאחורי', so: 92, sw: Math.round(form.getBoundingClientRect().width) };
   }
-  var orig = null, lastDemo = null, refEl = hero.querySelector('.h2-ref');
+  var cyc = null, orig = null, lastDemo = null, refEl = hero.querySelector('.h2-ref');
   function sample(kind) {
     var a = q.querySelector('a'); if (!a) return;
     if (!orig || (lastDemo === 'הציטוט של היום' || lastDemo === null)) orig = orig && lastDemo !== null && kind !== 'הציטוט של היום' ? orig : { t: a.textContent, h: a.getAttribute('href'), r: refEl.textContent };
     if (kind === lastDemo) return;
     var pick = orig;
-    if (kind !== 'הציטוט של היום') {
+    if (kind.charAt(0) === '#') {
+      var PP = []; try { PP = JSON.parse(document.getElementById('pool').textContent); } catch (e) {}
+      var it = PP[+kind.slice(1)]; if (it) pick = { t: it.q, h: a.getAttribute('href'), r: it.r || '' };
+    } else if (kind !== 'הציטוט של היום') {
       var P = []; try { P = JSON.parse(document.getElementById('pool').textContent); } catch (e) {}
       var want = { 'קצר': 30, 'בינוני': 75, 'ארוך': 130, 'ארוך מאוד': 230 }[kind], best = null;
       P.forEach(function (x) { var d = Math.abs((x.q || '').length - want); if (!best || d < best.d) best = { d: d, x: x }; });
@@ -1484,7 +1487,7 @@ window.H2_PRESET = {
     img.style.setProperty('filter', 'sepia(' + v.sep / 100 + ') saturate(1.1) hue-rotate(-6deg) brightness(' + v.br / 100 + ') contrast(1.04)', 'important');
     [].forEach.call(hws, function (h) { h.style.opacity = v.hwo / 100; h.style.fontSize = v.hws + 'px'; h.style.height = v.hwh + '%'; h.style.lineHeight = v.hwl; });
     inn.style.setProperty('padding-bottom', v.ty + 'vh', 'important'); inn.style.transform = v.tx ? 'translateX(' + (-v.tx) + 'vw)' : '';
-    sample(v.demo);
+    sample(cyc !== null ? '#' + cyc : v.demo);
     q.style.setProperty('max-width', v.qw + '%', 'important'); q.style.width = v.box === 'כן' ? v.qw + '%' : '';
     q.style.outline = v.box === 'כן' ? '2px dashed rgba(200, 40, 40, .85)' : ''; q.style.outlineOffset = '0px';
     inn.style.outline = v.box === 'כן' ? '1px dashed rgba(40, 90, 200, .7)' : '';
@@ -1510,7 +1513,7 @@ window.H2_PRESET = {
   }
   function text() { return (mob() ? 'טלפון' : 'מחשב') + ' | פריסה ' + root.getAttribute('data-hv') + ' | כתב יד ' + root.getAttribute('data-hw') + ' | ' + F.filter(function (f) { return f[0] !== 'h'; }).map(function (f) { return f[0] + '=' + v[f[0]]; }).join(', ') + ' | מסך ' + window.innerWidth + 'x' + window.innerHeight; }
   var box = document.createElement('details'); box.className = 'h2c'; box.open = !mob();
-  var html = '<summary>כיוון ידני ⚙</summary><div class="bd">';
+  var html = '<summary>כיוון ידני ⚙</summary><div class="bd"><h4>לראות איך ציטוטים אחרים יושבים</h4><div class="cyc"><button type="button" data-a="qn">הבא ›</button><button type="button" data-a="qp">‹ הקודם</button><button type="button" data-a="qt">של היום</button></div><p class="tip cyci" data-cyc></p>';
   F.forEach(function (f) {
     if (f[0] === 'h') { html += '<h4>' + f[1] + '</h4>'; return; }
     if (f[2] === 'color') { html += '<label class="col">' + f[1] + '<input type="color" data-k="' + f[0] + '"></label>'; return; }
@@ -1525,6 +1528,14 @@ window.H2_PRESET = {
   box.addEventListener('input', function (e) { var k = e.target.getAttribute('data-k'); if (!k) return; v[k] = e.target.type === 'range' ? parseFloat(e.target.value) : e.target.value; apply(); fill(); try { localStorage.setItem(key(), JSON.stringify(v)); } catch (x) {} });
   box.addEventListener('click', function (e) {
     var a = e.target.getAttribute && e.target.getAttribute('data-a'); if (!a) return;
+    if (a === 'qn' || a === 'qp' || a === 'qt') {
+      var N = 0; try { N = JSON.parse(document.getElementById('pool').textContent).length; } catch (x) {}
+      if (a === 'qt' || !N) cyc = null; else cyc = cyc === null ? (a === 'qn' ? 0 : N - 1) : (cyc + (a === 'qn' ? 1 : N - 1)) % N;
+      apply();
+      var inf = box.querySelector('[data-cyc]'), n = q.textContent.trim().length, hr = hero.getBoundingClientRect(), fr = form.getBoundingClientRect();
+      inf.textContent = (cyc === null ? 'הציטוט של היום' : 'ציטוט ' + (cyc + 1) + ' מתוך ' + N) + ' · ' + n + ' תווים' + (fr.bottom > Math.min(hr.bottom, window.innerHeight) + 1 ? ' · שים לב: החיפוש יוצא מהמסך הראשון' : '');
+      return;
+    }
     if (a === 'reset') { try { localStorage.removeItem(key()); } catch (x) {} start(); return; }
     var t = text(), done = function () { e.target.textContent = 'הועתק ✓'; setTimeout(function () { e.target.textContent = 'העתקת ההגדרות'; }, 1600); };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, function () { prompt('להעתיק:', t); }); else prompt('להעתיק:', t);

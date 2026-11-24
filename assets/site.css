@@ -1653,3 +1653,6 @@ html:root .home.h2 .lede{text-shadow: 0 0 10px rgba(255, 246, 226, .95), 0 0 26p
 .h2c label.col{grid-template-columns: 1fr 64px;}
 .h2c input[type="color"]{width: 64px; height: 32px; padding: 0; border: 1px solid #6b4f24; background: #2c1d0d; cursor: pointer;}
 .h2-qm{position: absolute; pointer-events: none; user-select: none; font-family: var(--display); font-weight: 700; line-height: .7; white-space: nowrap; display: none;}
+.h2c .cyc{display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;}
+.h2c .cyc button{min-height: 40px; font-size: 13.5px;}
+.h2c .cyci{margin-top: 6px; min-height: 1.3em;}
